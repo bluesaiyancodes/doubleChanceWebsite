@@ -27,3 +27,28 @@ function fadeOut() {
 
 window.onload = fadeOut();
 
+$(document).ready(function(){
+  // var contentBoxWidth = $(".content").width();
+  // var imageBoxWith = $(".image").width();
+
+  // $(".btn").click(function(){
+  //   $(".content").animate({
+  //     width: 0
+  //   });
+  //   $(".image").animate({
+  //     width: 0
+  //   });
+  // });
+
+  $(".btn").on('click', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+
+    // $('#home').hide("slide", { direction: "left" }, 500, function () {
+    //   $('#tandc-block').show("slide", { direction: "right" }, 500);
+    // });
+    $('#home').toggle("slide");
+    $('#tandc-block').toggle("slide");
+    $('#tandc-block').show();
+  });
+});
