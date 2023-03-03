@@ -36,3 +36,12 @@ $(document).ready(function(){
     $('#tandc-block').show();
   });
 });
+
+$('#btn-tandc').click(function() {
+  if ($('#mark').is(':checked')) {
+      alert('you agreed conditions');
+  }
+  else {
+      alert('please check terms & conditions');
+  }
+});
