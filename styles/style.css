@@ -242,6 +242,7 @@ header .navbar a:hover {
   background-size: cover;
   background-position: center;
   position: absolute;
+  width: 100%;
 }
 
 .home .content {
