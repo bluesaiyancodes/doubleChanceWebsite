@@ -46,7 +46,7 @@ $(document).ready(function(){
 
   $('#btn-tandc').click(function() {
     if ($('#mark').is(':checked')) {
-        alert('you agreed conditions');
+      window.location.href = 'second_page.html';
     }
     else {
         alert('please check terms & conditions');
