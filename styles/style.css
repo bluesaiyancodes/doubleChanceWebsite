@@ -22,7 +22,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 72.5%;
   overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
@@ -293,6 +293,7 @@ header .navbar a:hover {
   align-items: center;
   background-color: white;
   background-size: cover;
+  padding-left: 10px;
   background-position: center;
   left: 100%;
 }
