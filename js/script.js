@@ -36,6 +36,14 @@ $(document).ready(function(){
     $('#tandc-block').show();
   });
 
+  $('.back-btn').on('click', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    $('#home').animate({right: '0%'});
+    $('#tandc-block').animate({left: '100%'});
+    // $('#tandc-block').hide();
+  })
+
   $('#btn-tandc').click(function() {
     if ($('#mark').is(':checked')) {
         alert('you agreed conditions');
@@ -47,13 +55,16 @@ $(document).ready(function(){
 
   // var selectEl = document.getElementById("cars");
   var imageList = Array();
-for (var i = 1; i <= 9; i++) {
-    imageList[i] = new Image(70, 70);
-    imageList[i].src = "https://api.lorem.space/image/movie?w=72"+i+"&h=128"+i;
-}
+  for (var i = 1; i <= 9; i++) {
+      imageList[i] = new Image(70, 70);
+      imageList[i].src = "https://api.lorem.space/image/movie?w=72"+i+"&h=128"+i;
+  }
   // selectEl.onclick = function () {
   $('#cars').click(function(){
     var val = parseInt(this.value);
     $(".home-slide").css("background-image", 'url(' + imageList[val].src + ')');
+
+    var selectedText = $(this).find('option:selected').text();
+    $('.header-text').text(selectedText);
   });
 });
