@@ -245,6 +245,17 @@ header .navbar a:hover {
   width: 100%;
 }
 
+.home2 {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  /* background-color: rgba(223,19,35,255); */
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  width: 100%;
+}
+
 .home .content {
   flex: 1 1 40rem;
   padding-top: 6rem;
@@ -286,6 +297,20 @@ header .navbar a:hover {
   left: 100%;
 }
 
+.tandc-block2{
+  display: none;
+  position: absolute;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  min-height: 100vh;
+  align-items: center;
+  /* background-color: white; */
+  background-size: cover;
+  background-position: center;
+  left: 100%;
+}
+
 .upper-border{
   position: absolute;
   background-color: #ff0000;
@@ -300,6 +325,17 @@ header .navbar a:hover {
   top: 60%;
   left: 50%;
   transform: translate(-50%,-50%);
+}
+
+.tandc-section2{
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fffcfc98;
 }
 
 .tandc{
@@ -515,6 +551,16 @@ header .navbar a:hover {
   padding: 10px;
 }
 
+.list-content2{
+  width: 400px;
+  /* border: 1px solid #df1323; */
+  background-color: #ededed;
+  border-radius: 10px;
+  height: 30px;
+  padding: 5px;
+  margin: 10px;
+}
+
 .btn-submit {
   display: inline-block;
   padding: 0.8rem 3rem;
@@ -556,6 +602,10 @@ header .navbar a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 /* media quiries */
 @media (max-width: 991px) {
