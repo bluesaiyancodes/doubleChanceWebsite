@@ -54,16 +54,18 @@ $(document).ready(function(){
   });
 
   // var selectEl = document.getElementById("cars");
+
   var imageList = Array();
   for (var i = 1; i <= 9; i++) {
       imageList[i] = new Image(70, 70);
       imageList[i].src = "https://api.lorem.space/image/movie?w=72"+i+"&h=128"+i;
   }
+  $(".list-content").css("background-image", 'url(' + imageList[1].src + ')');
   // selectEl.onclick = function () {
   $('#cars').click(function(){
     var val = parseInt(this.value);
-    $(".home-slide").css("background-image", 'url(' + imageList[val].src + ')');
-
+    $(".list-content").css("background-image", 'url(' + imageList[val].src + ')');
+    $(".tandc-section2").css("background-image", 'url(' + imageList[val].src + ')');
     var selectedText = $(this).find('option:selected').text();
     $('.header-text').text(selectedText);
   });
