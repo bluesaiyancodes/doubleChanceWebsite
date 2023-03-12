@@ -81,8 +81,6 @@ $(document).ready(function(){
     $('.captcha').text(a);
   });
 
-
-
   var max_fields = 5;
   var wrapper = $(".form-group");
   var add_button = $(".add_more");

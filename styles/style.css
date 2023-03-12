@@ -631,6 +631,14 @@ header .navbar a:hover {
   padding: 20px;
 }
 
+.list-content > option:hover{
+  background-color: #df1323;
+}
+
+.list-content option{
+  background-color: #df1323;
+}
+
 .list-content2{
   background-color: #ededed;
   border-radius: 10px;
