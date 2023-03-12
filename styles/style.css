@@ -260,8 +260,8 @@ header .navbar a:hover {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.789);
   padding: 30px;
-  width: 400px;
-  height: 600px;
+  width: 500px;
+  height: 730px;
   position: absolute;
   top: 58%;
   left: 50%;
@@ -328,8 +328,12 @@ header .navbar a:hover {
 .inner-content .captcha-reload{
   background-color: #666;
   color: white;
-  padding: 8px;
-  margin: 5px;
+  padding: 5px;
+  margin-bottom: 1vh;
+}
+
+.inner-content p{
+  margin-top: 10px;
 }
 
 .home .content {
@@ -702,7 +706,7 @@ header .navbar a:hover {
 /* media quiries */
 @media (max-width: 991px) {
   html {
-    font-size: 55%;
+    font-size: 80%;
   }
 
   header {
@@ -767,7 +771,7 @@ header .navbar a:hover {
 
 @media (max-width: 450px) {
   html {
-    font-size: 50%;
+    font-size: 70%;
   }
 
   .order .row form .inputBox input {
