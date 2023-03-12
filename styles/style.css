@@ -245,6 +245,17 @@ header .navbar a:hover {
   width: 100%;
 }
 
+.home2 {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  background-color: rgba(223,19,35,255);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  width: 100%;
+}
+
 .inner-content{
   text-align: center;
   background-color: rgba(255, 255, 255, 0.789);
@@ -254,6 +265,8 @@ header .navbar a:hover {
   top: 58%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow-y: scroll;
+  height: 700px;
 }
 
 .inner-content ul{
