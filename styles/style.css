@@ -245,16 +245,6 @@ header .navbar a:hover {
   width: 100%;
 }
 
-.home2 {
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  background-color: rgba(223,19,35,255);
-  width: 100%;
-}
-
 .inner-content{
   text-align: center;
   background-color: rgba(255, 255, 255, 0.789);
@@ -379,8 +369,9 @@ header .navbar a:hover {
   gap: 1.5rem;
   min-height: 100vh;
   align-items: center;
-  /* background-color: white; */
+  /* background-color: #ff0000; */
   background-size: cover;
+  padding-left: 10px;
   background-position: center;
   left: 100%;
 }
@@ -407,6 +398,7 @@ header .navbar a:hover {
   left: 50%;
   transform: translate(-50%,-50%);
   width: 500px;
+  height: 700px;
   padding: 20px;
   border-radius: 10px;
   background-repeat: no-repeat;
@@ -414,10 +406,9 @@ header .navbar a:hover {
   background-position: center;
   color: white;
   font-weight: bolder;
-  border: 4px solid white;
+  border: 20px solid white;
   box-shadow: 1px 1px 10px white;
-  /* background-color: #fffcfc98; */
-  /* margin-bottom: 20px; */
+  overflow-y: scroll;
 }
 
 .tandc{
@@ -625,13 +616,12 @@ header .navbar a:hover {
   border: 1px solid #df1323;
   border-radius: 10px;
   height: 40px;
-  padding: 10px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   overflow-x: hidden;
-  overflow-y: hidden;
-  border: 4px solid white;
+  overflow-y: scroll;
+  border: 20px solid white;
   color: white;
   font-weight: bolder;
   box-shadow: 1px 1px 10px white;
@@ -749,6 +739,7 @@ header .navbar a:hover {
 
   .tandc-section2{
     width: 350px;
+    height: 480px;
   }
 
   .form-card{
@@ -773,11 +764,11 @@ header .navbar a:hover {
     width: 300px;
   }
 
-  .home-slide{
-    height: 1100px;
-  }
-
   .form-card{
     width: 300px;
+  }
+
+  .tandc-section2{
+    height: 480px;
   }
 }

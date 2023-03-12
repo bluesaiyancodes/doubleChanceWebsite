@@ -49,7 +49,7 @@ $(document).ready(function(){
       window.location.href = 'second_page.html';
     }
     else {
-        alert('약관을 확인하십시오');
+      alert('약관을 확인하십시오');
     }
   });
 
