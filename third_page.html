@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이찌방쿠지 더블찬스</title>
+    <link rel="stylesheet" href="styles/style.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <!-- Font Awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+    <script src="https://kit.fontawesome.com/a5b1885f61.js" crossorigin="anonymous"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+</head>
+
+<body onload="myFunction()">
+    <!-- Header section starts -->
+    <header>
+        <a href="index.html" class="logo"><img src="assets/images/logo.png" height="100vh"></a>
+
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <!--
+        <nav class="navbar">
+            <a href="#home">home</a>
+        </nav>
+        -->
+    </header>
+    <!-- Header section ends -->
+
+    <div class="home2">
+        <div class="inner-content">
+            <h1>Lore Ipsum</h1>
+            <hr>
+            <ul>
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, velit.</li>
+                <li>Lorem ipsum dolor sit amet consectetur.</li>
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quidem fugit error!</li>
+            </ul>
+            <form action="">
+                <div class="form-group">
+                    <input class="input-field" type="text"/> . <button class="input-button">Lorem, ipsum. <i class="fa-solid fa-camera"></i></button>
+                </div>
+            </form>
+            <input type="button" class="add_more" value="More">
+
+            <p class="captcha"></p>
+            <button class="captcha-reload"><i class="fa-sharp fa-solid fa-rotate"></i></button>
+            <br>
+            <input class="input-field2" type="text">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, fuga?</p>
+            <hr>
+            <p>email:example@gmail.com</p>
+            <button class="btn2">Submit</button>
+        </div>
+    </div>
+
+    <div id="footer" class="footer">
+        <div class="footer-top">
+            <div class="footer-top-inner">
+                <ul>
+                    <li><a href="/rule.do?type=1">개인정보처리방침</a></li>
+                    <li><a href="/rule.do?type=2">청소년보호정책</a></li>
+                    <li><a href="/rule.do?type=3">이용약관</a></li>
+                </ul>
+                <div class="share">
+                    <a href="https://twitter.com/ICHIBAN_KUJI_" class="twitter" target="_blank"><span
+                            class="blind">twitter</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="fotter-bottom-inner">
+                <a href="#" class="logo"><span class="blind">이찌방쿠지 더블찬스</span></a>
+                <div class="footer-bottom-right">
+                    <div class="location">회사명 : 대원미디어(주) | 사업자등록번호 : 106-81-03487 | 대표자 : 정동훈 | 주소 : 서울특별시
+                        용산구 한강대로23길 55 (용산역) 아이파크몰 리빙파크6층 1-1호 통신판매업 신고 : 제2007-서울용산-04838호 | 고객센터 : 1670-0396 |
+                        개인정보관리 책임자 : 김기남 | 메일 : jw@daewonmedia.com</div>
+                    <div class="copy">COPYRIGHT © 2021 이찌방쿠지 더블찬스. ALL RIGHTS RESERVED</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
+
+    <!-- Loader 
+    <div class="loader-container">
+        <img src="assets/images/loading_goku.gif" alt="" />
+    </div>
+    -->
+
+    <!-- JS -->
+    <script src="js/script.js" defer></script>
+
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+</body>
+
+</html>

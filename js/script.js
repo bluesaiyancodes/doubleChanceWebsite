@@ -69,4 +69,37 @@ $(document).ready(function(){
     var selectedText = $(this).find('option:selected').text();
     $('.header-text').text(selectedText);
   });
+
+  var a = Math.floor(100000 + Math.random() * 900000);   
+  a = String(a);
+  // a = a.substring(0,4);
+  $('.captcha').text(a);
+
+  $('.captcha-reload').click(function(){
+    var a = Math.floor(100000 + Math.random() * 900000);   
+    a = String(a);
+    $('.captcha').text(a);
+  });
+
+
+
+  var max_fields = 5;
+  var wrapper = $(".form-group");
+  var add_button = $(".add_more");
+
+  var x = 1;
+  $(add_button).click(function(e) {
+      e.preventDefault();
+      if (x < max_fields) {
+        x++;
+        $(wrapper).append('<div><input class="input-field" type="text"/> . <button class="input-button">Lorem, ipsum. <i class="fa-solid fa-camera"></i></button></div>'); //add input box
+      } else {
+          alert('You Reached the limits')
+      }
+  });
+  $(wrapper).on("click", ".delete", function(e) {
+    e.preventDefault();
+    $(this).parent('div').remove();
+      x--;
+  });
 });
