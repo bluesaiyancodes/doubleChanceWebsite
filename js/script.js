@@ -49,7 +49,7 @@ $(document).ready(function(){
       window.location.href = 'second_page.html';
     }
     else {
-        alert('please check terms & conditions');
+        alert('약관을 확인하십시오');
     }
   });
 
