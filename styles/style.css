@@ -260,7 +260,7 @@ header .navbar a:hover {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.789);
   padding: 30px;
-  width: 400px;
+  width: 450px;
   position: absolute;
   top: 58%;
   left: 50%;
@@ -286,7 +286,7 @@ header .navbar a:hover {
   background: linear-gradient(90deg, rgba(55,55,55,1) 0%, rgba(255,255,255,1) 100%);
   height: fit-content;
   width: 100%;
-  font-size: 6rem;
+  font-size: 5rem;
   font-style: italic;
 }
 
@@ -328,8 +328,11 @@ header .navbar a:hover {
 .inner-content .captcha-reload{
   background-color: #666;
   color: white;
-  padding: 8px;
-  margin: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.inner-content p{
+  margin-top: 5px;
 }
 
 .home .content {
@@ -706,7 +709,7 @@ header .navbar a:hover {
 /* media quiries */
 @media (max-width: 991px) {
   html {
-    font-size: 55%;
+    font-size: 75%;
   }
 
   header {
@@ -716,6 +719,11 @@ header .navbar a:hover {
   section {
     padding: 2rem;
   }
+
+  .inner-content{
+    height: 675px;
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -762,11 +770,19 @@ header .navbar a:hover {
   .form-card{
     width: 350px;
   }
+
+  .inner-content{
+    height: 650px;
+  }
+
+  .captcha{
+    font-size: 3rem;
+  }
 }
 
 @media (max-width: 450px) {
   html {
-    font-size: 50%;
+    font-size: 65%;
   }
 
   .order .row form .inputBox input {
@@ -787,5 +803,14 @@ header .navbar a:hover {
 
   .tandc-section2{
     height: 480px;
+  }
+
+  .inner-content{
+    width: 400px;
+    height: 600px;
+  }
+
+  .captcha{
+    font-size: 2rem;
   }
 }

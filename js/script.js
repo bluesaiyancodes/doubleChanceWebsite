@@ -90,7 +90,7 @@ $(document).ready(function(){
       e.preventDefault();
       if (x < max_fields) {
         x++;
-        $(wrapper).append('<div><input class="input-field" type="text"/> . <button class="input-button">Lorem, ipsum. <i class="fa-solid fa-camera"></i></button></div>'); //add input box
+        $(wrapper).append('<div class="form-group"><input class="input-field" type="text" placeholder="알파벳 4자리"/> . <button class="input-button" >숫자입력  <i class="fa-solid fa-camera"></i></button></div>'); //add input box
       } else {
           alert('You Reached the limits')
       }
