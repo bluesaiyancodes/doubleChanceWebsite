@@ -428,8 +428,8 @@ header .navbar a:hover {
 }
 
 .tandc{
-  width: 350px;
-  height: 400px;
+  width: 400px;
+  height: 500px;
   background-color: white;
   border: 1px solid #d4d4d4;
   overflow: scroll;
@@ -437,6 +437,13 @@ header .navbar a:hover {
   border-radius: 5px;
   padding: 15px;
 }
+
+.tandc > ol{
+  margin-left: 10px;
+}
+
+
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -466,6 +473,15 @@ header .navbar a:hover {
   border-bottom: 1px solid lightgray;
   margin-bottom: 20px;
   padding-bottom: 10px;
+}
+
+.col-form-label{
+  background: radial-gradient(farthest-side,rgba(255,255,255,1), rgba(255,255,255,0));
+  color: #000000;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-tandc {
@@ -646,6 +662,9 @@ header .navbar a:hover {
 .list-content > option{
   padding: 20px;
 }
+.list-content > option:checked {
+  background-color: #fff;
+}
 
 .list-content > option:hover{
   background-color: #df1323;
@@ -656,6 +675,15 @@ header .navbar a:hover {
   border-radius: 10px;
   height: 30px;
   padding: 5px;
+  margin: 10px auto;
+}
+.list-content3{
+  background-color: #ededed;
+  border-radius: 10px;
+  height: 30px;
+  padding: 5px;
+  color: #000000;
+  text-align: center;
   margin: 10px auto;
 }
 
@@ -720,6 +748,11 @@ header .navbar a:hover {
     padding: 2rem;
   }
 
+  .tandc{
+    width: 350px;
+    height: 450px;
+  }
+
   .inner-content{
     height: 675px;
   }
@@ -763,8 +796,8 @@ header .navbar a:hover {
   }
 
   .tandc-section2{
-    width: 350px;
-    height: 480px;
+    width: 400px;
+    height: 600px;
   }
 
   .form-card{
@@ -787,6 +820,10 @@ header .navbar a:hover {
 
   .order .row form .inputBox input {
     width: 100%;
+  }
+  .tandc{
+    width: 300px;
+    height: 400px;
   }
 
   .list-content2{

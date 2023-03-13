@@ -36,7 +36,15 @@ $(document).ready(function(){
     $('#tandc-block').show();
   });
 
-  $('.back-btn').on('click', function(e){
+  $("#opn_submit_btn").on('click', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    $('#home').animate({right: '100%'});
+    $('#tandc-block').animate({left: '0%'});
+    $('#tandc-block').show();
+  });
+
+  $('#opn_back_btn').on('click', function(e){
     e.stopPropagation();
     e.preventDefault();
     $('#home').animate({right: '0%'});
@@ -44,7 +52,13 @@ $(document).ready(function(){
     // $('#tandc-block').hide();
   })
 
-  $('#btn-tandc').click(function() {
+  $('#opn_submit_btn_final').on('click', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    window.location.href = 'third_page.html';
+  });
+
+  $('#btn-tandc').click(function(e) {
     if ($('#mark').is(':checked')) {
       window.location.href = 'second_page.html';
     }
@@ -53,6 +67,8 @@ $(document).ready(function(){
     }
   });
 
+
+
   // var selectEl = document.getElementById("cars");
 
   var imageList = Array();
@@ -60,12 +76,13 @@ $(document).ready(function(){
       imageList[i] = new Image(70, 70);
       imageList[i].src = "https://api.lorem.space/image/movie?w=72"+i+"&h=128"+i;
   }
-  $(".list-content").css("background-image", 'url(' + imageList[1].src + ')');
+  
+  $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[1].src + ')');
   // selectEl.onclick = function () {
   $('#cars').click(function(){
     var val = parseInt(this.value);
-    $(".list-content").css("background-image", 'url(' + imageList[val].src + ')');
-    $(".tandc-section2").css("background-image", 'url(' + imageList[val].src + ')');
+    $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[val].src + ')');
+    $(".tandc-section2").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[val].src + ')');
     var selectedText = $(this).find('option:selected').text();
     $('.header-text').text(selectedText);
   });
