@@ -132,6 +132,7 @@ section {
 .link1 {
   display: inline-block;
   padding: 0.8rem 3rem;
+  text-align: center;
   color: #333;
   cursor: pointer;
   font-size: 1.7rem;
@@ -145,6 +146,7 @@ section {
 .link2 {
   display: inline-block;
   padding: 0.8rem 3rem;
+  text-align: center;
   border: 0.2rem solid var(--red);
   color: var(--red);
   cursor: pointer;
@@ -154,7 +156,6 @@ section {
   overflow: hidden;
   z-index: 0;
   margin-top: 1rem;
-  margin-right: 5rem;
 }
 
 .link2::before {
@@ -192,6 +193,10 @@ header {
   background: #fff;
   padding: 2rem 9%;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+header img {
+  width: 100px;
 }
 
 header .logo {
@@ -367,6 +372,8 @@ header .navbar a:hover {
   position: absolute;
   width: 100%;
   flex-wrap: wrap;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
   gap: 1.5rem;
   min-height: 100vh;
   align-items: center;
@@ -534,6 +541,7 @@ header .navbar a:hover {
 
 .container {
   margin-top: 10vh;
+  margin-bottom: 5vh;
   display: flex;
   justify-content: center;
 }
@@ -554,6 +562,7 @@ header .navbar a:hover {
 
 .steps .box img {
   border-radius: 50%;
+  width: 200px;
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
   border: 1rem solid #fff;
 }
@@ -566,7 +575,8 @@ header .navbar a:hover {
 
 .containerlink {
   margin-bottom: 10vh;
-  display: flex;
+  display: inline-flex;
+  width: 100%;
   justify-content: center;
 }
 
@@ -734,6 +744,17 @@ header .navbar a:hover {
   transform: translate(-50%, -50%);
   width: 500px;
 }
+
+
+
+
+
+
+
+
+
+
+
 /* media quiries */
 @media (max-width: 991px) {
   html {
@@ -744,13 +765,42 @@ header .navbar a:hover {
     padding: 2rem;
   }
 
+  header img {
+    width: 80px;
+  }
+
   section {
     padding: 2rem;
   }
 
+  .steps .box img{
+    width: 150px;
+  }
+
+  .steps .box h3{
+     font-size: 2rem;
+     padding: 30px;
+  }
+  .container {
+    margin-top: 2vh;
+  }
+
+  .heading {
+    font-size: 2rem;
+    padding: 10px;
+  }
+
+  .link1{
+    font-size: 1.25rem;
+  }
+
+  .link2{
+    font-size: 1.25rem;
+  }
+
   .tandc{
     width: 350px;
-    height: 450px;
+    height: 400px;
   }
 
   .inner-content{
@@ -787,6 +837,31 @@ header .navbar a:hover {
     background: #fff;
   }
 
+  .home .content h3 {
+    font-size: 3.5rem;
+  }
+  .tandc-block-text{
+    font-size: 2rem;
+  }
+  .btn {
+    
+    font-size: 1.7rem;
+  }
+
+  .container {
+    margin-bottom: 0.5vh;
+  }
+  
+  .link1{
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .link2{
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+
   .list-content{
     width: 350px;
   }
@@ -816,6 +891,14 @@ header .navbar a:hover {
 @media (max-width: 450px) {
   html {
     font-size: 65%;
+  }
+
+  header img {
+    width: 60px;
+  }
+
+  .steps .box img{
+    width: 100px;
   }
 
   .order .row form .inputBox input {
