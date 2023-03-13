@@ -36,6 +36,21 @@ $(document).ready(function(){
     $('#tandc-block').show();
   });
 
+  $('#btn-tandc').on('click', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    if ($('#mark').is(':checked')) {
+      //window.location.href = 'second_page.html';
+      $('#tandc-block').animate({right: '100%'});
+      $('#home_new').animate({left: '0%'});
+      $('#home_new').show();
+    }
+    else {
+      alert('약관을 확인하십시오');
+    }
+  });
+
+
   $("#opn_submit_btn").on('click', function(e){
     e.stopPropagation();
     e.preventDefault();
@@ -58,15 +73,7 @@ $(document).ready(function(){
     window.location.href = 'third_page.html';
   });
 
-  $('#btn-tandc').click(function(e) {
-    if ($('#mark').is(':checked')) {
-      window.location.href = 'second_page.html';
-    }
-    else {
-      alert('약관을 확인하십시오');
-    }
-  });
-
+  
 
 
   // var selectEl = document.getElementById("cars");
