@@ -71,6 +71,8 @@ $(document).ready(function(){
 
   // var selectEl = document.getElementById("cars");
 
+  // Image PreLoad
+
   var imageList = Array();
   for (var i = 1; i <= 9; i++) {
       imageList[i] = new Image(70, 70);
@@ -87,6 +89,8 @@ $(document).ready(function(){
     $('.header-text').text(selectedText);
   });
 
+  // For Captcha Generation
+
   var a = Math.floor(100000 + Math.random() * 900000);   
   a = String(a);
   // a = a.substring(0,4);
@@ -98,23 +102,135 @@ $(document).ready(function(){
     $('.captcha').text(a);
   });
 
+  // Add more Coupon Space
+
   var max_fields = 5;
   var wrapper = $(".form-group");
   var add_button = $(".add_more");
 
-  var x = 1;
+  var x = 1
   $(add_button).click(function(e) {
       e.preventDefault();
       if (x < max_fields) {
         x++;
-        $(wrapper).append('<div class="form-group"><input class="input-field" type="text" placeholder="알파벳 4자리"/> . <button class="input-button" >숫자입력  <i class="fa-solid fa-camera"></i></button></div>'); //add input box
+        var str1 = '<div class="form-group">';
+        var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input'+(x+2)+'" capture="environment" ><input class="input-field" type="text" placeholder="알파벳 4자리" id="coupon'+(x+2)+'" /> . <button class="input-button" onclick="$('+'\'#file-input'+(x+2)+'\').click()" >숫자입력  <i class="fa-solid fa-camera"></i></button></div>'
+        $(wrapper).append(str2); //add input box
       } else {
           alert('You Reached the limits')
       }
+  });  
+
+
+
+
+
+  //Image Handling
+  const fileInput = document.getElementById('file-input1');
+  fileInput.addEventListener('change', (e) =>{
+
+    doSomethingWithFiles(e.dataTransfer.files);
+
   });
-  $(wrapper).on("click", ".delete", function(e) {
-    e.preventDefault();
-    $(this).parent('div').remove();
-      x--;
+
+
+
+  // Captcha and Coupon Validation
+  var coupon1L = 19;
+  var coupon2L = 14;
+
+  
+
+  $('#submit_coupons').click(function(e) {
+
+
+  var emptyCouponFlag = true;
+  var capchaFlag = false;
+  var validateFlag = false;
+
+    // Captcha Validation
+    var capchaInput = document.getElementById('captcha_input').value;
+    var capchaReal = $('.captcha').text();
+    if (capchaInput==capchaReal){
+        console.log("Captcha Success!");
+        capchaFlag = false;
+      }
+    else{
+      alert("자동입력 방지문자 입력을 다시 확인해 주세요");
+      capchaFlag = true;
+      document.getElementsByClassName('captcha-reload')[0].click();
+    }
+
+    // Coupon Validation 1
+    
+    // Candidate coupons
+    var couponArray = Array();
+
+    if (!capchaFlag){
+
+      coupon_count = $("div#form-group input").length;
+      // because there are two input tags per each input box
+      coupon_count = coupon_count/2
+      
+      for (var i=1; i<= coupon_count; i++){
+        var coupon_i = document.getElementById('coupon'+i.toString()).value;
+
+        if (coupon_i == "" ){
+          $('#coupon'+i.toString()).css("border-style","none");
+          continue;
+        }else{
+          if (coupon_i.length!=coupon1L && coupon_i.length!=coupon2L){
+            $('#coupon'+i.toString()).css("border-style","solid");
+            validateFlag = true;
+          }else{
+            $('#coupon'+i.toString()).css("border-style","none");
+            couponArray[i-1] = coupon_i
+            emptyCouponFlag = false
+          }
+  
+        }
+  
+      }
+  
+        if (validateFlag){
+          alert("쿠폰을 다시 확인해 주세요");
+          validateFlag = false;
+          document.getElementsByClassName('captcha-reload')[0].click();
+        }else{
+          if (!emptyCouponFlag){
+            console.log("Coupon Success!")
+            console.log(couponArray)
+          }
+         
+
+
+        }
+
+    }
+
+
+    
+    
   });
+
+
+
+
+});
+
+// async data fetch
+$(function(){ 
+  /*
+  coupon_count = $("div#form-group input").length;
+  for (var i=1; i<= coupon_count; i++){
+    $('#coupon'+i.toString()).keyup(function() {
+      if(this.value.length>5){
+        alert('Coupon'+i.toString()+": done");
+       
+      }
+      
+    });
+  }
+  */
+  
 });

@@ -300,6 +300,9 @@ header .navbar a:hover {
   height: 30px;
   padding: 10px;
   border-radius: 5px;
+  border-color: red;
+  text-transform:uppercase;
+  border-style: none;
 }
 
 .input-button{
@@ -311,6 +314,10 @@ header .navbar a:hover {
   padding-bottom: 4px;
   padding-right: 5px;
   width: 140px;
+}
+
+.hide{
+  display: none;
 }
 
 .input-field2{
