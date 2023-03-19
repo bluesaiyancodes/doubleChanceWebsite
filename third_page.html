@@ -59,6 +59,36 @@
                     <input class="hide" type="file" accept="image/*" id="file-input3" capture="environment">
                     <input class="input-field" type="text" placeholder="알파벳 4자리" id="coupon3"/> . 
                     <button class="input-button" onclick="$('#file-input3').click()">숫자입력  <i class="fa-solid fa-camera"></i></button>
+
+                    <!-- crop image modal start-->
+                    <div id="myModal" class="modal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Crop Image</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="row">
+                                          <div class="col-md-8 text-center">
+                                              <div id="image" style="width:250px; margin-top:20px"></div>
+                                          </div>
+                                          <div class="col-md-4" style="padding-top:20px;">
+                                              <br />
+                                              <br />
+                                              <br/>
+                                              <button class="btn btn-success crop_image">Crop & Upload Image</button>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- crop image modal end -->
+                    
                 </div>
             </form>
             <input type="button" class="add_more" value="추가">
@@ -72,6 +102,14 @@
             <p>문의사항 : w_cs@daewonmedia.com</p>
             <button class="btn2" id="submit_coupons">당첨확인하기 </button>
         </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
+
+    <!-- Loader     -->
+    <div class="loader-container">
+        
     </div>
 
     <div id="footer" class="footer">
@@ -99,14 +137,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Back to Top Button -->
-    <a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
-
-    <!-- Loader     -->
-    <div class="loader-container">
-        
     </div>
 
 

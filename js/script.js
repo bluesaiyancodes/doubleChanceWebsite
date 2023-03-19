@@ -121,8 +121,38 @@ $(document).ready(function(){
       }
   });  
 
+  $('#upload').on('change', function(){
+    var reader = new FileReader();
+    reader.onload = function (event) {
+      $image_crop.croppie('bind', {
+        url: event.target.result
+      }).then(function(){
+        console.log('jQuery bind complete');
+      });
+    }
+    reader.readAsDataURL(this.files[0]);
+    $('#myModal').modal('show');
+  });
 
 
+
+  $('.crop_image').click(function(event){
+    $image_crop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function(response){
+      $.ajax({
+        url:'<?php echo base_url(); ?>crop/upload',
+        type: "POST",
+        data:{"image": response},
+        success:function(data)
+        {
+          $('#myModal').modal('hide');
+          $('#uploaded').html(data);
+        }
+      });
+    })
+  });
 
 
   //Image Handling
@@ -132,8 +162,6 @@ $(document).ready(function(){
     doSomethingWithFiles(e.dataTransfer.files);
 
   });
-
-
 
   // Captcha and Coupon Validation
   var coupon1L = 19;
