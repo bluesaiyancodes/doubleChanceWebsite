@@ -589,28 +589,91 @@ header .navbar a:hover {
 }
 
 .footer {
-  background: #ffffff;
+  background:#f1f1f1;
   color: #000000;
   text-align: center;
 }
 
-.footer .share {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
+.footer .footer-top {
+  border-bottom:0.2rem solid #d8d8d8;
 }
 
-.footer .credit {
-  padding: 2.5rem 1rem;
+.footer .footer-top-inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  margin-left: 2rem;
+  padding: 2rem 0;
+  font-size: 1.7rem;
+  text-decoration: none;
+}
+
+.footer .footer-top-inner > ul {
+  display:flex;
+  color:#6c6c6c;
+  line-height: 4rem;
+}
+
+.footer .footer-top-inner > ul li {
+  list-style-type: none;
+  margin-right:3rem;
+}
+
+.footer .footer-top-inner > ul li:last-child {
+  margin-right:0;
+}
+
+.footer .footer-top-inner > ul li a {
   color: #000000;
-  font-weight: normal;
-  font-size: 2rem;  
+  display:block;
 }
 
-.footer .credit span {
-  color: var(--red);
+.footer .footer-top-inner .right {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex:1 0 4rem;
+  max-width:4rem;
+  margin-right: 3vi;
 }
+
+.footer .footer-top-inner .right .twitter {
+  display:block;
+  flex:1 0 4rem;
+  max-width:4rem;
+  height:4rem;
+  background:url(../assets/images/ico-twitter.png) center center no-repeat;
+  background-size:100% 100%;
+}
+
+
+.footer .fotter-bottom-inner {
+  margin:0 auto;
+  padding: 3.5rem 1rem;
+}
+
+.footer .fotter-bottom-inner .logo {
+  display:block;
+  width:8rem;
+  height:8rem;
+  background:url(../assets/images/logo-footer.png) center center no-repeat;
+  background-size:100% 100%;
+}
+
+.footer .fotter-bottom-inner .location {
+  font-size:1.6rem;
+  line-height:2rem;
+  margin-top:1rem;
+}
+
+.footer .fotter-bottom-inner .copy {
+  font-size:1.4rem;
+  line-height:2rem;
+  margin-top:1rem;
+  color:#757575;
+}
+
 
 #scroll-top {
   position: fixed;
@@ -884,6 +947,14 @@ header .navbar a:hover {
   .captcha{
     font-size: 3rem;
   }
+
+  .footer .footer-top-inner {
+    font-size: 1.3rem;
+  }
+  .footer .fotter-bottom-inner {
+    margin:0 auto;
+    padding: 2rem 1rem;
+  }
 }
 
 @media (max-width: 450px) {
@@ -945,5 +1016,25 @@ header .navbar a:hover {
 
   .captcha{
     font-size: 2rem;
+  }
+
+  .footer .footer-top-inner {
+    font-size: 1rem;
+  }
+  .footer .footer-top-inner .right {
+    flex:1 0 1rem;
+    max-width:1rem;
+  }
+  .footer .footer-top-inner .right .twitter {
+    flex:1 0 2rem;
+    max-width:2rem;
+    height:2rem;
+  }
+  .footer .fotter-bottom-inner .location {
+    font-size:1rem;
+  }
+  
+  .footer .fotter-bottom-inner .copy {
+    font-size:1rem;
   }
 }

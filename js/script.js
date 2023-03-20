@@ -109,13 +109,13 @@ $(document).ready(function(){
       i = i+1;
     }
     console.log(imageList)
-    $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[1].src + ')');
+    $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(' + imageList[1].src + ')');
     // selectEl.onclick = function () {
     $('#cars').click(function(){
       //var val = parseInt(this.value);
       var val = $("#cars").children(":selected").attr("id");
-      $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[val].src + ')');
-      $(".tandc-section2").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[val].src + ')');
+      $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(' + imageList[val].src + ')');
+      $(".tandc-section2").css("background-image", 'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(' + imageList[val].src + ')');
       var selectedText = $(this).find('option:selected').text();
       $('.header-text').text(selectedText);
     });
