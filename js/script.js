@@ -69,25 +69,71 @@ $(document).ready(function(){
 
 
 
+  // Page 2 -  Second Page JS
+
   // var selectEl = document.getElementById("cars");
 
   // Image PreLoad
 
   var imageList = Array();
+  /*
+ 
   for (var i = 1; i <= 9; i++) {
-      imageList[i] = new Image(70, 70);
-      imageList[i].src = "https://api.lorem.space/image/movie?w=72"+i+"&h=128"+i;
+      
   }
+
+  */
+
+  const productList = document.getElementById("cars");
+  console.log({ productList });
+  const getPost = async () => {
+    const response = await fetch("http://202.31.200.222/api/goods/types");
+    const data = await response.json();
+    console.log(data);
+    return data;
+  };
   
-  $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[1].src + ')');
-  // selectEl.onclick = function () {
-  $('#cars').click(function(){
-    var val = parseInt(this.value);
-    $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[val].src + ')');
-    $(".tandc-section2").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[val].src + ')');
-    var selectedText = $(this).find('option:selected').text();
-    $('.header-text').text(selectedText);
-  });
+  const displayOption = async () => {
+    const options = await getPost();
+    var i = 1;
+    for (option of options) {
+      const newOption = document.createElement("option");
+      newOption.value = option.typeid;
+      newOption.text = option.typename;
+      newOption.id = i;
+      productList.appendChild(newOption);
+      imageList[i] = new Image(70, 70);
+      imageList[i].src = "http://202.31.200.222/api/goods/image/"+option.typeid;
+      console.log(i);
+      console.log(imageList[i].src);
+      i = i+1;
+    }
+    console.log(imageList)
+    $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[1].src + ')');
+    // selectEl.onclick = function () {
+    $('#cars').click(function(){
+      //var val = parseInt(this.value);
+      var val = $("#cars").children(":selected").attr("id");
+      $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[val].src + ')');
+      $(".tandc-section2").css("background-image", 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.5)), url(' + imageList[val].src + ')');
+      var selectedText = $(this).find('option:selected').text();
+      $('.header-text').text(selectedText);
+    });
+
+  };
+  
+  displayOption();
+
+
+  
+
+
+
+
+
+
+
+  // Page 3
 
   // For Captcha Generation
 
@@ -157,11 +203,11 @@ $(document).ready(function(){
 
   //Image Handling
   const fileInput = document.getElementById('file-input1');
-  fileInput.addEventListener('change', (e) =>{
+  //fileInput.addEventListener('change', (e) =>{
 
-    doSomethingWithFiles(e.dataTransfer.files);
+    //doSomethingWithFiles(e.dataTransfer.files);
 
-  });
+  //});
 
   // Captcha and Coupon Validation
   var coupon1L = 19;
@@ -262,3 +308,37 @@ $(function(){
   */
   
 });
+
+
+
+
+// api url
+const api_url = 
+"http://202.31.200.222/api/goods/types";
+
+// Defining async function
+async function getapi(url) {
+
+// Storing response
+const response = await fetch(url);
+
+// Storing data in form of JSON
+var data = await response.json();
+
+if (response) {
+console.log(data[0]);
+
+}
+//show(data);
+}
+// Calling that async function
+getapi(api_url);
+
+
+
+
+
+
+
+
+
