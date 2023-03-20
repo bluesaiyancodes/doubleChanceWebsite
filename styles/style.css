@@ -388,24 +388,12 @@ header .navbar a:hover {
   background-size: cover;
   padding-left: 10px;
   background-position: center;
+  padding-top: 0vh;
+  margin-top: -15vh;
   left: 100%;
   height: 1100px;
 }
 
-.tandc-block2{
-  display: none;
-  position: absolute;
-  width: 100%;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  min-height: 100vh;
-  align-items: center;
-  /* background-color: #ff0000; */
-  background-size: cover;
-  padding-left: 10px;
-  background-position: center;
-  left: 100%;
-}
 
 .upper-border{
   position: absolute;
@@ -423,24 +411,6 @@ header .navbar a:hover {
   transform: translate(-50%,-50%);
 }
 
-.tandc-section2{
-  position: absolute;
-  top: 58%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 500px;
-  height: 800px;
-  padding: 20px;
-  border-radius: 10px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  color: white;
-  font-weight: bolder;
-  border: 20px solid white;
-  box-shadow: 1px 1px 10px white;
-  overflow-y: scroll;
-}
 
 .tandc{
   width: 400px;
@@ -913,6 +883,11 @@ header .navbar a:hover {
     height: 675px;
   }
 
+  .tandc-block{
+    padding-top: 40vh;
+  }
+
+
 }
 
 @media (max-width: 768px) {
@@ -941,6 +916,9 @@ header .navbar a:hover {
     border: 0.2rem solid rgba(0, 0, 0, 0.1);
     border-left: 0.5rem solid var(--red);
     background: #fff;
+  }
+  .tandc-block{
+    padding-top: 70vh;
   }
 
   .home .content h3 {
@@ -1091,4 +1069,11 @@ header .navbar a:hover {
   .footer .fotter-bottom-inner .copy {
     font-size:1rem;
   }
+}
+
+@media (max-width: 390px) {
+  .tandc-block{
+    margin-top: 25vh;
+  }
+  
 }
