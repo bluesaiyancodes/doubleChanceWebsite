@@ -39,24 +39,27 @@
 
     <div class="home-slide">
         <div id="flip" class="content-card">
-            <div class="circle" id="circle"></div>
+            <div class="circle" id="circle"> 
+              <p class="circletext">성공</p>
+            </div>
         </div>
         <div id="panel">
-            <form name="address-form" action="" method="post" class="address_form">
-				<div class="mb-2">
-                    <label for="addressField" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="addressField" placeholder="Address">
+            <form name="address-form" action="javascript:void(0);" method="post" class="address_form">
+				
+                <div class="mb-2">
+                    <label for="cityField" class="form-label">도시</label>
+                    <input type="text" class="form-control" id="cityField" placeholder="광주">
                 </div>
                 <div class="mb-2">
-                    <label for="cityField" class="form-label">City</label>
-                    <input type="text" class="form-control" id="cityField" placeholder="City">
+                    <label for="zipField" class="form-label">우편번호</label>
+                    <input type="text" class="form-control" id="zipField" placeholder="39177">
                 </div>
                 <div class="mb-2">
-                    <label for="zipField" class="form-label">Zip</label>
-                    <input type="text" class="form-control" id="zipField" placeholder="Zip">
-                </div>
+                  <label for="addressField" class="form-label">주소</label>
+                  <input type="text" class="form-control" id="addressField" placeholder="푸름관4동 302호, 대학로 61">
+              </div>
                 <div class="mb-2 text-center">
-                    <input type="submit" value="SUBMIT" class="btn btn-danger">
+                    <input type="submit" value="제출" class="btn btn-danger" id="addresssubmitbtn">
                 </div>
 			</form>
         </div>

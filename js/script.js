@@ -204,6 +204,9 @@ $(document).ready(function(){
   });
 
 
+
+
+
   //Image Handling
   const fileInput = document.getElementById('file-input1');
   //fileInput.addEventListener('change', (e) =>{
@@ -277,6 +280,7 @@ $(document).ready(function(){
           if (!emptyCouponFlag){
             console.log("Coupon Success!")
             console.log(couponArray)
+            window.location.replace("result.html");
           }
          
 
@@ -289,6 +293,28 @@ $(document).ready(function(){
     
     
   });
+
+
+
+  // adress form submit
+
+  $("#addresssubmitbtn").click(function(){
+    console.log(document.getElementById("cityField").value)
+    if (document.getElementById("cityField").value == ""){
+      alert("도시 정보를 삽입합니다");
+    }else if (document.getElementById("zipField").value == ""){
+      alert("도시 정보를 삽입합니다");
+    }else if (document.getElementById("addressField").value == ""){
+      alert("적절한 주소 정보를 삽입하십시오");
+    }else{
+      alert("성공적으로 제출되었습니다");
+      window.location.replace("index.html");
+    }
+  });
+
+
+  
+
 
 
 
@@ -337,9 +363,24 @@ console.log(data[0]);
 // Calling that async function
 getapi(api_url);
 
+/*
 
 
-
+function addsub(){
+  console.log(document.getElementById("cityField"))
+  if (document.getElementById("cityField") == ""){
+    alert("도시 정보를 삽입합니다");
+  }else if (document.getElementById("zipField") == ""){
+    alert("도시 정보를 삽입합니다");
+  }else if (document.getElementById("addressField") == ""){
+    alert("적절한 주소 정보를 삽입하십시오");
+  }else{
+    alert("성공적으로 제출되었습니다");
+  }
+  
+  return true;
+}
+  */
 
 
 

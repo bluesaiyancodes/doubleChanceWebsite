@@ -833,6 +833,12 @@ header .navbar a:hover {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.circle .circletext{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  font-size: 3rem;
+}
 
 .content-card{
   width: 500px;

@@ -1,7 +1,7 @@
 function loginWithKakao() {
-    window.location.replace("/auth/kakao");
+    window.location.replace("doublechance/auth/kakao");
 }
 
 function logoutFromKakao() {
-    window.location.replace("/auth/logout");
+    window.location.replace("doublechance/auth/logout");
 }
