@@ -816,6 +816,51 @@ header .navbar a:hover {
   width: 500px;
 }
 
+/* 4th page start */
+.circle{
+  width: 155px;
+  height: 155px;
+  background-color: white;
+  border: 10px solid #df1323;
+  border-radius: 100px;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.content-card{
+  width: 500px;
+  height: 90px;
+  background-color: white;
+  border-radius: 15px 15px 0px 0px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#panel{
+  display: none;
+  width: 500px;
+  height: 300px;
+  background-color: white;
+  border-radius: 0px 0px 15px 15px;
+  position: absolute;
+  top: 61%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.address_form{
+  margin: 30px;
+}
+
+.submit-btn{
+  text-align: center;
+}
+/* 4th page end */
+
 /* media quiries */
 @media (max-width: 991px) {
   html {
@@ -1012,6 +1057,15 @@ header .navbar a:hover {
   .inner-content{
     width: 300px;
     height: 500px;
+  }
+
+  .content-card{
+    width: 350px;
+  }
+
+  #panel{
+    width: 350px;
+    top: 63%;
   }
 
   .captcha{

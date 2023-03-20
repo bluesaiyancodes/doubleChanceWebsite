@@ -68,6 +68,9 @@ $(document).ready(function(){
   });
 
 
+  $("#flip").click(function(){
+    $("#panel").slideDown("slow");
+  });
 
   // Page 2 -  Second Page JS
 
