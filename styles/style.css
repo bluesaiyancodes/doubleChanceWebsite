@@ -394,6 +394,41 @@ header .navbar a:hover {
   height: 1100px;
 }
 
+ 
+.tandc-section2{
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 500px;
+  height: 800px;
+  padding: 20px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-weight: bolder;
+  border: 20px solid white;
+  box-shadow: 1px 1px 10px white;
+  overflow-y: scroll;
+}
+
+.tandc-block2{
+  display: none;
+  position: absolute;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  min-height: 100vh;
+  align-items: center;
+  /* background-color: #ff0000; */
+  background-size: cover;
+  padding-left: 10px;
+  background-position: center;
+  left: 100%;
+}
+
 
 .upper-border{
   position: absolute;
