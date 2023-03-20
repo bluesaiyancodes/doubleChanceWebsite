@@ -1,0 +1,82 @@
+
+
+/* 
+.delivery-list is ul element that contains all the deliveries
+this is view like table,
+each li element is a row
+and li element contains 5 divs
+and colored background odd and even rows
+when you hover over the row, the background color changes
+
+and first li element is the header
+
+text is centered in each div with horizontal padding
+
+div size : 14% 40% 14% 14% 14%
+*/
+
+.delivery-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 300;
+    overflow-y: scroll;
+}
+
+.delivery-list li {
+    list-style: none;
+    padding: 4px 0;
+    border-bottom: 1px solid #ccc;
+    background: #f9f9f9;
+    height: 40px;
+
+    -webkit-transition: background 0.2s ease-in-out;
+    -moz-transition: background 0.2s ease-in-out;
+    -o-transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out;
+}
+
+.delivery-list li:hover {
+    background: #f0f0f0;
+}
+
+.delivery-list li:first-child {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+.delivery-list li:nth-child(odd) {
+    background: #fff;
+}
+
+.delivery-list li:nth-child(odd):hover {
+    background: #f0f0f0;
+}
+
+.delivery-list li div {
+    float: left;
+    width: 20%;
+    text-align: center;
+    
+    padding: 5 0px;
+}
+
+.delivery-list li div:nth-child(1) {
+    width: 14%;
+}
+
+.delivery-list li div:nth-child(2) {
+    width: 40%;
+}
+
+.delivery-list li div:nth-child(3) {
+    width: 14%;
+}
+
+.delivery-list li div:nth-child(4) {
+    width: 14%;
+}
+
+.delivery-list li div:nth-child(5) {
+    width: 14%;
+}

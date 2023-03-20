@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Log In</title>
+        <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+        <script src="login.js"></script>
+
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="login.css" />
+    </head>
+    <body>
+        <header>
+            <a href="index.html" class="logo"><img src="../assets/images/logo.png"></a>
+            <div id="menu-bar" class="fas fa-bars" aria-hidden="true"></div>
+        </header>
+        
+    
+        <div class="home-slide">
+            <section class="home" id="home">
+                <div style="width:100%;text-align:center;" id="login-buttons">
+                    <button onclick="loginWithKakao()"></button>
+                </div>
+            </section>
+        </div>
+	
+        <script>
+            fetch("/auth/check")
+            .then((res) => res.json())
+            .then((json)=>{
+                if(json != 0) {
+                    window.location.replace("/profile");
+                }
+            })
+        </script>
+    </body>
+
+
+</html>
