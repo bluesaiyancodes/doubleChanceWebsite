@@ -28,6 +28,16 @@ function fadeOut() {
 window.onload = fadeOut();
 
 $(document).ready(function(){
+
+// Login Verification
+
+
+
+
+
+
+
+
   $("#btn").on('click', function(e){
     e.stopPropagation();
     e.preventDefault();
@@ -62,10 +72,11 @@ $(document).ready(function(){
     }
   });
 
-
+/*
   $("#flip").click(function(){
     $("#panel").slideDown("slow");
   });
+  */
 
   // Page 2 -  Second Page JS
 
@@ -287,6 +298,32 @@ $('#opn_submit_btn_final').on('click', function(e){
             $('#coupon'+i.toString()).css("border-style","none");
             couponArray[i-1] = coupon_i
             emptyCouponFlag = false
+
+            
+            $.ajax({
+              type: "POST",
+              dataType: "json",
+              url: "http://202.31.200.222/api/win/valid",
+              headers:{         
+                'serial' : coupon_i,
+                'type' : coupon_i
+                
+            },
+              success: function (data) {
+                  alert(data);
+              },
+              error: function (error) {
+
+                  jsonValue = jQuery.parseJSON(error.responseText);
+                  alert("error" + error.responseText);
+              }
+          });
+
+          
+
+
+
+
           }
   
         }
@@ -301,7 +338,19 @@ $('#opn_submit_btn_final').on('click', function(e){
           if (!emptyCouponFlag){
             console.log("Coupon Success!")
             console.log(couponArray)
+
+
+
             window.location.replace("result.html");
+
+            /*
+            $.post("www.abc.com/details", {
+              json_string: JSON.stringify({id:"John", validity:"+valid"})
+          });
+         */ 
+
+
+
           }
          
 
@@ -364,7 +413,7 @@ $(function(){
 
 // api url
 const api_url = 
-"http://202.31.200.222/api/goods/types";
+"http://202.31.200.222/auth/check";
 
 // Defining async function
 async function getapi(url) {
@@ -374,15 +423,28 @@ const response = await fetch(url);
 
 // Storing data in form of JSON
 var data = await response.json();
+const obj_ = JSON.parse(data);
 
 if (response) {
-console.log(data[0]);
+  console.log("data-");
+console.log( obj_);
+
+
+if (data[0]!=0){
+  console.log("kakao");
+}
 
 }
 //show(data);
 }
 // Calling that async function
 getapi(api_url);
+
+  
+   fetch('http://202.31.200.222/auth/check')     
+  .then(response => response.text()) // the promise
+    .then(data => console.log('Data', data)) // data
+  .catch(error => console.log('Error', error))
 
 /*
 
