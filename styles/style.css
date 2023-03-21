@@ -855,9 +855,9 @@ input {
 }
 
 #panel{
-  display: none;
+  display: visible;
   width: 500px;
-  height: 300px;
+  height: 450px;
   background-color: white;
   border-radius: 0px 0px 15px 15px;
   position: absolute;
