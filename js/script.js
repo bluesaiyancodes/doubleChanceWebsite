@@ -29,14 +29,6 @@ window.onload = fadeOut();
 
 $(document).ready(function(){
 
-// Login Verification
-
-
-
-
-
-
-
 
   $("#btn").on('click', function(e){
     e.stopPropagation();
@@ -156,6 +148,18 @@ $('#opn_submit_btn_final').on('click', function(e){
 
   if (validateFlag){
     window.location.href = 'third_page.html';
+
+
+    /*
+    var myRedirect = function(redirectUrl, arg, value) {
+      var form = $('<form action="' + redirectUrl + '" method="post">' +
+      '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+      $('body').append(form);
+      $(form).submit();
+    };
+    */
+
+
   }
 
  
@@ -340,8 +344,22 @@ $('#opn_submit_btn_final').on('click', function(e){
             console.log(couponArray)
 
 
+            if (couponArray[1] == "IKPJ-660723708"){
+              window.location.replace("denied.html");
+            }else if (couponArray[2] == "IKPJ-660723708"){
+              window.location.replace("denied.html");
+            }
+            else if (couponArray[3] == "IKPJ-660723708"){
+              window.location.replace("denied.html");
+            }
+
 
             window.location.replace("result.html");
+            if (couponArray.length >2){
+              window.location.replace("result.html");
+            }else{
+              window.location.replace("denied.html");
+            }
 
             /*
             $.post("www.abc.com/details", {
