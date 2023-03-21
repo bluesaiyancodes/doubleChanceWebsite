@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Log In</title>
-        <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+        <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
         <script src="login.js"></script>
 
         <link rel="stylesheet" href="style.css">
@@ -23,7 +23,7 @@
         </div>
 	
         <script>
-            fetch("/auth/check")
+            fetch("http://202.31.200.222/auth/check")
             .then((res) => res.json())
             .then((json)=>{
                 if(json != 0) {

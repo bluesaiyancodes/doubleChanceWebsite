@@ -50,88 +50,149 @@
 
         <section class="tandc-block" style="background-color: rgba(223,19,35,255);" id="tandc-block">
             <div class="tandc-section2">
-                <form action="">
+                <form action="javascript:void(0);">
                     <h1 class="text-center header-text">Option 1</h1>
                     <hr>
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-3 col-form-label">연령</label>
-                        <select class="col-sm-3 list-content2">
-                            <option value="opt1">----</option>
-                            <option value="opt2">----</option>
-                            <option value="opt3">----</option>
+                        <label for="staticEmail" class="col-sm-3 col-form-label" id="id1">연령</label>
+                        <select class="col-sm-3 list-content2" required>
+                            <option value="">----</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
                         </select>
-                        <select class="col-sm-3 list-content2">
-                            <option value="opt1">----</option>
-                            <option value="opt2">----</option>
-                            <option value="opt3">----</option>
+                        <select class="col-sm-3 list-content2" id="id2" required>
+                            <option value="">----</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
                         </select>
                     </div>
                     <div class="form-group row">
                         <label for="inputGender" class="col-sm-3 col-form-label">성별</label>
                         <div class="col-sm-3">
-                            <input type="radio" name="op1" id="op1">  남
+                            <input type="radio" name="op1" id="id3">  남
                         </div>
                         <div class="col-sm-3">
-                            <input type="radio" name="op1" id="op1">  여
+                            <input type="radio" name="op1" id="id3">  여
                         </div>
                         <div class="col-sm-3">
-                            <input type="radio" name="op1" id="op3">  기타
+                            <input type="radio" name="op1" id="id3">  기타
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">거주지역</label>
-                        <select class="col-sm-8 list-content2">
-                            <option value="opt1">option 1</option>
-                            <option value="opt2">option 2</option>
-                            <option value="opt3">option 3</option>
+                        <select class="col-sm-8 list-content2" id="id4" required>
+                            <option value="">-----</option>
+                            <option value="서울특별시">서울특별시</option>
+                            <option value="경기도">경기도</option>
+                            <option value="인천광역시">인천광역시</option>
+                            <option value="경상북도">경상북도</option>
+                            <option value="경상남도">경상남도</option>
+                            <option value="강원도">강원도</option>
+                            <option value="광주광역시">광주광역시</option>
+                            <option value="대구광역시">대구광역시</option>
+                            <option value="대전광역시">대전광역시</option>
+                            <option value="부산광역시">부산광역시</option>
+                            <option value="울산광역시">울산광역시</option>
+                            <option value="전라북도">전라북도</option>
+                            <option value="전라남도">전라남도</option>
+                            <option value="제주도">제주도</option>
+                            <option value="충청남도">충청남도</option>
+                            <option value="충청북도">충청북도</option>
+                            <option value="세종시">세종시</option>
                         </select>
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">구매지역</label>
-                        <select class="col-sm-8 list-content2">
-                            <option value="opt1">option 1</option>
-                            <option value="opt2">option 2</option>
-                            <option value="opt3">option 3</option>
+                        <select class="col-sm-8 list-content2" id="id5" required>
+                            <option value="">-----</option>
+                            <option value="서울특별시">서울특별시</option>
+                            <option value="경기도">경기도</option>
+                            <option value="인천광역시">인천광역시</option>
+                            <option value="경상북도">경상북도</option>
+                            <option value="경상남도">경상남도</option>
+                            <option value="강원도">강원도</option>
+                            <option value="광주광역시">광주광역시</option>
+                            <option value="대구광역시">대구광역시</option>
+                            <option value="대전광역시">대전광역시</option>
+                            <option value="부산광역시">부산광역시</option>
+                            <option value="울산광역시">울산광역시</option>
+                            <option value="전라북도">전라북도</option>
+                            <option value="전라남도">전라남도</option>
+                            <option value="제주도">제주도</option>
+                            <option value="충청남도">충청남도</option>
+                            <option value="충청북도">충청북도</option>
+                            <option value="세종시">세종시</option>
                         </select>
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">구매점포</label>
-                        <select class="col-sm-8 list-content2">
-                            <option value="opt1">option 1</option>
-                            <option value="opt2">option 2</option>
-                            <option value="opt3">option 3</option>
+                        <select class="col-sm-8 list-content2" id="id6" required>
+                            <option value="">-----</option>
+                            <option value="제일복권 홍대 직영점">제일복권 홍대 직영점</option>
+                            <option value="제일복권 용산 직영점">제일복권 용산 직영점</option>
+                            <option value="애니메이트 홍대점">애니메이트 홍대점</option>
+                            <option value="건담베이스">건담베이스</option>
+                            <option value="국제전자센터">국제전자센터</option>
+                            <option value="애니플러스샵">애니플러스샵</option>
+                            <option value="그밖의 하비샵">그밖의 하비샵</option>
+                            <option value="서점">서점</option>
+                            <option value="기타">기타</option>
                         </select>
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">이치방쿠지 처음 사용여부</label>
-                        <select class="col-sm-8 list-content2">
-                            <option value="opt1">option 1</option>
-                            <option value="opt2">option 2</option>
-                            <option value="opt3">option 3</option>
+                        <select class="col-sm-8 list-content2" id="id7" required>
+                            <option value="">-----</option>
+                            <option value="네">네</option>
+                            <option value="아니오">아니오</option>
                         </select>
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">더블찬스 처음 사용여부</label>
-                        <select class="col-sm-8 list-content2">
-                            <option value="opt1">option 1</option>
-                            <option value="opt2">option 2</option>
-                            <option value="opt3">option 3</option>
+                        <select class="col-sm-8 list-content2" id="id8" required>
+                            <option value="">-----</option>
+                            <option value="네">네</option>
+                            <option value="아니오">아니오</option>
                         </select>
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">월구매건수</label>
-                        <select class="col-sm-8 list-content2">
-                            <option value="opt1">option 1</option>
-                            <option value="opt2">option 2</option>
-                            <option value="opt3">option 3</option>
+                        <select class="col-sm-8 list-content2" id="id9" required>
+                            <option value="">-----</option>
+                            <option value="1회~5회">1회~5회</option>
+                            <option value="5회~10회">5회~10회</option>
+                            <option value="10회~20회">10회~20회</option>
+                            <option value="20회~50회">20회~50회</option>
+                            <option value="50회~80회">50회~80회</option>
+                            <option value="80회이상">80회이상</option>
                         </select>
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">제일복권 정보를 얻는 곳</label>
-                        <select class="col-sm-8 list-content2">
-                            <option value="opt1">option 1</option>
-                            <option value="opt2">option 2</option>
-                            <option value="opt3">option 3</option>
+                        <select class="col-sm-8 list-content2" id="id10" required>
+                            <option value="">-----</option>
+                            <option value="제일복권 페이스북">제일복권 페이스북</option>
+                            <option value="카카오 더블찬스">카카오 더블찬스</option>
+                            <option value="제일복권(이치방쿠지) 직영점 트위터">제일복권(이치방쿠지) 직영점 트위터</option>
+                            <option value="애니플러스샵">애니플러스샵</option>
+                            <option value="다른점포SNS">다른점포SNS</option>
+                            <option value="기타">기타</option>
                         </select>
                     </div>
                     <div class="form-group row">
@@ -139,17 +200,22 @@
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">가장 가지고싶은 상 딩급</label>
-                        <select class="col-sm-8 list-content2">
-                            <option value="opt1">option 1</option>
-                            <option value="opt2">option 2</option>
-                            <option value="opt3">option 3</option>
+                        <select class="col-sm-8 list-content2" id="id11" required>
+                            <option value="">-----</option>
+                            <option value="A상">A상</option>
+                            <option value="B상">B상</option>
+                            <option value="C상">C상</option>
+                            <option value="D상">D상</option>
+                            <option value="E상">E상</option>
+                            <option value="F상">F상</option>
+                            <option value="라스트원">라스트원</option>
                         </select>
                     </div>
                     <hr>
                     <h5 class="text-center">설문에 참여해 주셔서 감사합니다.<br>확인 버튼을 누르시면 당첨번호 확인으로 넘어갑니다.</h5>
                     <div style="text-align: center;">
-                        <button class="btn2" id="opn_submit_btn_final">Submit</button>
-                        <button class="btn2" id="opn_back_btn">Back</button>
+                        <button class="btn2" id="opn_submit_btn_final">확인하기</button>
+                        <button class="btn2" id="opn_back_btn">돌아가기</button>
                     </div>
                 </form>
             </div>

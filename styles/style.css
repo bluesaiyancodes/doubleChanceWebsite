@@ -305,6 +305,10 @@ header .navbar a:hover {
   border-style: none;
 }
 
+input {
+  accent-color: red;
+}
+
 .input-button{
   margin: 5px;
   height: 30px;
@@ -407,7 +411,6 @@ header .navbar a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  color: white;
   font-weight: bolder;
   border: 20px solid white;
   box-shadow: 1px 1px 10px white;

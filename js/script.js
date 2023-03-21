@@ -52,11 +52,6 @@ $(document).ready(function(){
     // $('#tandc-block').hide();
   })
 
-  $('#opn_submit_btn_final').on('click', function(e){
-    e.stopPropagation();
-    e.preventDefault();
-    window.location.href = 'third_page.html';
-  });
 
   $('#btn-tandc').click(function(e) {
     if ($('#mark').is(':checked')) {
@@ -130,6 +125,31 @@ $(document).ready(function(){
 
   
 
+// Page  2 Validation
+$('#opn_submit_btn_final').on('click', function(e){
+  e.stopPropagation();
+  e.preventDefault();
+
+  var validateFlag = true;
+  for(var i=1;i<=11;i++){
+    var inputData = document.getElementById('id'+ i.toString()).value;
+    console.log(inputData);
+    if (inputData==""){
+      $('#id'+i.toString()).css("border-color","red");
+      $('#id'+i.toString()).css("border-style","solid");
+      validateFlag = false;
+    }else{
+      $('#id'+i.toString()).css("border-style","none");
+    }
+  }
+
+  if (validateFlag){
+    window.location.href = 'third_page.html';
+  }
+
+ 
+
+});
 
 
 
@@ -163,10 +183,11 @@ $(document).ready(function(){
       if (x < max_fields) {
         x++;
         var str1 = '<div class="form-group">';
-        var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input'+(x+2)+'" capture="environment" ><input class="input-field" type="text" placeholder="알파벳 4자리" id="coupon'+(x+2)+'" /> . <button class="input-button" onclick="$('+'\'#file-input'+(x+2)+'\').click()" >숫자입력  <i class="fa-solid fa-camera"></i></button></div>'
+        var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input'+(x+2)+'" capture="environment" ><input class="input-field" type="text" placeholder="쿠폰을 입력하십시오" id="coupon'+(x+2)+'" /> . <button class="input-button" onclick="$('+'\'#file-input'+(x+2)+'\').click()" >이미지 스캔 <i class="fa-solid fa-camera"></i></button></div>'
         $(wrapper).append(str2); //add input box
       } else {
           alert('You Reached the limits')
+          // Maximum limit reached
       }
   });  
 
