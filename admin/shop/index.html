@@ -23,8 +23,8 @@
 		<link rel="canonical" href="">
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link type="text/css" rel="stylesheet" href="../styles/admin-default.css"/>
-		<link type="text/css" rel="stylesheet" href="../styles/admin-layout.css"/>
+		<link type="text/css" rel="stylesheet" href="../../styles/admin-default.css"/>
+		<link type="text/css" rel="stylesheet" href="../../styles/admin-layout.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
 		<script src="https://unpkg.com/filepond-polyfill/dist/filepond-polyfill.js"></script>
@@ -152,26 +152,25 @@
 			</head>
 			<body>
 				<div id="adm_wrapper">
-					<!-- ST:sidebar -->
-					<div class="sidebar">
-						<div class="sidebar_top">
-							<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
-						</div>
-						<ul class="sidebar_menu">
-							<li><a href="/admin/notice/list.do"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
-							<li class="active"><a href="/admin/shop/list.do"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
-							<!-- <li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/banner.do')} ? active"><a href="/admin/banner.do"><i class="fa fa-picture-o" aria-hidden="true"></i> 배너관리</a></li>
-							<li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/popup.do')} ? active"><a href="/admin/popup.do"><i class="fa fa-object-group" aria-hidden="true"></i> 팝업관리</a></li> -->	
-							<li><a href="/admin/survey/list.do"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
-							
-							<!-- classappend path 에 있는 .do 다 삭제하기 (sidemenu의 링크 누르면 '/경로' 가 a href 링크로 넘어감 -->
-							<li><a href="/admin/prize/number.do"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
-							<li><a href="/admin/product.do"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
-							<li><a href="/admin/prize/round.do"><i class="fa fa-wpforms" aria-hidden="true"></i> 당첨회차관리</a></li>
-							<li><a href="/admin/delivery.do"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
-						</ul>
+									<!-- ST:sidebar -->
+				<div class="sidebar">
+					<div class="sidebar_top">
+						<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
 					</div>
-					<!-- EN:sidebar -->
+					<ul class="sidebar_menu">
+						<li><a href="notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
+						<li><a href="shop/index.html"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
+						<!-- <li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/banner.do')} ? active"><a href="/admin/banner.do"><i class="fa fa-picture-o" aria-hidden="true"></i> 배너관리</a></li>
+						<li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/popup.do')} ? active"><a href="/admin/popup.do"><i class="fa fa-object-group" aria-hidden="true"></i> 팝업관리</a></li> -->	
+						<li><a href="survey/index.html"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
+						
+						<!-- classappend path 에 있는 .do 다 삭제하기 (sidemenu의 링크 누르면 '/경로' 가 a href 링크로 넘어감 -->
+						<li><a href="prize/index.html"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
+						<li><a href="product/index.html"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
+						<li><a href="delivery/index.html"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
+					</ul>
+				</div>
+				<!-- EN:sidebar -->
 					
 					<!-- ST:content_area -->
 					<div class="content_area" data-aos-delay="300">

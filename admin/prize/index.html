@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>이찌방쿠지 관리자 페이지</title>
+	
+		<meta charset="UTF-8">
+		<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="">
+		<meta property="og:title" content="이찌방쿠지 더블찬스">
+		<meta property="og:image" content="">
+		<meta property="og:description" content="이찌방쿠지 더블찬스">
+		<meta property="og:site_name" content="이찌방쿠지 더블찬스">
+		<meta property="og:locale" content="ko_KR"> 
+		
+		<!-- 공통으로 쓰는 css/js 파일을 넣는 영역 th:href(src)=@{/css/..} << 는 src/main/resources/static 이 생략된 형태 -->
+		<!-- <script th:src="@{/js/common.js}"></script> -->
+		<!-- <link rel="stylesheet" th:href="@{/css/admin.css}" /> -->
+		 
+		<!-- <link rel="shortcut icon" href="/img/common/favicon.ico"> -->
+		<link rel="canonical" href="">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link type="text/css" rel="stylesheet" href="../../styles/admin-default.css"/>
+		<link type="text/css" rel="stylesheet" href="../../styles/admin-layout.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
+		<script src="https://unpkg.com/filepond-polyfill/dist/filepond-polyfill.js"></script>
+		<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+		 
+		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
+		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
+		
+	
+				
+<style>
+	.excel_wrap{
+	margin-right:-700px;
+	}
+	.excel_wrap button{
+	width:120px;
+	height:45px;
+	color:#fff;
+	border:1px solid #e7e7e7;
+	background-color:#000;
+	border-radius:5px;
+	}
+	.dimmed {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: #000;
+		opacity: 0.8;
+		filter: alpha(opacity=80);
+		z-index: 1303;
+		display: none;
+	}
+	#loading {
+		display: none;
+		width: 50px;
+		height: 50px;
+		border: 3px solid rgba(255,255,255,.3);
+		border-radius: 50%;
+		border-top-color: #fff;
+		animation: spin 1s ease-in-out infinite;
+		-webkit-animation: spin 1s ease-in-out infinite;
+		z-index:1304;
+		position: absolute;
+		top:50%;
+		left:50%;
+		margin: -50px 0 0 -150px;
+	}
+	@keyframes spin {
+		to { -webkit-transform: rotate(360deg); }
+	}
+	@-webkit-keyframes spin {
+		to { -webkit-transform: rotate(360deg); }
+	}
+	</style>
+	
+			
+		<script>
+		
+		$(function(){
+			
+			// 체크박스 널 체크 
+			$('#removeNum').on('click', function(){
+				var checked = $('.checks').is(':checked');
+				
+				if(!checked){
+					alert('삭제할 일련번호를 선택해주세요.');
+					return false;
+				}
+				
+			})
+	
+			// 전체 삭제 체크 박스 
+			$('#all_check').on('click', function(){
+				var checked = $('#all_check').is(':checked'); // id all_check 가 체크되면 T , 체크 해제되면 F 를 값으로 checked 에 담음
+				$('.checks').prop('checked', checked); // T or F 값을 갖고 있는 checked 에 따라 checks 들의 체크 속성(checked)을 바꿈 (ex>all_check 가 true 일 때 class checks 들의 checked 속성도 true(체크)로 바꿈)
+			   
+				});
+			});
+		
+			
+		// 엑셀 등록
+		function doExcelUploadProcess() {
+			
+			// 엑셀 파일 널 체크 
+			if(document.getElementById('excelfileInput').files.length === 0){
+				alert('엑셀파일을 등록해주세요.');
+				return false;
+			}
+	
+			var fileName = document.getElementById('excelfileInput').files[0].name;
+			var fileType = fileName.substring(fileName.lastIndexOf(".")+1);
+			
+			if(fileType.indexOf("xls") == -1 && fileType.indexOf("xlsx") == -1){
+				alert("엑셀파일만 등록할 수 있습니다.(.xls 또는 .xlsx 확장자)");
+				return false;
+			}
+			
+			var f = new FormData(document.getElementById('excel'));
+	
+			//dimmed, loading
+			$(".dimmed, #loading").fadeIn();
+	
+			$.ajax({
+				url : "/admin/excelUpload.do",
+				method : "post",
+				data : f,
+				processData : false,
+				contentType : false,
+				type : "POST",
+				success : function(data) {
+					if (data.result) {
+						alert(data.msg);
+						// 페이지 새로고침 
+						location.reload();					
+					} else {
+						alert(data.msg);
+					}
+				},error : function(xhr){
+					alert("에러가 발생하였습니다.");
+				},complete : function(){
+					$(".dimmed, #loading").fadeOut();
+				}
+			});
+		}
+		
+		function goPage(page){
+			if(page==null) return false;
+			search.page.value = page;
+			search.submit();
+		}
+		</script>
+	
+		
+		</head>
+		<body>
+			<div id="adm_wrapper">
+								<!-- ST:sidebar -->
+								<div class="sidebar">
+									<div class="sidebar_top">
+										<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+									</div>
+									<ul class="sidebar_menu">
+										<li><a href="notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
+										<li><a href="shop/index.html"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
+										<!-- <li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/banner.do')} ? active"><a href="/admin/banner.do"><i class="fa fa-picture-o" aria-hidden="true"></i> 배너관리</a></li>
+										<li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/popup.do')} ? active"><a href="/admin/popup.do"><i class="fa fa-object-group" aria-hidden="true"></i> 팝업관리</a></li> -->	
+										<li><a href="survey/index.html"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
+										
+										<!-- classappend path 에 있는 .do 다 삭제하기 (sidemenu의 링크 누르면 '/경로' 가 a href 링크로 넘어감 -->
+										<li><a href="prize/index.html"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
+										<li><a href="product/index.html"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
+										<li><a href="delivery/index.html"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
+									</ul>
+								</div>
+								<!-- EN:sidebar -->
+				
+				<!-- ST:content_area -->
+				<div class="content_area" data-aos-delay="300">
+					<!-- ST:navbar -->
+					<div class="navbar">
+						<a href="/admin/adminInfo.do" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
+						<a href="/admin/logout.do" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
+					</div>
+					<!-- EN:navbar -->
+					
+					
+		<div class="card">
+			<div class="card_top">
+				<h3 class="title">일련번호관리</h3>
+				<!-- 엑셀등록 -->
+				<div class="excel_wrap">
+				<form id="excel" name="excel" method="post" enctype="multipart/form-data">
+					<input type="file" id="excelfileInput" name="excelfileInput"> 
+					<button type="button" onclick="doExcelUploadProcess()">엑셀 등록</button>
+				</form>
+				<div id="result"></div>
+				</div>
+				<!-- 검색 -->
+				<div class="sch_wrap">
+					<form name="search" action="/admin/prize/number.do" method="get">
+						<input type="hidden" name="page" value="1"/>
+						<label for="keyword" class="hidden">검색어</label>
+						<input type="text" id="keyword" name="keyword" class="sch_input" maxlength="25" placeholder="검색어를 입력하세요." value="">
+						<button type="submit" class="sch_btn">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</button>
+					</form>
+				</div>
+			</div>
+			<form action="/admin/prize/deleteNumberList.do" method="get">
+			<button type="submit" class="btn btnSubmit" style="background-color:red; border:none;" id="removeNum">일련번호 삭제</button>
+			<table class="table">
+				<caption>일련번호관리 ㅣ 번호,브라우저타이틀,표시언어,사용유무,기간,수정으로구성</caption>
+				<thead>
+					<tr>
+						<th scope="col">
+						<input type="checkbox" id="all_check" class="all_check"> 
+						</th>
+						<th scope="col">번호</th>
+						<th scope="col">일련번호</th>
+						<th scope="col">상품군번호</th>
+						<th scope="col">상품군명</th>
+						<th scope="col">사용일시</th>
+						<th scope="col">당첨여부</th>
+						<th scope="col">당첨상품</th>
+						<th scope="col">사용여부</th>
+						<th scope="col">유효기간</th>
+						<th scope="col">수정</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26317838" value="26317838"></td>
+						<td>9366455</td>
+						<td>GKVZ-1009829646</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26317838">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289254" value="26289254"></td>
+						<td>9366454</td>
+						<td>LDUS-1009801062</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289254">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289255" value="26289255"></td>
+						<td>9366453</td>
+						<td>EKYG-1009801063</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289255">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289256" value="26289256"></td>
+						<td>9366452</td>
+						<td>PLVJ-1009801064</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289256">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289257" value="26289257"></td>
+						<td>9366451</td>
+						<td>BXYS-1009801065</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289257">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289258" value="26289258"></td>
+						<td>9366450</td>
+						<td>MRSC-1009801066</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289258">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289259" value="26289259"></td>
+						<td>9366449</td>
+						<td>WXYK-1009801067</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289259">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289260" value="26289260"></td>
+						<td>9366448</td>
+						<td>VGCN-1009801068</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289260">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289261" value="26289261"></td>
+						<td>9366447</td>
+						<td>DNYR-1009801069</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289261">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289262" value="26289262"></td>
+						<td>9366446</td>
+						<td>HAEZ-1009801070</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289262">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289263" value="26289263"></td>
+						<td>9366445</td>
+						<td>XSWH-1009801071</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289263">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289264" value="26289264"></td>
+						<td>9366444</td>
+						<td>GEVR-1009801072</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289264">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289266" value="26289266"></td>
+						<td>9366443</td>
+						<td>WJDB-1009801074</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289266">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289267" value="26289267"></td>
+						<td>9366442</td>
+						<td>BRCN-1009801075</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289267">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289268" value="26289268"></td>
+						<td>9366441</td>
+						<td>SLER-1009801076</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289268">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289269" value="26289269"></td>
+						<td>9366440</td>
+						<td>YMAC-1009801077</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289269">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289270" value="26289270"></td>
+						<td>9366439</td>
+						<td>WMDZ-1009801078</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289270">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289271" value="26289271"></td>
+						<td>9366438</td>
+						<td>KJVE-1009801079</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289271">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289272" value="26289272"></td>
+						<td>9366437</td>
+						<td>JWMG-1009801080</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289272">수정</a></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="checks" name="checks" id="check26289273" value="26289273"></td>
+						<td>9366436</td>
+						<td>CMNV-1009801081</td>
+						<td>23032301</td>
+						<td>극장판 세일러문 Cosmos antique style</td>
+						<td>-</td>
+						<td>N</td>
+						<td>-</td>
+						<td>N</td>
+						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
+						<td><a href="/admin/prize/number/register.do?id=26289273">수정</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <button type="submit" class="btn btnSubmit">일련번호 삭제</button> -->
+			</form>
+			<div class="card_bottom">
+				<a href="/admin/prize/number/register.do" class="btn btnSubmit">일련번호 등록</a>
+	
+				<!-- 페이징 -->
+				<nav class="pagination">
+					<a onclick="goPage(1)" class="pg_page pg_start"> 
+	<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=1)}" class="pg_page pg_start">  -->
+						<i class="fa fa-angle-double-left" aria-hidden="true">
+							<span class="hidden">처음</span>
+						</i>
+					</a> 
+					<a onclick="true ? goPage() : goPage([[0]])" class="pg_page pg_prev"> 
+	<!-- 					<a th:href="${page?.first} ? '#' : @{|/admin/${paths}/list.do|(page=${page?.number})}" class="pg_page pg_prev">  -->
+						<i class="fa fa-angle-left" aria-hidden="true">
+							<span class="hidden">이전</span>
+						</i>
+					</a>
+					
+						<strong class="pg_page pg_current">1</strong>
+						
+					
+						
+						<a onclick="goPage(2)" class="pg_page">2</a>
+					
+						
+						<a onclick="goPage(3)" class="pg_page">3</a>
+					
+						
+						<a onclick="goPage(4)" class="pg_page">4</a>
+					
+						
+						<a onclick="goPage(5)" class="pg_page">5</a>
+					
+						
+						<a onclick="goPage(6)" class="pg_page">6</a>
+					
+						
+						<a onclick="goPage(7)" class="pg_page">7</a>
+					
+						
+						<a onclick="goPage(8)" class="pg_page">8</a>
+					
+						
+						<a onclick="goPage(9)" class="pg_page">9</a>
+					
+						
+						<a onclick="goPage(10)" class="pg_page">10</a>
+					
+					<a onclick="false ? goPage() : goPage([[2]])" class="pg_page pg_next"> 
+	<!-- 					<a th:href="${page?.last} ? '#' : @{|/admin/${path}/list.do|(page=${page?.number + 2})}" class="pg_page pg_next">  -->
+						<i class="fa fa-angle-right" aria-hidden="true">
+							<span class="hidden">다음</span>
+						</i>
+					</a> 
+					<a onclick="goPage(468323)" class="pg_page pg_end">
+	<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=${page?.totalPages})}" class="pg_page pg_end"> -->
+						<i class="fa fa-angle-double-right" aria-hidden="true">
+							<span class="hidden">맨끝</span>
+						</i>
+					</a>
+				</nav>
+			</div>
+		</div>
+		<div class="dimmed"></div>
+		<div id="loading"></div>
+	
+				</div>
+				<!-- EN:content_area -->
+			</div>
+			
+			
+			  
+			<footer id="footer"> 
+		<p>COPYRIGHT © 2021 이찌방쿠지 더블찬스. ALL RIGHTS RESERVED</p>
+	</footer>
+		</body>
+	</html>

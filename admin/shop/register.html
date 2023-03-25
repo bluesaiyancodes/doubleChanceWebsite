@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>이찌방쿠지 관리자 페이지</title>
+	
+		<meta charset="UTF-8">
+		<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="">
+		<meta property="og:title" content="이찌방쿠지 더블찬스">
+		<meta property="og:image" content="">
+		<meta property="og:description" content="이찌방쿠지 더블찬스">
+		<meta property="og:site_name" content="이찌방쿠지 더블찬스">
+		<meta property="og:locale" content="ko_KR"> 
+		
+		<!-- 공통으로 쓰는 css/js 파일을 넣는 영역 th:href(src)=@{/css/..} << 는 src/main/resources/static 이 생략된 형태 -->
+		<!-- <script th:src="@{/js/common.js}"></script> -->
+		<!-- <link rel="stylesheet" th:href="@{/css/admin.css}" /> -->
+		 
+		<!-- <link rel="shortcut icon" href="/img/common/favicon.ico"> -->
+		<link rel="canonical" href="">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link type="text/css" rel="stylesheet" href="../styles/admin-default.css"/>
+		<link type="text/css" rel="stylesheet" href="../styles/admin-layout.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
+		<script src="https://unpkg.com/filepond-polyfill/dist/filepond-polyfill.js"></script>
+		<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+		 
+		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
+		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
+		
+	
+		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
+		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
+		
+		<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+		<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet"> 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" />
+	
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js" integrity="sha512-Gn0tSSjkIGAkaZQWjx3Ctl/0dVJuTmjW/f9QyB302kFjU4uTNP4HtA32U2qXs/TRlEsK5CoEqMEMs7LnzLOBsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		
+		<script src="https://cdn.tiny.cloud/1/8zdgppu8g69i034u0chmwsfxrotk4y3x35qft53gk55sqzgd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> <!-- 월요일 키 추가 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous"></script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="/js/postcode.js"></script>
+		<script>	
+		var isLoading;
+		
+		$(function(){	
+				    			
+				/* 상위 지역 설정 */
+				$("#city").on('change',function(){
+					var city = $("#city").val();
+				 		$.ajax({
+				 			type : "POST",
+							url : "/admin/map/category.do",
+							data : {city : city},
+				 			success : function(res) {
+								if(res.result){
+									$("#county").children().remove(); // county 의 option 모두 삭제
+									var countySelectBox = '<option value="0">선택</option>';
+									for(var i=0; i<res.county.length; i++){
+										countySelectBox += '<option value="'+ res.county[i].addressCode +'">' + res.county[i].name + '</option>'
+									}
+									$('#county').append(countySelectBox);
+								} else {
+									alert(res.msg);
+								}
+							},
+							error : function(xhr){
+								if(xhr.status == 403){
+									alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+									location.href = "/admin/login.do";
+								}else{
+									alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+								}
+							}
+				 		});
+			 		});
+				
+				/* 상위 지역 설정에 따른 하위 지역 설정 */
+/* 				$('#county').on('change', function(){
+					var county = $('#county').val();
+					console.log('#####'+county);
+					
+					$.ajax({
+						type : "POST",
+						url : "/admin/map/county.do",
+						data : {county : county},
+						success : function(res){
+							if(res.result){
+								console.log(res.county2.name);
+								$('#county').children().remove();
+								var innerHTML = '<option value="'+res.county2.addressCode'">'+res.county2.name+'</option>';
+								$('#county').append(innerHTML);
+								
+							}
+						},
+						
+						error : function(xhr){
+							if(xhr.status == 403){
+								alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+								location.href = "/admin/login.do";
+							}else{
+								alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+							}
+						}
+						
+					});
+				});
+				 */
+			
+			/* 게시글 등록 */
+			$("#board").on('submit', function(e){
+				e.preventDefault();
+				var city = $('#city').val();
+				var county = $('#county').val();
+				
+				if(!confirm("게시글을 등록하시겠습니까?")){
+					return false;
+				}
+				
+				if(city === '0' || county ==='0') {
+					alert('지역을 설정해주세요.');
+					return false;
+				}
+				
+				
+				var f = $(this);
+				var data = new FormData(f[0]);
+		
+					$.ajax({
+						type : "POST",
+						url : f[0].action, // form의 action으로 이동
+						dataType : 'json',
+						data : data,
+						enctype: 'multipart/form-data',
+						contentType: false,
+						processData: false,
+						async : false,
+			 			success : function(res) {
+							if(res.result){
+								location.href= "/admin/shop/list.do";
+							} else {
+								alert(res.msg);
+							}
+						},
+						error : function(xhr){
+							if(xhr.status == 403){
+								alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+								location.href = "/admin/login.do";
+							}else{
+								alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+							}
+						}
+					});
+		// 				console.log(f.serializeObject());
+		//  			$.post(f[0].action, f.serializeObject())
+		//  			.done(function(res) {
+		 				
+		// 				if(res.result){
+		// 					location.href= "/admin/" + path + "/list.do";
+		// 				} else {
+		// 					alert(res.msg);
+		// 				}
+		// 			}).fail(function(xhr){
+		// 				if(xhr.status == 403){
+		// 					alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+		// 					location.href = "/admin/login.do";
+		// 				}else{
+		// 					alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+		// 				}
+		// 			});
+		
+			});
+			
+		});
+		
+		/*<![CDATA[*/
+		var shopId = 91;
+		/*]]>*/
+		
+		function postDeleteAjax(){
+			if(!confirm("게시글을 삭제하시겠습니까?")){
+				return false;
+			}
+			$.ajax({
+				type : "POST",
+				url : "/admin/shop/deletePost.do",
+				dataType : 'json',
+				data : {
+					shopId : shopId
+				},
+				success : function(res){
+					if(res.result){
+						location.href="/admin/shop/list.do";
+					}else{
+						alert(res.msg);
+						return false;
+					}
+				},
+				error : function(xhr){
+					if(xhr.status == 403){
+						alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+						location.href = "/admin/login.do";
+					}else{
+						alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+					}
+				}			
+			});
+		}
+		
+		
+		</script>
+	
+	
+	</head>
+	<body>
+		<div id="adm_wrapper">
+			<!-- ST:sidebar -->
+			<div class="sidebar">
+				<div class="sidebar_top">
+					<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+				</div>
+				<ul class="sidebar_menu">
+					<li><a href="/admin/notice/list.do"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
+					<li class="active"><a href="/admin/shop/list.do"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
+					<!-- <li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/banner.do')} ? active"><a href="/admin/banner.do"><i class="fa fa-picture-o" aria-hidden="true"></i> 배너관리</a></li>
+					<li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/popup.do')} ? active"><a href="/admin/popup.do"><i class="fa fa-object-group" aria-hidden="true"></i> 팝업관리</a></li> -->	
+					<li><a href="/admin/survey/list.do"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
+					
+					<!-- classappend path 에 있는 .do 다 삭제하기 (sidemenu의 링크 누르면 '/경로' 가 a href 링크로 넘어감 -->
+					<li><a href="/admin/prize/number.do"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
+					<li><a href="/admin/product.do"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
+					<li><a href="/admin/prize/round.do"><i class="fa fa-wpforms" aria-hidden="true"></i> 당첨회차관리</a></li>
+					<li><a href="/admin/delivery.do"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
+				</ul>
+			</div>
+			<!-- EN:sidebar -->
+			
+			<!-- ST:content_area -->
+			<div class="content_area" data-aos-delay="300">
+				<!-- ST:navbar -->
+				<div class="navbar">
+					<a href="/admin/adminInfo.do" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
+					<a href="/admin/logout.do" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
+				</div>
+				<!-- EN:navbar -->
+				
+				
+		<div class="card">
+			<div class="card_top">
+				<h3 class="title">매장관리 <span>등록/수정/삭제</span></h3>
+			</div>
+			<form id="board" name="board" action="/admin/shop/register.do">
+				 <input type="hidden" name="shopId"  value="91" > 
+				 <input type="hidden" name="addressId" value="97"> 
+				<div class="write">
+					<!-- 지역설정 -->
+					<h3 class="write_title">지역설정</h3>
+					<div class="write_div">
+						<label for="city" class="hidden">시/도</label>
+						<select id="city"  name="city" class="frm_input required" required> 
+							<option value="0">시/도</option>
+							<option value="1">서울특별시</option>
+							<option value="2" selected="selected">경기도</option> 
+							<option value="3">인천광역시</option>
+							<option value="4">경상북도</option>
+							<option value="5">경상남도</option>
+							<option value="6">강원도</option> 
+							<option value="7">광주광역시</option>
+							<option value="8">대구광역시</option> 
+							<option value="9">대전광역시</option>
+							<option value="10">부산광역시</option>
+							<option value="11">울산광역시</option>
+							<option value="12">전라북도</option>
+							<option value="13">전라남도</option>
+							<option value="14">제주도</option> 
+							<option value="15">충청남도</option>
+							<option value="16">충청북도</option>
+							<option value="17">세종시</option>
+						</select>		
+						<label for="county" class="hidden" >시/군/구</label>
+						<select id="county"  name="county" class="frm_input required"> 
+							<option value="343">화성시</option>
+							<option else="true" value="">시/군/구</option>					
+						</select>		
+					</div>	
+				</div>
+				
+				<div class="write">
+					<!-- 매장명 -->
+					<label for="name" class="write_title">매장명</label>
+					<input type="text" id="name" required class="frm_input required" name="name" value="박서방 동탄점" maxlength="20">
+				</div>
+				
+				<div class="write write_btnWrap">	
+					<!-- 우편번호 -->
+					<label for="postalCode" class="write_title">우편번호<strong class="hidden">필수</strong></label>
+					<input type="text" id="postalCode" name="postalCode"  required class="frm_input required" placeholder="우편번호" value="18497" maxlength="10">  
+					<input type="button" onclick="findPostcode()" value="우편번호 찾기" class="write_btn">
+				</div>
+				
+				<div class="write">
+					<!-- 주소 -->
+					<label for="address" class="write_title">주소</label>
+					<input type="text" id="address" required class="frm_input required" name="address" value="경기 화성시 동탄대로5길 21 A동 4층 E410호" maxlength="100">
+				</div>		
+				
+				<div class="write">
+					<!-- 연락처 -->
+					<label for="phone" class="write_title">연락처</label>
+					<input type="text" id="phone" required class="frm_input required" name="phone" value="070-4833-0083" maxlength="15">
+				</div>	
+				
+				<div class="write">
+					<!-- 매장설명 -->
+					<label for="content" class="write_title">매장설명</label>
+					<input type="text" id="content" required class="frm_input required" name="content" value="동탄호수공원 앞 라크몽 A동 4층 디스커버리 옆" maxlength="200">
+				</div>
+				
+				<div class="write">
+					<!-- 주소URL -->
+					<label for="url" class="write_title">주소URL</label>
+					<input type="text" id="url" required class="frm_input required" name="url" value="map.naver.com/v5/entry/place/1205944563?c=14149262.5637090,4462411.0453250,19,0,0,0,dh&amp;isCor" placeholder="http:// 를제외하고 입력하세요" maxlength="100">
+				</div>
+				
+				<div class="btn_wrap">
+					<a href="/admin/shop/list.do" class="btn btnSubmit">목록</a> 
+					<button type="submit" class="btn btnSubmit">수정</button> 
+					<button type="button" onclick="postDeleteAjax()" class="btn btnSubmit">삭제</button> 
+				</div> 
+			</form>
+		</div>
+		<!-- EN:content_area -->
+	
+			</div>
+			<!-- EN:content_area -->
+		</div>
+		
+		
+		  
+		<footer id="footer"> 
+	<p>COPYRIGHT © 2021 이찌방쿠지 더블찬스. ALL RIGHTS RESERVED</p>
+</footer>
+	</body>
+</html>

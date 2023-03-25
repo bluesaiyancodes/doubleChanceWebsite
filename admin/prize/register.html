@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>이찌방쿠지 관리자 페이지</title>
+	
+		<meta charset="UTF-8">
+		<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="">
+		<meta property="og:title" content="이찌방쿠지 더블찬스">
+		<meta property="og:image" content="">
+		<meta property="og:description" content="이찌방쿠지 더블찬스">
+		<meta property="og:site_name" content="이찌방쿠지 더블찬스">
+		<meta property="og:locale" content="ko_KR"> 
+		
+		<!-- 공통으로 쓰는 css/js 파일을 넣는 영역 th:href(src)=@{/css/..} << 는 src/main/resources/static 이 생략된 형태 -->
+		<!-- <script th:src="@{/js/common.js}"></script> -->
+		<!-- <link rel="stylesheet" th:href="@{/css/admin.css}" /> -->
+		 
+		<!-- <link rel="shortcut icon" href="/img/common/favicon.ico"> -->
+		<link rel="canonical" href="">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link type="text/css" rel="stylesheet" href="../styles/admin-default.css"/>
+		<link type="text/css" rel="stylesheet" href="../styles/admin-layout.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
+		<script src="https://unpkg.com/filepond-polyfill/dist/filepond-polyfill.js"></script>
+		<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+		 
+		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
+		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
+		<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+		<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet"> 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" />
+	
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js" integrity="sha512-Gn0tSSjkIGAkaZQWjx3Ctl/0dVJuTmjW/f9QyB302kFjU4uTNP4HtA32U2qXs/TRlEsK5CoEqMEMs7LnzLOBsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+		<script src="https://cdn.tiny.cloud/1/8zdgppu8g69i034u0chmwsfxrotk4y3x35qft53gk55sqzgd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous"></script>
+		<script>
+		/*<![CDATA[*/
+		var numberId = 26317838;
+		/*]]>*/
+		/*<![CDATA[*/
+		var prizeProductId = null;
+		/*]]>*/
+		
+		
+		$(function(){
+			/* date time picker */
+			$('.dateTimePicker').datetimepicker();
+			$.datetimepicker.setLocale('ko');
+			
+			
+			/* 일련번호 중복검사 */
+			$("#board").on('submit', function(e){
+				e.preventDefault();
+				
+				var number = $('#number').val();
+//				console.log(number);
+				var varThis = $(this);
+				
+				$.ajax({
+					type : "POST",
+					url : "/admin/numberCheck.do",
+					dataType : 'json',
+					data : {
+						number : number ,
+						numberId : numberId
+					},
+					success : function(res){
+						if(res.result){
+							submit(varThis);
+						}else{
+							alert(res.msg);
+							return false;
+						}
+					},
+					error : function(xhr){
+						if(xhr.status == 403){
+							alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+							location.href = "/admin/login.do";
+						}else{
+							alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+						}
+					}
+				});
+			});
+		});
+		
+		function submit(temp){	
+			
+			if(!confirm("게시글을 등록하시겠습니까?")){
+				return false;
+			}
+			
+			var f = temp;
+			
+			var data = new FormData(f[0]);
+			
+			
+				$.ajax({
+					type : "POST",
+					url : f[0].action,
+					dataType : 'json',
+					data : data,
+					enctype: 'multipart/form-data',
+					contentType: false,
+					processData: false,
+					async : false,
+		 			success : function(res) {
+						if(res.result){
+							location.href= "/admin/prize/number.do";
+						} else {
+							alert(res.msg);
+						}
+					},
+					error : function(xhr){
+						if(xhr.status == 403){
+							alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+							location.href = "/admin/login.do";
+						}else{
+							alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+						}
+					}
+				});
+			}
+		
+		
+		 function postDeleteAjax(){
+			if(!confirm("게시글을 삭제하시겠습니까?")){
+				return false;
+			}
+			$.ajax({
+				type : "POST",
+				url : "/admin/prize/deleteNumber.do",
+				dataType : 'json',
+				data : {
+					numberId : numberId
+				},
+				success : function(res){
+					if(res.result){
+						location.href="/admin/prize/number.do";
+					}else{
+						alert(res.msg);
+						return false;
+					}
+				},
+				error : function(xhr){
+					if(xhr.status == 403){
+						alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+						location.href = "/admin/login.do";
+					}else{
+						alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+					}
+				}			
+			});
+		}
+		
+		// 당첨될 상품 검색
+		 function findProduct(){
+			
+			var productName = $("#productName").val();
+			
+			$.ajax({
+				type : "POST",
+				url : "/admin/prize/round/findProduct.do",
+				dataType : 'json',
+				data : {
+					productName : productName
+				},
+				success : function(res){
+					if(res.result){
+						$("#productNumber").text(res.product);
+					} else {
+						alert(res.msg);
+					}
+				},
+				error : function(xhr){
+					if(xhr.status == 403){
+						alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
+						location.href = "/admin/login.do";
+					}else{
+						alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
+					}
+				}			
+			});
+		} 
+		
+		
+		</script>
+	
+	
+	</head>
+	<body>
+		<div id="adm_wrapper">
+			<!-- ST:sidebar -->
+			<div class="sidebar">
+				<div class="sidebar_top">
+					<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+				</div>
+				<ul class="sidebar_menu">
+					<li><a href="/admin/notice/list.do"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
+					<li><a href="/admin/shop/list.do"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
+					<!-- <li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/banner.do')} ? active"><a href="/admin/banner.do"><i class="fa fa-picture-o" aria-hidden="true"></i> 배너관리</a></li>
+					<li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/popup.do')} ? active"><a href="/admin/popup.do"><i class="fa fa-object-group" aria-hidden="true"></i> 팝업관리</a></li> -->	
+					<li><a href="/admin/survey/list.do"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
+					
+					<!-- classappend path 에 있는 .do 다 삭제하기 (sidemenu의 링크 누르면 '/경로' 가 a href 링크로 넘어감 -->
+					<li class="active"><a href="/admin/prize/number.do"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
+					<li><a href="/admin/product.do"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
+					<li><a href="/admin/prize/round.do"><i class="fa fa-wpforms" aria-hidden="true"></i> 당첨회차관리</a></li>
+					<li><a href="/admin/delivery.do"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
+				</ul>
+			</div>
+			<!-- EN:sidebar -->
+			
+			<!-- ST:content_area -->
+			<div class="content_area" data-aos-delay="300">
+				<!-- ST:navbar -->
+				<div class="navbar">
+					<a href="/admin/adminInfo.do" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
+					<a href="/admin/logout.do" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
+				</div>
+				<!-- EN:navbar -->
+				
+				
+		<div class="card">
+			<div class="card_top">
+				<h3 class="title">일련번호관리 <span>등록/수정/삭제</span></h3>
+			</div>
+			<form id="board" name="board" action="/admin/prize/number/register.do">
+				  <input type="hidden" name="numberId" value="26317838">
+				  <!-- 당첨상품 정보  --> 
+				  <input type="hidden" name="prizeProductId" value="">
+				  <input type="hidden" name="usedDate" value="">
+				<div class="write">
+					<!-- 일련번호 -->
+					<label for="number" class="write_title">일련번호</label>
+					<input type="text" id="number" required class="frm_input required" name="number" value="GKVZ-1009829646" placeholder="띄어쓰기 없이 알파벳4자리  - 숫자 형식으로 입력해주세요." pattern="[a-zA-Z]+-[0-9]+" maxlength="50"> <!-- "[a-zA-Z0-9\-]{1,25}" -->
+				</div>
+				
+				<div class="write">
+					<!-- 상품군명 -->
+					<label for="categoryName" class="write_title">상품군이름</label>
+					<input type="text" id="categoryName" required class="frm_input required" name="categoryName" value="극장판 세일러문 Cosmos antique style" maxlength="50" > <!-- pattern="^\S+$" 공백불가 -->
+				</div>
+				
+				<div class="write">
+					<!-- 상품군번호 -->
+					<label for="categoryNumber" class="write_title">상품군NO</label>
+					<input type="text" id="categoryNumber" required class="frm_input required" name="categoryNumber" value="23032301" maxlength="50" pattern="[0-9]\S+$" placeholder="공백없이 숫자만 입력해주세요.">
+				</div>
+				
+				<div class="write">
+					<!-- 일련번호 사용여부 -->
+					<h3 class="write_title">사용</h3>
+					<div class="write_div">
+						<div class="radio">
+							<input type="radio" name="usedYn" id="yes" value="Y" required class="input_radio" disabled>
+							<label for="yes" class="label_radio">사용</label>
+						</div>
+						<div class="radio">
+							<input type="radio" name="usedYn" id="no" value="N" required class="input_radio" disabled checked="checked">
+							<label for="no" class="label_radio">미사용</label>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="usedYn" value=N>
+				
+				<div class="write">
+					<!-- 당첨 여부  -->
+					<h3 class="write_title">당첨</h3>
+					<div class="write_div">
+						<div class="radio">
+							<input type="radio" name="prizedYn" id="yes1" value="Y" required class="input_radio" disabled>
+							<label for="yes1" class="label_radio">당첨</label>
+						</div>
+						<div class="radio">
+							<input type="radio" name="prizedYn" id="no1" value="N" required class="input_radio" disabled checked="checked">
+							<label for="no1" class="label_radio">미당첨</label>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="prizedYn" value="N"> 
+				
+				
+				<div class="write">
+					<!-- 당첨상품 -->
+					<label for="prizeProductName" class="write_title">당첨상품</label>
+					<input type="text" id="prizeProductName" required class="frm_input required" name="prizeProductName" value=""  readonly> 
+				</div>
+				<div class="write">
+					<!-- 당첨상품번호 -->
+					<label for="prizeProductNumber" class="write_title">당첨상품번호</label>
+					<input type="text" id="prizeProductNumber" required class="frm_input required" name="prizeProductNumber" value="" readonly> 
+				</div>
+				
+				<div class="write">
+					<!-- start date -->
+					<label for="startDate" class="write_title">시작일</label>
+					<input type="text" id="startDate" required class="dateTimePicker frm_input required" name="startDate" value="2023/03/24 08:00" placeholder="시작일" autocomplete="off" maxlength="20">
+				</div>
+				<div class="write">
+					<!-- end date -->
+					<label for="endDate" class="write_title">종료일</label>
+					<input type="text" id="endDate" required class="dateTimePicker frm_input required" name="endDate" value="2023/06/25 23:59" placeholder="종료일" autocomplete="off" maxlength="20">
+				</div>
+				
+				<div class="btn_wrap">
+					<a href="/admin/prize/number.do" class="btn btnSubmit">목록</a> 
+					<button type="submit" class="btn btnSubmit">수정</button>
+					<button type="button" onclick="postDeleteAjax()" class="btn btnSubmit">삭제</button> 
+				</div> 
+			</form>
+		</div>
+		<!-- EN:content_area -->
+	
+			</div>
+			<!-- EN:content_area -->
+		</div>
+		
+		
+		  
+		<footer id="footer"> 
+	<p>COPYRIGHT © 2021 이찌방쿠지 더블찬스. ALL RIGHTS RESERVED</p>
+</footer>
+	</body>
+</html>
