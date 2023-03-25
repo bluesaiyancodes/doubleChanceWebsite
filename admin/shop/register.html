@@ -228,29 +228,28 @@
 					<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
 				</div>
 				<ul class="sidebar_menu">
-					<li><a href="/admin/notice/list.do"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
-					<li class="active"><a href="/admin/shop/list.do"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
+					<li><a href="../notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
+					<li><a href="../shop/index.html"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
 					<!-- <li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/banner.do')} ? active"><a href="/admin/banner.do"><i class="fa fa-picture-o" aria-hidden="true"></i> 배너관리</a></li>
 					<li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/popup.do')} ? active"><a href="/admin/popup.do"><i class="fa fa-object-group" aria-hidden="true"></i> 팝업관리</a></li> -->	
-					<li><a href="/admin/survey/list.do"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
+					<li><a href="../survey/index.html"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
 					
 					<!-- classappend path 에 있는 .do 다 삭제하기 (sidemenu의 링크 누르면 '/경로' 가 a href 링크로 넘어감 -->
-					<li><a href="/admin/prize/number.do"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
-					<li><a href="/admin/product.do"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
-					<li><a href="/admin/prize/round.do"><i class="fa fa-wpforms" aria-hidden="true"></i> 당첨회차관리</a></li>
-					<li><a href="/admin/delivery.do"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
+					<li><a href="../prize/index.html"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
+					<li><a href="../product/index.html"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
+					<li><a href="../delivery/index.html"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
 				</ul>
 			</div>
 			<!-- EN:sidebar -->
-			
-			<!-- ST:content_area -->
-			<div class="content_area" data-aos-delay="300">
-				<!-- ST:navbar -->
-				<div class="navbar">
-					<a href="/admin/adminInfo.do" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
-					<a href="/admin/logout.do" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
-				</div>
-				<!-- EN:navbar -->
+
+		<!-- ST:content_area -->
+		<div class="content_area" data-aos-delay="300">
+			<!-- ST:navbar -->
+			<div class="navbar">
+				<a href="../adminInfo.html" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
+				<a href="../logout.html" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
+			</div>
+			<!-- EN:navbar -->
 				
 				
 		<div class="card">
