@@ -341,7 +341,74 @@ getapi(api_url);
 
 
 
+// new second page start
+console.clear();
 
+let icons = document.querySelectorAll(".toolbarLink");
+let dock = document.querySelector(".toolbar");
+let firstIcon = icons[0];
+
+let min = 48; // 40 + margin
+let max = 120;
+let bound = min * Math.PI;
+
+gsap.set(icons, {
+  transformOrigin: "50% -20%",  
+  height: 60
+});
+
+gsap.set(dock, {
+  position: "relative",  
+  height: 100
+});
+
+dock.addEventListener("mousemove", (event) => {
+  
+  let offset = dock.getBoundingClientRect().top + firstIcon.offsetTop;  
+  updateIcons(event.clientY - offset);
+
+  // change photo
+  
+
+});
+
+dock.addEventListener("mouseleave", (event) => {
+  
+  gsap.to(icons, {
+    duration: 0.3,
+    scale: 1,
+    y: 0
+  });
+});
+
+function updateIcons(pointer) {
+  
+  for (let i = 0; i < icons.length; i++) {
+    
+    let icon = icons[i];        
+    let distance = (i * min + min / 2) - pointer;    
+    let y = 0;
+    let scale = 1;
+    
+    if (-bound < distance && distance < bound) {
+      
+      let rad = distance / min * 0.5;
+      scale = 1 + (max / min - 1) * Math.cos(rad);  
+      y = 2 * (max - min) * Math.sin(rad);
+      
+    } else {
+      
+      y = (-bound < distance ? 2 : -2) * (max - min);    
+    }
+    
+    gsap.to(icon, {
+      duration: 0.3,
+      y: y,
+      scale: scale
+    });    
+  }
+}
+// new second page end
 
 
 

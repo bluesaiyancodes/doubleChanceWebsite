@@ -866,6 +866,46 @@ header .navbar a:hover {
 }
 /* 4th page end */
 
+/* new second page start */
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.toolbar {
+  display: block;
+  justify-content: center;
+  width: 300px;
+  height: fit-content !important;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  list-style: none;
+  box-shadow: black;
+  border-radius: 10px;
+}
+
+.toolbarItem {
+  width: 40px;
+  margin: 0 110px;
+}
+
+.toolbarLink {
+  display: inline-flex;
+}
+
+.toolbarLink p{
+  width: 80px;
+  margin: 10px;
+}
+
+.toolbarImg {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+/* new second page end */
+
 /* media quiries */
 @media (max-width: 991px) {
   html {
