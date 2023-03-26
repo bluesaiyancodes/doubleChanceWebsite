@@ -60,7 +60,7 @@ function goPage(page){
 
 function excelDownload(){
 	let f = document.getElementsByName('search');
-	location.href="/admin/delivery/excelDownload.do?"+$(f).serialize();
+	location.href="http://localhost:3000/api/delivery/download";
 }
 </script>
 
@@ -106,6 +106,7 @@ function excelDownload(){
 					<input type="text" id="startDate" class="dateTimePicker frm_input" name="startDate" placeholder="시작일" value="" autocomplete="off">&nbsp;
 					<input type="text" id="endDate" class="dateTimePicker frm_input" name="endDate"  placeholder="종료일" value="" autocomplete="off">&nbsp;
 					<input type="hidden" name="page" value="1"/>
+					<input type="hidden" name="manualSearch" value="1"/>
 					<select name="searchType" style="width:120px; height:40px; color:#B6B6B4; border:1px solid #e7e7e7;  border-radius:5px;">
 						<option value="all">전체</option>
 						<option value="title">제목</option>

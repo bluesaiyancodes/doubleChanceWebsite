@@ -27,38 +27,62 @@ $(document).ready(function(){
   
   let searchType = params.searchType;
   let keyword = params.keyword;
+  let manualSearch = params.manualSearch;
+  console.log(manualSearch);
 
 
   console.log(startDate, endDate, searchType, keyword);
 
   var payload = {
-    startDate: "", 
-    endDate: "", 
-    searchType: "all",
-    keyword: ""
+    startDate: startDate, 
+    endDate: endDate, 
+    searchType: searchType,
+    keyword: keyword
   }
 
-  var payloadData = new FormData();
-  payloadData.append("json", JSON.stringify(payload));
+ 
 
-  const getData2 = async () => {
-    const response = await fetch('http://localhost:3000/api/delivery/search',{
-      method: 'POST',
-      body: payloadData
-    });
-    const data = await response.json();
-    console.log(data);
-  };
+  if (manualSearch=="1"){
 
-  (async () => {
-    
-    await getData2();
-    
 
-  })();
+    let delvData;
+
+    var payloadData = new FormData();
+    payloadData.append("json", JSON.stringify(payload));
   
+    const getData2 = async () => {
+      const response = await fetch('http://localhost:3000/api/delivery/search',{
+        method: 'POST',
+        body: payloadData
+      });
+      const data = await response.json();
+      delvData = data;
+      console.log(data);
+    };
+
+
+
+    (async () => {
+      await getData2();
+      console.log(delvData["data"]);
+      for (var i =0;i<Object.keys(delvData["data"]).length; i++){
+        console.log(delvData["data"][i]);
+        var data = delvData["data"][i];
+        var dlStatus = parseInt(data["status"])== 0 ? "미완성":"완성인";
+        var str_delvdata = '<tr> <td>'+data["id"]+'</td><td>전생슬 사립 템페트스트 학원</td><td>'+data["name"]+'</td><td>'+data["phone"]+'</td><td>'+data["date"]+'</td><td>전생슬 사립 템페트스트 학원</td><td>'+dlStatus+'</td>';
+        str_delvdata += '<td>-</td></tr>';
   
+        //console.log(str_delvdata)
+        var wrapper = $("#deliverydata");
+        $(wrapper).append(str_delvdata);
   
+        
+      }
+      
+  
+    })();
+  }else{
+
 
   const getData = async () => {
     const response = await fetch('http://localhost:3000/api/delivery/page');
@@ -131,6 +155,15 @@ $(document).ready(function(){
    
 
   })();
+
+
+
+  }
+ 
+  
+  
+  
+
 
 
 
