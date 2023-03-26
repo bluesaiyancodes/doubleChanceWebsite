@@ -64,6 +64,17 @@ $(document).ready(function () {
     }
   });
 
+  $(".img-card").click(function(e){
+    selectedText = $(this).find('p').text();
+    // alert(header_text);
+    e.stopPropagation();
+    e.preventDefault();
+    $('#home').animate({ right: '100%' });
+    $('#tandc-block').animate({ left: '0%' });
+    $('#tandc-block').show();
+    $('.header-text').text(selectedText);
+  });
+
   /*
     $("#flip").click(function(){
       $("#panel").slideDown("slow");
