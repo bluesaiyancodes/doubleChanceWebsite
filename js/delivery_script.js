@@ -3,15 +3,61 @@ $(document).ready(function(){
   // Page Number Format
 
   let pglen;
-  let currPage = 1;
-  try{
-    currPage = parseInt(location.search.slice(1).split("=")[1]);
+  
 
-    console.log(location.search.slice(1).split("=")[1]);
-  }catch (err){
+
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+  // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+  let currPage = params.page; 
+  if (currPage==null){
     currPage = 1;
-    console.log("sadfa");
   }
+
+  let startDate = "";
+  let endDate = "";
+  try{
+     startDate = params.startDate.split(" ")[0];
+     endDate = params.endDate.split(" ")[0];
+  }catch (e){
+    startDate = "";
+    endDate = "";
+  }
+  
+  let searchType = params.searchType;
+  let keyword = params.keyword;
+
+
+  console.log(startDate, endDate, searchType, keyword);
+
+  var payload = {
+    startDate: "", 
+    endDate: "", 
+    searchType: "all",
+    keyword: ""
+  }
+
+  var payloadData = new FormData();
+  payloadData.append("json", JSON.stringify(payload));
+
+  const getData2 = async () => {
+    const response = await fetch('http://localhost:3000/api/delivery/search',{
+      method: 'POST',
+      body: payloadData
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+
+  (async () => {
+    
+    await getData2();
+    
+
+  })();
+  
+  
   
 
   const getData = async () => {
