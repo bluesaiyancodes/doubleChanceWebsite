@@ -20,14 +20,11 @@
     <script src="https://kit.fontawesome.com/a5b1885f61.js" crossorigin="anonymous"></script>
 </head>
 <style>
-    .list-content {
-        height: 700px;
-        width: 500px;
+    .form-card1{
+        margin: 200px auto 0 auto;
     }
 
     .img-card {
-        background-color: blueviolet;
-        width: 500px;
         height: 200px;
         font-size: 1.5rem;
         color: white;
@@ -38,14 +35,9 @@
         text-shadow: 1px 1px 10px black;
     }
 
-    /* .img-card:hover {
-        -ms-transform: scale(1.5);
-        IE 9
-        -webkit-transform: scale(1.5);
-        Safari 3-8
-        transform: scale(1.5);
-        z-index: 1000;
-    } */
+    .list-content{
+        height: 600px;
+    }
 
     #img-1 {
         background: url('./list_card_img/KakaoTalk_20230322_114557173.png');
@@ -102,6 +94,10 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+
+    .btn-center{
+        text-align: center;
+    }
 </style>
 
 <body>
@@ -113,15 +109,13 @@
         <nav class="navbar">
             <a href="admin_login.html">Admin</a>
             <a href="admin_login.html">Kakao Login</a>
-
         </nav>
-
     </header>
     <!-- Header section ends -->
 
     <div class="home-slide">
         <section class="home" id="home">
-            <form class="form-card col-sm-5" action="">
+            <form class="form-card1" action="">
                 <div class="list-content">
                     <div class="img-card" id="img-1">
                         <p>Option 1</p>
@@ -148,7 +142,9 @@
                         <p>Option 8</p>
                     </div>
                 </div>
-                <button class="btn2" id="opn_submit_btn">Submit</button>
+                <div class="btn-center">
+                    <button class="btn2" id="opn_submit_btn">Submit</button>
+                </div>
             </form>
         </section>
 

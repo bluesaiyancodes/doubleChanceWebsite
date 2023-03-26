@@ -77,13 +77,6 @@ $(document).ready(function () {
   // Image PreLoad
 
   var imageList = Array();
-  /*
- 
-  for (var i = 1; i <= 9; i++) {
-      
-  }
-
-  */
 
   const productList = document.getElementById("cars");
   console.log({ productList });
@@ -109,7 +102,7 @@ $(document).ready(function () {
       console.log(imageList[i].src);
       i = i + 1;
     }
-    
+
     console.log(imageList)
     $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(' + imageList[1].src + ')');
     // selectEl.onclick = function () {
@@ -124,9 +117,6 @@ $(document).ready(function () {
   };
 
   displayOption();
-
-
-
 
   // Page  2 Validation
   $('#opn_submit_btn_final').on('click', function (e) {
