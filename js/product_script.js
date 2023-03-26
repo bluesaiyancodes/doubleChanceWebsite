@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 
   const getData = async () => {
-    const response = await fetch('http://localhost:3000/api/delivery/page');
+    const response = await fetch('http://localhost:3000	/api/goods/page');
     const data = await response.json();
     pglen = parseInt(data["len"]);
     return data;
@@ -130,7 +130,7 @@ $(document).ready(function(){
 			
   let delvData;
   const getDelData = async () => {
-    const response = await fetch('http://localhost:3000/api/delivery/page/'+currPage);
+    const response = await fetch('http://localhost:3000/api/goods/page/'+currPage);
     const data = await response.json();
     delvData = data;
     return data;
@@ -144,7 +144,7 @@ $(document).ready(function(){
       //console.log(delvData["data"][i]);
       var data = delvData["data"][i];
       var dlStatus = parseInt(data["status"])== 0 ? "미완성":"완성인";
-      var str_delvdata = '<tr> <td>'+data["id"]+'</td><td>'+data["typename"]+'</td><td>'+data["name"]+'</td><td>'+data["phone"]+'</td><td>'+data["date"]+'</td><td>'+data["goodsname"]+'</td><td>'+dlStatus+'</td>';
+      var str_delvdata = '<tr> <td>'+data["id"]+'</td><td>'+data["typename"]+'</td><td>'+data["typeid"]+'</td><td>'+data["name"]+'</td><td>'+data["start"]+'~'+data["end"]+'</td><td>'+data["oneday"]+'</td><td>'+data["probability"]+'</td>';
       str_delvdata += '<td>-</td></tr>';
 
       //console.log(str_delvdata)
@@ -163,19 +163,6 @@ $(document).ready(function(){
   
   
   
-
-
-
-
-
- 
-
-  $("#login_btn").on('click', function(e){
-    e.stopPropagation();
-    e.preventDefault();
-    alert("Worlking");
-  });
-
 
 
 
