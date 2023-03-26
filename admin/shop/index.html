@@ -33,6 +33,9 @@
 		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
 		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
 		
+			<!-- JS -->
+			<script src="../../js/shop_script.js" defer></script>
+		
 	
 		
 		<!--     <script th:src="@{/js/page/home.js}"></script> -->
@@ -100,16 +103,17 @@
 							 
 		//			 		location.href= '/admin/shop/list.do?city=' + city;
 							 $.ajax({
-								 type : "POST",
-								url : "/admin/map/category.do",
-								data : {city : city},
+								 type : "GET",
+								url : "http://localhost:3000/api/shop/city/"+city,
 								 success : function(res) {
-									if(res.result){
+									if(res.data){
+										//console.log("data54: ",res);
 										$("#county").children().remove();
 										var countySelectBox = '<option value="">시/군/구</option>';
 										countySelectBox += '<option value="99">전체</option>';
-										for(var i=0; i<res.county.length; i++){
-											countySelectBox += '<option value="'+ res.county[i].addressCode +'">' + res.county[i].name + '</option>'
+										for(var i=0; i<res.data.length; i++){
+											//console.log(res.data[i]);
+											countySelectBox += '<option value="'+ i+1+'">' + res.data[i] + '</option>'
 										}
 										$('#county').append(countySelectBox);
 										
@@ -121,7 +125,6 @@
 								error : function(xhr){
 									if(xhr.status == 403){
 										alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
-										location.href = "/admin/login.do";
 									}else{
 										alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
 									}
@@ -143,7 +146,27 @@
 				if(county == ""){
 					return false;
 				}
-				location.href= '/admin/shop/list.do?city=' + city + '&county=' + county;
+
+				$.ajax({
+								 type : "POST",
+								url : "http://localhost:3000/api/shop/search/city",
+								data : {sec_1 : city, sec_2: county},
+								 success : function(res) {
+									if(res.data){
+										console.log("data54: ",res);
+										
+										
+									} else {
+										alert(res.msg);
+									}
+								},
+								error : function(xhr){
+									
+								}
+							 });
+
+
+				//location.href= '/admin/shop/list.do?city=' + city + '&county=' + county;
 			});
 		});
 		</script>
@@ -155,7 +178,7 @@
 				<!-- ST:sidebar -->
 				<div class="sidebar">
 					<div class="sidebar_top">
-						<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+						<h1 class="logo"><a href="../index.html"><span>이찌방쿠지</span></a></h1>
 					</div>
 					<ul class="sidebar_menu">
 						<li><a href="../notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
@@ -240,17 +263,7 @@
 							<th scope="col">수정</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>83</td>
-							<td>박서방 동탄점</td>
-							<td>경기 화성시 동탄대로5길 21 A동 4층 E410호</td>
-							<td>070-4833-0083</td>
-							<td>동탄호수공원 앞 라크몽 A동 4층 디스커버리 옆</td>
-							<td><a href="https://map.naver.com/v5/entry/place/1205944563?c=14149262.5637090,4462411.0453250,19,0,0,0,dh&amp;isCor" target="_blank">지도보기</a></td>
-							<td>-</td>
-							<!-- <td><a href="/admin/shop/register.do?shopId=91">수정</a></td>  ->
-						</tr>
+					<tbody id="deliverydata">
 						
 					</tbody>
 				</table>
@@ -262,61 +275,7 @@
 		
 					<!-- 페이지 -->
 					<nav class="pagination">
-						<a onclick="goPage(1)" class="pg_page pg_start"> 
-		<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=1)}" class="pg_page pg_start">  -->
-							<i class="fa fa-angle-double-left" aria-hidden="true">
-								<span class="hidden">처음</span>
-							</i>
-						</a> 
-						<a onclick="true ? goPage() : goPage([[0]])" class="pg_page pg_prev"> 
-		<!-- 					<a th:href="${page?.first} ? '#' : @{|/admin/${paths}/list.do|(page=${page?.number})}" class="pg_page pg_prev">  -->
-							<i class="fa fa-angle-left" aria-hidden="true">
-								<span class="hidden">이전</span>
-							</i>
-						</a>
 						
-							<strong class="pg_page pg_current">1</strong>
-							
-						
-							
-							<a onclick="goPage(2)" class="pg_page">2</a>
-						
-							
-							<a onclick="goPage(3)" class="pg_page">3</a>
-						
-							
-							<a onclick="goPage(4)" class="pg_page">4</a>
-						
-							
-							<a onclick="goPage(5)" class="pg_page">5</a>
-						
-							
-							<a onclick="goPage(6)" class="pg_page">6</a>
-						
-							
-							<a onclick="goPage(7)" class="pg_page">7</a>
-						
-							
-							<a onclick="goPage(8)" class="pg_page">8</a>
-						
-							
-							<a onclick="goPage(9)" class="pg_page">9</a>
-						
-							
-							<a onclick="goPage(10)" class="pg_page">10</a>
-						
-						<a onclick="false ? goPage() : goPage([[2]])" class="pg_page pg_next"> 
-		<!-- 					<a th:href="${page?.last} ? '#' : @{|/admin/${path}/list.do|(page=${page?.number + 2})}" class="pg_page pg_next">  -->
-							<i class="fa fa-angle-right" aria-hidden="true">
-								<span class="hidden">다음</span>
-							</i>
-						</a> 
-						<a onclick="goPage(11)" class="pg_page pg_end">
-		<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=${page?.totalPages})}" class="pg_page pg_end"> -->
-							<i class="fa fa-angle-double-right" aria-hidden="true">
-								<span class="hidden">맨끝</span>
-							</i>
-						</a>
 					</nav>
 				</div>
 		

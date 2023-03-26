@@ -203,7 +203,7 @@ select.frm_input {
 	-moz-appearance:none; 
 	-o-appearance:none; 
 	appearance:none; 
-	background-image:url('/common/img/admin/select.png');
+	background-image:url('../assets/images/select.png');
 	background-repeat:no-repeat;
 	background-position:97%;
 	color:#999

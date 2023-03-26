@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 
   const getData = async () => {
-    const response = await fetch('http://localhost:3000/api/goods/page');
+    const response = await fetch('http://localhost:3000/api/shop/page');
     const data = await response.json();
     pglen = parseInt(data["len"]);
     return data;
@@ -130,9 +130,10 @@ $(document).ready(function(){
 			
   let delvData;
   const getDelData = async () => {
-    const response = await fetch('http://localhost:3000/api/goods/page/'+currPage);
+    const response = await fetch('http://localhost:3000/api/shop/page/'+currPage);
     const data = await response.json();
     delvData = data;
+    console.log(data);
     return data;
   };
   
@@ -143,7 +144,7 @@ $(document).ready(function(){
     for (var i =0;i<Object.keys(delvData["data"]).length; i++){
       //console.log(delvData["data"][i]);
       var data = delvData["data"][i];
-      var str_delvdata = '<tr> <td>'+data["id"]+'</td><td>'+data["typename"]+'</td><td>'+data["typeid"]+'</td><td>'+data["name"]+'</td><td>'+data["start"]+'~'+data["end"]+'</td><td>'+data["oneday"]+'</td><td>'+data["probability"]+'</td>';
+      var str_delvdata = '<tr> <td>'+data["id"]+'</td><td>'+data["name"]+'</td><td>'+data["address"]+'</td><td>'+data["phone"]+'</td><td>'+data["description"]+'</td><td><a href="'+data["url"]+'" target="_blank">지도보기</a></td>';
       str_delvdata += '<td>-</td></tr>';
 
       //console.log(str_delvdata)
