@@ -412,8 +412,8 @@ input {
   background-size: cover;
   background-position: center;
   font-weight: bolder;
-  border: 20px solid white;
-  box-shadow: 1px 1px 10px white;
+  border: 10px solid white;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.311);
   overflow-y: scroll;
 }
 
@@ -464,9 +464,6 @@ input {
 .tandc > ol{
   margin-left: 10px;
 }
-
-
-
 
 /* width */
 ::-webkit-scrollbar {
@@ -542,6 +539,18 @@ input {
 
 .btn-tandc:hover {
   font-weight: bolder;
+}
+
+.modal-image {
+  display: block;
+  max-width: 100%;
+}
+.preview {
+  overflow: hidden;
+  width: 160px; 
+  height: 160px;
+  margin: 10px;
+  border: 1px solid red;
 }
 
 @keyframes float {
@@ -742,10 +751,10 @@ input {
   background-position: center;
   overflow-x: hidden;
   overflow-y: scroll;
-  border: 20px solid white;
+  border: 10px solid white;
   color: white;
   font-weight: bolder;
-  box-shadow: 1px 1px 10px white;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.369)
 }
 
 .list-content > option{

@@ -27,35 +27,35 @@ function fadeOut() {
 
 window.onload = fadeOut();
 
-$(document).ready(function(){
+$(document).ready(function () {
 
 
-  $("#btn").on('click', function(e){
+  $("#btn").on('click', function (e) {
     e.stopPropagation();
     e.preventDefault();
-    $('#home').animate({right: '100%'});
-    $('#tandc-block').animate({left: '0%'});
+    $('#home').animate({ right: '100%' });
+    $('#tandc-block').animate({ left: '0%' });
     $('#tandc-block').show();
   });
 
-  $("#opn_submit_btn").on('click', function(e){
+  $("#opn_submit_btn").on('click', function (e) {
     e.stopPropagation();
     e.preventDefault();
-    $('#home').animate({right: '100%'});
-    $('#tandc-block').animate({left: '0%'});
+    $('#home').animate({ right: '100%' });
+    $('#tandc-block').animate({ left: '0%' });
     $('#tandc-block').show();
   });
 
-  $('#opn_back_btn').on('click', function(e){
+  $('#opn_back_btn').on('click', function (e) {
     e.stopPropagation();
     e.preventDefault();
-    $('#home').animate({right: '0%'});
-    $('#tandc-block').animate({left: '100%'});
+    $('#home').animate({ right: '0%' });
+    $('#tandc-block').animate({ left: '100%' });
     // $('#tandc-block').hide();
   })
 
 
-  $('#btn-tandc').click(function(e) {
+  $('#btn-tandc').click(function (e) {
     if ($('#mark').is(':checked')) {
       window.location.href = 'second_page.html';
     }
@@ -64,11 +64,11 @@ $(document).ready(function(){
     }
   });
 
-/*
-  $("#flip").click(function(){
-    $("#panel").slideDown("slow");
-  });
-  */
+  /*
+    $("#flip").click(function(){
+      $("#panel").slideDown("slow");
+    });
+    */
 
   // Page 2 -  Second Page JS
 
@@ -93,7 +93,7 @@ $(document).ready(function(){
     console.log(data);
     return data;
   };
-  
+
   const displayOption = async () => {
     const options = await getPost();
     var i = 1;
@@ -104,15 +104,16 @@ $(document).ready(function(){
       newOption.id = i;
       productList.appendChild(newOption);
       imageList[i] = new Image(70, 70);
-      imageList[i].src = "http://202.31.200.222/api/goods/image/"+option.typeid;
+      imageList[i].src = "http://202.31.200.222/api/goods/image/" + option.typeid;
       console.log(i);
       console.log(imageList[i].src);
-      i = i+1;
+      i = i + 1;
     }
+    
     console.log(imageList)
     $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(' + imageList[1].src + ')');
     // selectEl.onclick = function () {
-    $('#cars').click(function(){
+    $('#cars').click(function () {
       //var val = parseInt(this.value);
       var val = $("#cars").children(":selected").attr("id");
       $(".list-content").css("background-image", 'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(' + imageList[val].src + ')');
@@ -120,51 +121,50 @@ $(document).ready(function(){
       var selectedText = $(this).find('option:selected').text();
       $('.header-text').text(selectedText);
     });
-
   };
-  
+
   displayOption();
 
 
-  
 
-// Page  2 Validation
-$('#opn_submit_btn_final').on('click', function(e){
-  e.stopPropagation();
-  e.preventDefault();
 
-  var validateFlag = true;
-  for(var i=1;i<=11;i++){
-    var inputData = document.getElementById('id'+ i.toString()).value;
-    console.log(inputData);
-    if (inputData==""){
-      $('#id'+i.toString()).css("border-color","red");
-      $('#id'+i.toString()).css("border-style","solid");
-      validateFlag = false;
-    }else{
-      $('#id'+i.toString()).css("border-style","none");
+  // Page  2 Validation
+  $('#opn_submit_btn_final').on('click', function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    var validateFlag = true;
+    for (var i = 1; i <= 11; i++) {
+      var inputData = document.getElementById('id' + i.toString()).value;
+      console.log(inputData);
+      if (inputData == "") {
+        $('#id' + i.toString()).css("border-color", "red");
+        $('#id' + i.toString()).css("border-style", "solid");
+        validateFlag = false;
+      } else {
+        $('#id' + i.toString()).css("border-style", "none");
+      }
     }
-  }
 
-  if (validateFlag){
-    window.location.href = 'third_page.html';
-
-
-    /*
-    var myRedirect = function(redirectUrl, arg, value) {
-      var form = $('<form action="' + redirectUrl + '" method="post">' +
-      '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
-      $('body').append(form);
-      $(form).submit();
-    };
-    */
+    if (validateFlag) {
+      window.location.href = 'third_page.html';
 
 
-  }
+      /*
+      var myRedirect = function(redirectUrl, arg, value) {
+        var form = $('<form action="' + redirectUrl + '" method="post">' +
+        '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+        $('body').append(form);
+        $(form).submit();
+      };
+      */
 
- 
 
-});
+    }
+
+
+
+  });
 
 
 
@@ -175,13 +175,13 @@ $('#opn_submit_btn_final').on('click', function(e){
 
   // For Captcha Generation
 
-  var a = Math.floor(100000 + Math.random() * 900000);   
+  var a = Math.floor(100000 + Math.random() * 900000);
   a = String(a);
   // a = a.substring(0,4);
   $('.captcha').text(a);
 
-  $('.captcha-reload').click(function(){
-    var a = Math.floor(100000 + Math.random() * 900000);   
+  $('.captcha-reload').click(function () {
+    var a = Math.floor(100000 + Math.random() * 900000);
     a = String(a);
     $('.captcha').text(a);
   });
@@ -193,25 +193,25 @@ $('#opn_submit_btn_final').on('click', function(e){
   var add_button = $(".add_more");
 
   var x = 1
-  $(add_button).click(function(e) {
-      e.preventDefault();
-      if (x < max_fields) {
-        x++;
-        var str1 = '<div class="form-group">';
-        var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input'+(x+2)+'" capture="environment" ><input class="input-field" type="text" placeholder="쿠폰을 입력하십시오" id="coupon'+(x+2)+'" /> . <button class="input-button" onclick="$('+'\'#file-input'+(x+2)+'\').click()" >이미지 스캔 <i class="fa-solid fa-camera"></i></button></div>'
-        $(wrapper).append(str2); //add input box
-      } else {
-          alert('You Reached the limits')
-          // Maximum limit reached
-      }
-  });  
+  $(add_button).click(function (e) {
+    e.preventDefault();
+    if (x < max_fields) {
+      x++;
+      var str1 = '<div class="form-group">';
+      var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input' + (x + 2) + '" capture="environment" ><input class="input-field" type="text" placeholder="쿠폰을 입력하십시오" id="coupon' + (x + 2) + '" /> . <button class="input-button" onclick="$(' + '\'#file-input' + (x + 2) + '\').click()" >이미지 스캔 <i class="fa-solid fa-camera"></i></button></div>'
+      $(wrapper).append(str2); //add input box
+    } else {
+      alert('You Reached the limits')
+      // Maximum limit reached
+    }
+  });
 
-  $('#upload').on('change', function(){
+  $('#upload').on('change', function () {
     var reader = new FileReader();
     reader.onload = function (event) {
       $image_crop.croppie('bind', {
         url: event.target.result
-      }).then(function(){
+      }).then(function () {
         console.log('jQuery bind complete');
       });
     }
@@ -221,17 +221,16 @@ $('#opn_submit_btn_final').on('click', function(e){
 
 
 
-  $('.crop_image').click(function(event){
+  $('.crop_image').click(function (event) {
     $image_crop.croppie('result', {
       type: 'canvas',
       size: 'viewport'
-    }).then(function(response){
+    }).then(function (response) {
       $.ajax({
-        url:'<?php echo base_url(); ?>crop/upload',
+        url: '<?php echo base_url(); ?>crop/upload',
         type: "POST",
-        data:{"image": response},
-        success:function(data)
-        {
+        data: { "image": response },
+        success: function (data) {
           $('#myModal').modal('hide');
           $('#uploaded').html(data);
         }
@@ -247,7 +246,7 @@ $('#opn_submit_btn_final').on('click', function(e){
   const fileInput = document.getElementById('file-input1');
   //fileInput.addEventListener('change', (e) =>{
 
-    //doSomethingWithFiles(e.dataTransfer.files);
+  //doSomethingWithFiles(e.dataTransfer.files);
 
   //});
 
@@ -255,162 +254,129 @@ $('#opn_submit_btn_final').on('click', function(e){
   var coupon1L = 19;
   var coupon2L = 14;
 
-  
-
-  $('#submit_coupons').click(function(e) {
 
 
-  var emptyCouponFlag = true;
-  var capchaFlag = false;
-  var validateFlag = false;
+  $('#submit_coupons').click(function (e) {
+
+    var emptyCouponFlag = true;
+    var capchaFlag = false;
+    var validateFlag = false;
 
     // Captcha Validation
     var capchaInput = document.getElementById('captcha_input').value;
     var capchaReal = $('.captcha').text();
-    if (capchaInput==capchaReal){
-        console.log("Captcha Success!");
-        capchaFlag = false;
-      }
-    else{
+    if (capchaInput == capchaReal) {
+      console.log("Captcha Success!");
+      capchaFlag = false;
+    }
+    else {
       alert("자동입력 방지문자 입력을 다시 확인해 주세요");
       capchaFlag = true;
       document.getElementsByClassName('captcha-reload')[0].click();
     }
 
     // Coupon Validation 1
-    
+
     // Candidate coupons
     var couponArray = Array();
-
-    if (!capchaFlag){
-
+    if (!capchaFlag) {
       coupon_count = $("div#form-group input").length;
       // because there are two input tags per each input box
-      coupon_count = coupon_count/2
-      
-      for (var i=1; i<= coupon_count; i++){
-        var coupon_i = document.getElementById('coupon'+i.toString()).value;
+      coupon_count = coupon_count / 2
 
-        if (coupon_i == "" ){
-          $('#coupon'+i.toString()).css("border-style","none");
+      for (var i = 1; i <= coupon_count; i++) {
+        var coupon_i = document.getElementById('coupon' + i.toString()).value;
+
+        if (coupon_i == "") {
+          $('#coupon' + i.toString()).css("border-style", "none");
           continue;
-        }else{
-          if (coupon_i.length!=coupon1L && coupon_i.length!=coupon2L){
-            $('#coupon'+i.toString()).css("border-style","solid");
+        } else {
+          if (coupon_i.length != coupon1L && coupon_i.length != coupon2L) {
+            $('#coupon' + i.toString()).css("border-style", "solid");
             validateFlag = true;
-          }else{
-            $('#coupon'+i.toString()).css("border-style","none");
-            couponArray[i-1] = coupon_i
+          } else {
+            $('#coupon' + i.toString()).css("border-style", "none");
+            couponArray[i - 1] = coupon_i
             emptyCouponFlag = false
 
-            
             $.ajax({
               type: "POST",
               dataType: "json",
               url: "http://202.31.200.222/api/win/valid",
-              headers:{         
-                'serial' : coupon_i,
-                'type' : coupon_i
-                
-            },
+              headers: {
+                'serial': coupon_i,
+                'type': coupon_i
+              },
               success: function (data) {
-                  alert(data);
+                alert(data);
               },
               error: function (error) {
 
-                  jsonValue = jQuery.parseJSON(error.responseText);
-                  alert("error" + error.responseText);
+                jsonValue = jQuery.parseJSON(error.responseText);
+                alert("error" + error.responseText);
               }
-          });
-
-          
-
-
-
+            });
 
           }
-  
+
         }
-  
+
       }
-  
-        if (validateFlag){
-          alert("쿠폰을 다시 확인해 주세요");
-          validateFlag = false;
-          document.getElementsByClassName('captcha-reload')[0].click();
-        }else{
-          if (!emptyCouponFlag){
-            console.log("Coupon Success!")
-            console.log(couponArray)
 
+      if (validateFlag) {
+        alert("쿠폰을 다시 확인해 주세요");
+        validateFlag = false;
+        document.getElementsByClassName('captcha-reload')[0].click();
+      } else {
+        if (!emptyCouponFlag) {
+          console.log("Coupon Success!")
+          console.log(couponArray)
 
-            if (couponArray[1] == "IKPJ-660723708"){
-              window.location.replace("denied.html");
-            }else if (couponArray[2] == "IKPJ-660723708"){
-              window.location.replace("denied.html");
-            }
-            else if (couponArray[3] == "IKPJ-660723708"){
-              window.location.replace("denied.html");
-            }
-
-
-            window.location.replace("result.html");
-            if (couponArray.length >2){
-              window.location.replace("result.html");
-            }else{
-              window.location.replace("denied.html");
-            }
-
-            /*
-            $.post("www.abc.com/details", {
-              json_string: JSON.stringify({id:"John", validity:"+valid"})
-          });
-         */ 
-
-
-
+          if (couponArray[1] == "IKPJ-660723708") {
+            window.location.replace("denied.html");
+          } else if (couponArray[2] == "IKPJ-660723708") {
+            window.location.replace("denied.html");
           }
-         
+          else if (couponArray[3] == "IKPJ-660723708") {
+            window.location.replace("denied.html");
+          }
 
+          window.location.replace("result.html");
+          if (couponArray.length > 2) {
+            window.location.replace("result.html");
+          } else {
+            window.location.replace("denied.html");
+          }
 
+          /*
+          $.post("www.abc.com/details", {
+            json_string: JSON.stringify({id:"John", validity:"+valid"})
+        });
+       */
         }
-
+      }
     }
-
-
-    
-    
   });
-
-
 
   // adress form submit
 
-  $("#addresssubmitbtn").click(function(){
+  $("#addresssubmitbtn").click(function () {
     console.log(document.getElementById("cityField").value)
-    if (document.getElementById("cityField").value == ""){
+    if (document.getElementById("cityField").value == "") {
       alert("도시 정보를 삽입합니다");
-    }else if (document.getElementById("zipField").value == ""){
+    } else if (document.getElementById("zipField").value == "") {
       alert("도시 정보를 삽입합니다");
-    }else if (document.getElementById("addressField").value == ""){
+    } else if (document.getElementById("addressField").value == "") {
       alert("적절한 주소 정보를 삽입하십시오");
-    }else{
+    } else {
       alert("성공적으로 제출되었습니다");
       window.location.replace("index.html");
     }
   });
-
-
-  
-
-
-
-
-
 });
 
 // async data fetch
-$(function(){ 
+$(function () {
   /*
   coupon_count = $("div#form-group input").length;
   for (var i=1; i<= coupon_count; i++){
@@ -423,45 +389,41 @@ $(function(){
     });
   }
   */
-  
+
 });
 
-
-
-
 // api url
-const api_url = 
-"http://202.31.200.222/auth/check";
+const api_url =
+  "http://202.31.200.222/auth/check";
 
 // Defining async function
 async function getapi(url) {
 
-// Storing response
-const response = await fetch(url);
+  // Storing response
+  const response = await fetch(url);
 
-// Storing data in form of JSON
-var data = await response.json();
-const obj_ = JSON.parse(data);
+  // Storing data in form of JSON
+  var data = await response.json();
+  const obj_ = JSON.parse(data);
 
-if (response) {
-  console.log("data-");
-console.log( obj_);
+  if (response) {
+    console.log("data-");
+    console.log(obj_);
 
 
-if (data[0]!=0){
-  console.log("kakao");
-}
+    if (data[0] != 0) {
+      console.log("kakao");
+    }
 
-}
-//show(data);
+  }
+  //show(data);
 }
 // Calling that async function
 getapi(api_url);
 
-  
-   fetch('http://202.31.200.222/auth/check')     
+fetch('http://202.31.200.222/auth/check')
   .then(response => response.text()) // the promise
-    .then(data => console.log('Data', data)) // data
+  .then(data => console.log('Data', data)) // data
   .catch(error => console.log('Error', error))
 
 /*
