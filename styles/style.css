@@ -408,11 +408,13 @@ input {
   height: 800px;
   padding: 20px;
   border-radius: 10px;
+  background-color: white;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  font-weight: bolder;
   border: 10px solid white;
+  margin: 20px;
+  font-weight: bolder;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.311);
   overflow-y: scroll;
 }
@@ -754,7 +756,7 @@ input {
   border: 10px solid white;
   color: white;
   font-weight: bolder;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.369)
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.369);
 }
 
 .list-content > option{
@@ -1071,6 +1073,7 @@ input {
   }
 
   .tandc-block{
+    width: 375px;
     height: 600px;
   }
 
@@ -1082,6 +1085,7 @@ input {
   }
 
   .tandc-section2{
+    width: 300px;
     height: 480px;
   }
 
@@ -1124,9 +1128,9 @@ input {
   }
 }
 
-@media (max-width: 390px) {
-  .tandc-block{
-    margin-top: 25vh;
+@media (max-width: 395px) {
+  .tandc-block {
+    width: 340px;
+    height: 600px;
   }
-  
 }
