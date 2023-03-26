@@ -32,6 +32,9 @@
 		 
 		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
 		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
+
+		<!-- JS -->
+		<script src="../../js/product_script.js" defer></script>
 		
 	
 		
@@ -43,6 +46,7 @@
 		var sizeOrg = null;
 		/*]]>*/
 		$(document).ready(function() {
+			/*
 			
 			if(recommendOrg == "true"){
 				$("#searchByRecommend").prop("checked", true);
@@ -50,6 +54,7 @@
 				$("#searchByRecommend").prop("checked", false);
 			}
 			
+				
 			$('#searchByCnt').on('click', function(){
 				$('#searchByCnt').children().remove();
 				var innerHTML = '<option>개수검색</option>';
@@ -58,6 +63,7 @@
 				    innerHTML += '<option value="100">100개씩보기</option>';
 				 $('#searchByCnt').append(innerHTML);   
 			});
+		
 			
 			
 			$('#searchByCnt').on('change', function() {
@@ -73,6 +79,7 @@
 				goRecommend(recommend);
 // 				location.href = '/admin/product.do?recommend=' + recommend;
 			});			
+			*/
 		})
 		
 		function goPage(page){
@@ -103,7 +110,7 @@
 						<!-- ST:sidebar -->
 						<div class="sidebar">
 							<div class="sidebar_top">
-								<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+								<h1 class="logo"><a href="../index.html"><span>이찌방쿠지</span></a></h1>
 							</div>
 							<ul class="sidebar_menu">
 								<li><a href="../notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
@@ -138,14 +145,16 @@
 		    <input type="checkbox" id="searchByRecommend"><label for="searchByRecommend">추천상품</label>
 		    
 			</div>
+			<!--
 			<select id="searchByCnt" style="width:120px; height:40px; color:#B6B6B4; border:1px solid #e7e7e7; margin:-850px; border-radius:5px;">
 				<option>개수검색</option>
 				<option value="20">20개씩보기</option>
 				<option value="50">50개씩보기</option>
 				<option value="100">100개씩보기</option>
 			</select>
+			-->
 			<div class="sch_wrap">
-				<form name="search" action="/admin/product.do" method="get">
+				<form name="search" action="index.html" method="get">
 					<input type="hidden" name="page" value="1"/>
 					<input type="hidden" name="recommend" value=""/>
 					<input type="hidden" name="size" value=""/>
@@ -161,27 +170,16 @@
 			<thead>
 				<tr>
 					<th scope="col">번호</th>
-					<th scope="col">상품군번호</th>
 					<th scope="col">상품군명</th>
 					<th scope="col">상품번호</th>
 					<th scope="col">상품명</th>
-					<th scope="col">등록일</th>
-					<th scope="col">추천상품</th>
+					<th scope="col">기간</th>
+					<th scope="col">최대당첨개수</th>
+					<th scope="col">확률</th>
 					<th scope="col">수정</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>123</td>
-					<td>23032302</td>
-					<td>히로아카 의지</td>
-					<td>00000129</td>
-					<td>히로아카 의지</td>
-					<td>2023.03.23 14:22</td>
-			        <td>예</td>
-					<td>-</td>
-					<!-- <td><a href="/admin/product/register.do?id=206">수정</a></td>  -->
-				</tr>
+			<tbody id="deliverydata">
 				
 			</tbody>
 		</table>
@@ -189,61 +187,7 @@
 			<a href="/admin/product/register.do" class="btn btnSubmit">상품등록</a>
 			<!-- 페이지 -->
 			<nav class="pagination">
-				<a onclick="goPage(1)" class="pg_page pg_start"> 
-<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=1)}" class="pg_page pg_start">  -->
-					<i class="fa fa-angle-double-left" aria-hidden="true">
-						<span class="hidden">처음</span>
-					</i>
-				</a> 
-				<a onclick="true ? goPage() : goPage([[0]])" class="pg_page pg_prev"> 
-<!-- 					<a th:href="${page?.first} ? '#' : @{|/admin/${paths}/list.do|(page=${page?.number})}" class="pg_page pg_prev">  -->
-					<i class="fa fa-angle-left" aria-hidden="true">
-						<span class="hidden">이전</span>
-					</i>
-				</a>
 				
-					<strong class="pg_page pg_current">1</strong>
-					
-				
-					
-					<a onclick="goPage(2)" class="pg_page">2</a>
-				
-					
-					<a onclick="goPage(3)" class="pg_page">3</a>
-				
-					
-					<a onclick="goPage(4)" class="pg_page">4</a>
-				
-					
-					<a onclick="goPage(5)" class="pg_page">5</a>
-				
-					
-					<a onclick="goPage(6)" class="pg_page">6</a>
-				
-					
-					<a onclick="goPage(7)" class="pg_page">7</a>
-				
-					
-					<a onclick="goPage(8)" class="pg_page">8</a>
-				
-					
-					<a onclick="goPage(9)" class="pg_page">9</a>
-				
-					
-					<a onclick="goPage(10)" class="pg_page">10</a>
-				
-				<a onclick="false ? goPage() : goPage([[2]])" class="pg_page pg_next"> 
-<!-- 					<a th:href="${page?.last} ? '#' : @{|/admin/${path}/list.do|(page=${page?.number + 2})}" class="pg_page pg_next">  -->
-					<i class="fa fa-angle-right" aria-hidden="true">
-						<span class="hidden">다음</span>
-					</i>
-				</a> 
-				<a onclick="goPage(16)" class="pg_page pg_end">
-<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=${page?.totalPages})}" class="pg_page pg_end"> -->
-					<i class="fa fa-angle-double-right" aria-hidden="true">
-						<span class="hidden">맨끝</span>
-					</i>
-				</a>
 			</nav>
 		</div>
 	</div>

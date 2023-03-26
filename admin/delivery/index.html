@@ -29,6 +29,9 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
 		<script src="https://unpkg.com/filepond-polyfill/dist/filepond-polyfill.js"></script>
 		<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+
+		 <!-- JS -->
+		 <script src="../../js/delivery_script.js" defer></script>
 		 
 		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
 		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
@@ -51,12 +54,13 @@ $(document).ready(function() {
 function goPage(page){
 	if(page==null) return false;
 	search.page.value = page;
+	console.log(search);
 	search.submit();
 }
 
 function excelDownload(){
 	let f = document.getElementsByName('search');
-	location.href="/admin/delivery/excelDownload.do?"+$(f).serialize();
+	location.href="http://localhost:3000/api/delivery/download";
 }
 </script>
 
@@ -67,7 +71,7 @@ function excelDownload(){
 						<!-- ST:sidebar -->
 						<div class="sidebar">
 							<div class="sidebar_top">
-								<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+								<h1 class="logo"><a href="../index.html"><span>이찌방쿠지</span></a></h1>
 							</div>
 							<ul class="sidebar_menu">
 								<li><a href="../notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
@@ -98,10 +102,11 @@ function excelDownload(){
 		<div class="card_top">
 			<h3 class="title">배송정보</h3>
 			<div class="sch_wrap">
-				<form name="search" action="/admin/delivery.do" method="get">
+				<form name="search" action="index.html" method="get">
 					<input type="text" id="startDate" class="dateTimePicker frm_input" name="startDate" placeholder="시작일" value="" autocomplete="off">&nbsp;
 					<input type="text" id="endDate" class="dateTimePicker frm_input" name="endDate"  placeholder="종료일" value="" autocomplete="off">&nbsp;
 					<input type="hidden" name="page" value="1"/>
+					<input type="hidden" name="manualSearch" value="1"/>
 					<select name="searchType" style="width:120px; height:40px; color:#B6B6B4; border:1px solid #e7e7e7;  border-radius:5px;">
 						<option value="all">전체</option>
 						<option value="title">제목</option>
@@ -110,12 +115,6 @@ function excelDownload(){
 						<option value="goods">당첨상품</option>
 					</select>
 					&nbsp;
-					<select id="searchByCnt" name="size" style="width:120px; height:40px; color:#B6B6B4; border:1px solid #e7e7e7;  border-radius:5px;">
-						<option>개수검색</option>
-						<option value="20">20개씩보기</option>
-						<option value="50">50개씩보기</option>
-						<option value="100">100개씩보기</option>
-					</select>
 					<label for="keyword" class="hidden">검색어</label> <input type="text" id="keyword" name="keyword" class="sch_input" maxlength="25" placeholder="검색어를 입력하세요." value="">
 					<button type="submit" class="sch_btn">
 						<i class="fa fa-search" aria-hidden="true"></i>
@@ -138,21 +137,7 @@ function excelDownload(){
 					<th scope="col">수정</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>2750</td>
-					<td>전생슬 사립 템페트스트 학원</td>
-					<td>김균혁</td>
-					<td>01035271094</td>
-					<td>2023.03.25 23:56</td>
-					<td>전생슬 사립 템페트스트 학원</td>
-					<td>-</td>
-					<td>-</td>
-					<!--
-						<td><a href="/admin/delivery/register.do?id=2819&amp;searchType=&amp;keyword=&amp;size=&amp;startDate=&amp;endDate=&amp;page=1">수정</a></td>	
-					-->
-					
-				</tr>
+			<tbody id="deliverydata">
 				
 			</tbody>
 		</table>
@@ -160,62 +145,8 @@ function excelDownload(){
 		<div class="card_bottom">
 			<!-- <a href="/admin/product/register.do" class="btn btnSubmit">상품등록</a> -->
 			<!-- 페이지 -->
-			<nav class="pagination">
-				<a onclick="goPage(1)" class="pg_page pg_start"> 
-<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=1)}" class="pg_page pg_start">  -->
-					<i class="fa fa-angle-double-left" aria-hidden="true">
-						<span class="hidden">처음</span>
-					</i>
-				</a> 
-				<a onclick="true ? goPage() : goPage([[0]])" class="pg_page pg_prev"> 
-<!-- 					<a th:href="${page?.first} ? '#' : @{|/admin/${paths}/list.do|(page=${page?.number})}" class="pg_page pg_prev">  -->
-					<i class="fa fa-angle-left" aria-hidden="true">
-						<span class="hidden">이전</span>
-					</i>
-				</a>
-				
-					<strong class="pg_page pg_current">1</strong>
-					
-				
-					
-					<a onclick="goPage(2)" class="pg_page">2</a>
-				
-					
-					<a onclick="goPage(3)" class="pg_page">3</a>
-				
-					
-					<a onclick="goPage(4)" class="pg_page">4</a>
-				
-					
-					<a onclick="goPage(5)" class="pg_page">5</a>
-				
-					
-					<a onclick="goPage(6)" class="pg_page">6</a>
-				
-					
-					<a onclick="goPage(7)" class="pg_page">7</a>
-				
-					
-					<a onclick="goPage(8)" class="pg_page">8</a>
-				
-					
-					<a onclick="goPage(9)" class="pg_page">9</a>
-				
-					
-					<a onclick="goPage(10)" class="pg_page">10</a>
-				
-				<a onclick="false ? goPage() : goPage([[2]])" class="pg_page pg_next"> 
-<!-- 					<a th:href="${page?.last} ? '#' : @{|/admin/${path}/list.do|(page=${page?.number + 2})}" class="pg_page pg_next">  -->
-					<i class="fa fa-angle-right" aria-hidden="true">
-						<span class="hidden">다음</span>
-					</i>
-				</a> 
-				<a onclick="goPage(344)" class="pg_page pg_end">
-<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=${page?.totalPages})}" class="pg_page pg_end"> -->
-					<i class="fa fa-angle-double-right" aria-hidden="true">
-						<span class="hidden">맨끝</span>
-					</i>
-				</a>
+			<nav class="pagination" id="pagination">
+				<!-- Added in JS -->
 			</nav>
 		</div>
 	</div>
