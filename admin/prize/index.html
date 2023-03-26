@@ -33,6 +33,9 @@
 		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
 		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
 		
+		<!-- JS -->
+		<script src="../../js/prize_script.js" defer></script>
+	
 	
 				
 <style>
@@ -130,7 +133,7 @@
 			$(".dimmed, #loading").fadeIn();
 	
 			$.ajax({
-				url : "/admin/excelUpload.do",
+				url : "http://localhost:3000/api/serial/upload",
 				method : "post",
 				data : f,
 				processData : false,
@@ -166,7 +169,7 @@
 						<!-- ST:sidebar -->
 						<div class="sidebar">
 							<div class="sidebar_top">
-								<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+								<h1 class="logo"><a href="../index.html"><span>이찌방쿠지</span></a></h1>
 							</div>
 							<ul class="sidebar_menu">
 								<li><a href="../notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
@@ -262,61 +265,7 @@
 	
 				<!-- 페이징 -->
 				<nav class="pagination">
-					<a onclick="goPage(1)" class="pg_page pg_start"> 
-	<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=1)}" class="pg_page pg_start">  -->
-						<i class="fa fa-angle-double-left" aria-hidden="true">
-							<span class="hidden">처음</span>
-						</i>
-					</a> 
-					<a onclick="true ? goPage() : goPage([[0]])" class="pg_page pg_prev"> 
-	<!-- 					<a th:href="${page?.first} ? '#' : @{|/admin/${paths}/list.do|(page=${page?.number})}" class="pg_page pg_prev">  -->
-						<i class="fa fa-angle-left" aria-hidden="true">
-							<span class="hidden">이전</span>
-						</i>
-					</a>
 					
-						<strong class="pg_page pg_current">1</strong>
-						
-					
-						
-						<a onclick="goPage(2)" class="pg_page">2</a>
-					
-						
-						<a onclick="goPage(3)" class="pg_page">3</a>
-					
-						
-						<a onclick="goPage(4)" class="pg_page">4</a>
-					
-						
-						<a onclick="goPage(5)" class="pg_page">5</a>
-					
-						
-						<a onclick="goPage(6)" class="pg_page">6</a>
-					
-						
-						<a onclick="goPage(7)" class="pg_page">7</a>
-					
-						
-						<a onclick="goPage(8)" class="pg_page">8</a>
-					
-						
-						<a onclick="goPage(9)" class="pg_page">9</a>
-					
-						
-						<a onclick="goPage(10)" class="pg_page">10</a>
-					
-					<a onclick="false ? goPage() : goPage([[2]])" class="pg_page pg_next"> 
-	<!-- 					<a th:href="${page?.last} ? '#' : @{|/admin/${path}/list.do|(page=${page?.number + 2})}" class="pg_page pg_next">  -->
-						<i class="fa fa-angle-right" aria-hidden="true">
-							<span class="hidden">다음</span>
-						</i>
-					</a> 
-					<a onclick="goPage(468323)" class="pg_page pg_end">
-	<!-- 					<a th:href="@{|/admin/${paths}/list.do|(page=${page?.totalPages})}" class="pg_page pg_end"> -->
-						<i class="fa fa-angle-double-right" aria-hidden="true">
-							<span class="hidden">맨끝</span>
-						</i>
-					</a>
 				</nav>
 			</div>
 		</div>
