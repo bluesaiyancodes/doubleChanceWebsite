@@ -83,16 +83,34 @@ $(document).ready(function(){
     })();
   }else{
 
+    let dataList ;
 
-  const getData = async () => {
-    const response = await fetch('http://localhost:3000/api/shop/page');
+    const getList = async () => {
+      const response = await fetch('http://localhost:3000/api/serial/list');
+      const data = await response.json();
+      dataList = JSON.parse(data["data"]);
+      console.log("datalist", dataList);
+      return data;
+    };
+
+  const getData = async (serialnum) => {
+    const response = await fetch('http://localhost:3000/api/serial/type/'+serialnum+'/page');
     const data = await response.json();
+    //console.log("seriel", data);
+    //console.log("text1", serialnum);
     pglen = parseInt(data["len"]);
     return data;
   };
   
   (async () => {
-    await getData();
+    await getList();
+    //console.log("text1a", dataList);
+    await getData(dataList);
+    //for (var serialnum in dataList){
+     // console.log("text15", serialnum);
+     // await getData(serialnum);
+  //  }
+    
     //pglen = 5;
     console.log("page len: ", pglen);
 
@@ -106,7 +124,9 @@ $(document).ready(function(){
   $(wrapper).append(str_start);
   $(wrapper).append(str_prev);
   //console.log(str2)
-  for (var i=1;i<=pglen;i++){
+  var start_ = currPage-10<1? 1 : currPage-10;
+  var end_ = currPage+10>pglen? pglen : currPage+10;
+  for (var i=start_;i<=end_;i++){
     if(i==currPage){
       var strLooper = '<strong class="pg_page pg_current">'+i+'</strong>';
     }else{
@@ -133,7 +153,7 @@ $(document).ready(function(){
     const response = await fetch('http://localhost:3000/api/shop/page/'+currPage);
     const data = await response.json();
     delvData = data;
-    console.log(data);
+   // console.log(data);
     return data;
   };
   
