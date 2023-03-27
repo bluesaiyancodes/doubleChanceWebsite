@@ -89,14 +89,48 @@ $(document).ready(function () {
 
   var imageList = Array();
 
-  const productList = document.getElementById("cars");
-  console.log({ productList });
-  const getPost = async () => {
-    const response = await fetch("http://202.31.200.222/api/goods/types");
+  //const productList = document.getElementById("cars");
+  //console.log({ productList });
+  var pData; 
+  const getData = async () => {
+    const response = await fetch('http://localhost:3000/api/goods/types');
     const data = await response.json();
+    pData = data;
     console.log(data);
-    return data;
   };
+
+
+
+  (async () => {
+    await getData();
+    var wrapper = $("#imagetitles");
+    
+    for(var i in pData){
+     console.log(i);
+     var data = pData[i];
+     var str_tiles = '<div class="img-card" id="img-'+(parseInt(i)+1)+'"><p>'+data["typename"]+'</p></div>';
+     console.log(str_tiles);
+     wrapper.append(str_tiles);
+
+      
+    }
+
+
+    $(".img-card").click(function(e){
+      selectedText = $(this).find('p').text();
+      // alert(header_text);
+      e.stopPropagation();
+      e.preventDefault();
+      $('#home').animate({ right: '100%' });
+      $('#tandc-block').animate({ left: '0%' });
+      $('#tandc-block').show();
+      $('.header-text').text(selectedText);
+    });
+    
+
+  })();
+
+
 
   const displayOption = async () => {
     const options = await getPost();
@@ -108,7 +142,7 @@ $(document).ready(function () {
       newOption.id = i;
       productList.appendChild(newOption);
       imageList[i] = new Image(70, 70);
-      imageList[i].src = "http://202.31.200.222/api/goods/image/" + option.typeid;
+      imageList[i].src = "http://localhost:3000/api/goods/image/" + option.typeid;
       console.log(i);
       console.log(imageList[i].src);
       i = i + 1;
@@ -127,7 +161,7 @@ $(document).ready(function () {
     });
   };
 
-  displayOption();
+  //displayOption();
 
   // Page  2 Validation
   $('#opn_submit_btn_final').on('click', function (e) {
@@ -395,7 +429,7 @@ $(function () {
 
 // api url
 const api_url =
-  "http://202.31.200.222/auth/check";
+  "http://localhost:3000/auth/check";
 
 // Defining async function
 async function getapi(url) {
@@ -422,7 +456,7 @@ async function getapi(url) {
 // Calling that async function
 getapi(api_url);
 
-fetch('http://202.31.200.222/auth/check')
+fetch('http://localhost:3000/auth/check')
   .then(response => response.text()) // the promise
   .then(data => console.log('Data', data)) // data
   .catch(error => console.log('Error', error))
