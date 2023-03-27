@@ -191,7 +191,7 @@ input, select, button:focus, button:active, textarea {
 
 .frm_input:focus {
 	border-color:#df1323
-}
+} 
 
 textarea.frm_input {
 	padding:13px 15px;
@@ -214,7 +214,7 @@ select.frm_input::-ms-expand {
 }
 
 .required {
-	background-image:url('/img/common/require.png');
+	
 	background-repeat:no-repeat;
 	background-position:right top
 }
