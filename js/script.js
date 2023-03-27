@@ -118,6 +118,7 @@ $(document).ready(function () {
 
     $(".img-card").click(function(e){
       selectedText = $(this).find('p').text();
+      console.log($(this)[0].id);
       // alert(header_text);
       e.stopPropagation();
       e.preventDefault();
@@ -125,7 +126,21 @@ $(document).ready(function () {
       $('#tandc-block').animate({ left: '0%' });
       $('#tandc-block').show();
       $('.header-text').text(selectedText);
+      createCookie("doubleChanceTck", $(this)[0].id, 15)
+      createCookie("doubleChanceTckName", $(this)[0].id, 15)
     });
+
+    function createCookie(name,value,minutes) {
+      if (minutes) {
+       var date = new Date();
+       date.setTime(date.getTime()+(minutes*60*1000));
+       var expires = "; expires="+date.toGMTString();
+      } else {
+         var expires = "";
+      }
+     document.cookie = name+"="+value+expires+"; path=/";
+ }		
+
     
 
   })();
@@ -283,7 +298,7 @@ $(document).ready(function () {
 
         var form_data = new FormData();
         var file_data = $("#" + file_id).prop("files")[i];
-        form_data.append("file_name", file_data);
+        form_data.append("image", file_data);
 
         $.ajax({
           //url         :   site_url + "inc/upload_image.php?width=96&height=60&show_small=1",
@@ -297,6 +312,8 @@ $(document).ready(function () {
           success: function(data) {
               // display image
               console.log(data);
+              var ib = document.getElementById("coupon1");
+              ib.value = data["data"];
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) { 
             alert("Status: " + textStatus); alert("Error: " + errorThrown); 

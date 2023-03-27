@@ -21,6 +21,22 @@
 
 <script>
 
+var imgID= getCookie('doubleChanceTck');
+var imgName= getCookie('doubleChanceTckName');
+console.log("Bear: ", imgID, imgName);
+var wrapper = $("#vict_titles");
+    
+    
+    // console.log(i);
+   // var data = pData[i];
+     var str_tiles = '<div class="img-card" id="img-'+(imgID)+'"><p>'+imgName+'</p></div>';
+     console.log(str_tiles);
+     wrapper.append(str_tiles);
+
+
+
+
+
 function uploadAddr(){
         var id_ = "uid-XXX"; //user id
         var serial = "XXXX";
@@ -84,7 +100,86 @@ function uploadAddr(){
 </head>
 
 <style>
-    
+  .form-card1{
+      margin: 200px auto 0 auto;
+  }
+
+  .img-card {
+      height: 200px;
+      font-size: 1.5rem;
+      color: white;
+      font-weight: bolder;
+      transition: transform .2s;
+      line-height: 40px;
+      padding: 10px;
+      text-shadow: 1px 1px 10px black;
+  }
+
+  .img-card:hover{
+      /* background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)); */
+      opacity: 0.7;
+      
+  }
+
+  #img-1 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557173.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-2 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557279.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-3 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557399.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-4 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557513.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-5 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557614.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-6 {
+      background: url('./list_card_img/KakaoTalk_20230322_114558209.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-7 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557513.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-8 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557279.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  .btn-center{
+      text-align: center;
+  }
 </style>
 
 <body>
@@ -107,6 +202,9 @@ function uploadAddr(){
             </div>
         </div>
         <div id="panel">
+          <div class="list-content" id="vict_titles">
+                    
+          </div>
             <form name="address-form" action="javascript:uploadAddr()" method="post" class="address_form">
 				
               <div class="mb-2">
