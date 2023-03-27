@@ -233,7 +233,7 @@ $(document).ready(function () {
     if (x < max_fields) {
       x++;
       var str1 = '<div class="form-group">';
-      var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input' + (x + 2) + '" capture="environment" ><input class="input-field" type="text" placeholder="쿠폰을 입력하십시오" id="coupon' + (x + 2) + '" /> . <button class="input-button" onclick="$(' + '\'#file-input' + (x + 2) + '\').click()" >이미지 스캔 <i class="fa-solid fa-camera"></i></button></div>'
+      var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input' + (x + 2) + '" capture="environment" ><input class="input-field" type="text" placeholder="쿠폰을 입력하십시오" maxlength="19" id="coupon' + (x + 2) + '" /> . <button class="input-button" onclick="$(' + '\'#file-input' + (x + 2) + '\').click()" >이미지 스캔 <i class="fa-solid fa-camera"></i></button></div>'
       $(wrapper).append(str2); //add input box
     } else {
       alert('You Reached the limits')
@@ -273,17 +273,53 @@ $(document).ready(function () {
     })
   });
 
+ function doSomethingWithFiles(e){
+  var file_id = e.target.id;
 
+    //var file_name_arr = new Array();
+    //var process_path = site_url + 'public/uploads/';
+
+    for (i = 0; i < $("#" + file_id).prop("files").length; i++) {
+
+        var form_data = new FormData();
+        var file_data = $("#" + file_id).prop("files")[i];
+        form_data.append("file_name", file_data);
+
+        $.ajax({
+          //url         :   site_url + "inc/upload_image.php?width=96&height=60&show_small=1",
+          url: "http://localhost:3000/api/ocr",
+          cache: false,
+          contentType: false,
+          processData: false,
+          async: false,
+          data: form_data,
+          type: 'post',
+          success: function(data) {
+              // display image
+              console.log(data);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+        }      
+      });
+
+    }
+ }
 
 
 
   //Image Handling
   const fileInput = document.getElementById('file-input1');
-  //fileInput.addEventListener('change', (e) =>{
+  fileInput.addEventListener('change', (e) =>{
+    console.log(e.target.id);
 
-  //doSomethingWithFiles(e.dataTransfer.files);
 
-  //});
+
+
+
+  doSomethingWithFiles(e);
+
+  });
 
   // Captcha and Coupon Validation
   var coupon1L = 19;
@@ -337,7 +373,7 @@ $(document).ready(function () {
             $.ajax({
               type: "POST",
               dataType: "json",
-              url: "http://202.31.200.222/api/win/valid",
+              url: "http://localhost:3000/api/win/valid",
               headers: {
                 'serial': coupon_i,
                 'type': coupon_i
