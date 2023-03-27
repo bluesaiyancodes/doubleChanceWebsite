@@ -191,7 +191,7 @@
 					<!-- ST:navbar -->
 				<div class="navbar">
 					<a href="../adminInfo.html" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
-					<a href="../logout.html" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
+					<a href="../../index.html" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
 				</div>
 				<!-- EN:navbar -->
 					
@@ -199,6 +199,17 @@
 		<div class="card">
 			<div class="card_top">
 				<h3 class="title">일련번호관리</h3>
+
+
+
+				<div class="write_div" style="margin-left:-250px; width:250px;">
+					<select id="filelist"  name="filelist" required class="frm_input required"> 
+					</select>		
+						
+				</div>
+
+
+
 				<!-- 엑셀등록 -->
 				<div class="excel_wrap">
 				<form id="excel" name="excel" method="post" enctype="multipart/form-data">
@@ -209,7 +220,7 @@
 				</div>
 				<!-- 검색 -->
 				<div class="sch_wrap">
-					<form name="search" action="/admin/prize/number.do" method="get">
+					<form name="search" action="index.html" method="get">
 						<input type="hidden" name="page" value="1"/>
 						<label for="keyword" class="hidden">검색어</label>
 						<input type="text" id="keyword" name="keyword" class="sch_input" maxlength="25" placeholder="검색어를 입력하세요." value="">
@@ -219,49 +230,28 @@
 					</form>
 				</div>
 			</div>
-			<form action="/admin/prize/deleteNumberList.do" method="get">
-			<button type="submit" class="btn btnSubmit" style="background-color:red; border:none;" id="removeNum">일련번호 삭제</button>
+			<form action="#" method="get">
 			<table class="table">
 				<caption>일련번호관리 ㅣ 번호,브라우저타이틀,표시언어,사용유무,기간,수정으로구성</caption>
 				<thead>
 					<tr>
-						<th scope="col">
-						<input type="checkbox" id="all_check" class="all_check"> 
-						</th>
 						<th scope="col">번호</th>
 						<th scope="col">일련번호</th>
 						<th scope="col">상품군번호</th>
 						<th scope="col">상품군명</th>
-						<th scope="col">사용일시</th>
 						<th scope="col">당첨여부</th>
-						<th scope="col">당첨상품</th>
 						<th scope="col">사용여부</th>
-						<th scope="col">유효기간</th>
-						<th scope="col">수정</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td><input type="checkbox" class="checks" name="checks" id="check26317838" value="26317838"></td>
-						<td>9366455</td>
-						<td>GKVZ-1009829646</td>
-						<td>23032301</td>
-						<td>극장판 세일러문 Cosmos antique style</td>
-						<td>-</td>
-						<td>N</td>
-						<td>-</td>
-						<td>N</td>
-						<td>2023/03/24 08:00 ~ 2023/06/25 23:59</td>
-						<td>-</td>
-						<!-- <td><a href="/admin/prize/number/register.do?id=26317838">수정</a></td>  -->
-					</tr>
+				<tbody id="deliverydata">
+
 					
 				</tbody>
 			</table>
 			<!-- <button type="submit" class="btn btnSubmit">일련번호 삭제</button> -->
 			</form>
 			<div class="card_bottom">
-				<a href="/admin/prize/number/register.do" class="btn btnSubmit">일련번호 등록</a>
+				
 	
 				<!-- 페이징 -->
 				<nav class="pagination">

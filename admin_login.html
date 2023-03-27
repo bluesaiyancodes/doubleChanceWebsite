@@ -33,13 +33,73 @@
 		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
 		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
 
+		<script type="text/javascript">
+
+			function loginClick() {
+
+				var id_ = document.getElementById("mber_id");
+				var passwd = document.getElementById("mber_pw");
+				//console.log(id_.value,passwd.value);
+
+				var payload = {
+    				id: id_.value, 
+    				password: passwd.value
+   				}
+
+				var loginFlag;
+				
+				const getLoginData = async () => {
+      				const response = await fetch('http://localhost:3000/auth/admin/login',{
+        				method: 'POST',
+						headers : {
+							"Content-type" : "application/json"
+						},
+        				body: JSON.stringify(payload)
+      				});
+					const data = await response.json();
+      				
+					loginFlag = data["res"];
+    			};
+
+				(async () => {
+      				await getLoginData();
+					//console.log(loginFlag);
+					if(loginFlag){
+						window.location = "admin/";
+					}else{
+						alert("아이디/비밀번호를 확인해주세요!");
+					}
+				})();
+
+			}
+
+			function createCookie(name,value,minutes) {
+   				if (minutes) {
+        		var date = new Date();
+        		date.setTime(date.getTime()+(minutes*60*1000));
+        		var expires = "; expires="+date.toGMTString();
+   				} else {
+        			var expires = "";
+   				}
+    			document.cookie = name+"="+value+expires+"; path=/";
+			}		
+
+			var date = new Date();
+			createCookie("doubleChanceAct", date.getTime(), 5)
+
+
+
+	  
+		  </script>
+
+
 </head>
 <body>
 	<div id="wrapper">
 		<div class="login_bg">
 		<div class="login_cont">
 			<h1 class="logo"><a href="admin/index.html"><span>이찌방쿠지</span></a></h1>
-			<form id="login" name="login" action="" method="post">
+			<form id="login" name="login" action="javascript:loginClick()" method="post">
 				<label for="mber_id" class="hidden">아이디<strong>필수</strong></label>
 				<input type="text" id="mber_id" name="loginId" class="login_write" placeholder="Username"  value="" required/>
 			

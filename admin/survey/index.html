@@ -78,6 +78,12 @@
 			search.page.value = page;
 			search.submit();
 		}
+		function updateLink(){
+			var curSelected = document.getElementById("filelist");
+			window.open('http://localhost:3000/api/survey/download/'+curSelected.value, '_blank').focus();
+   			//alert("Hello");
+  		}
+
 	</script>
 
 	
@@ -109,7 +115,7 @@
 				<!-- ST:navbar -->
 				<div class="navbar">
 					<a href="../adminInfo.html" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
-					<a href="../logout.html" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
+					<a href="../../index.html" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
 				</div>
 				<!-- EN:navbar -->
 				
@@ -120,6 +126,12 @@
 		<div class="card_top">
 			<h3 class="title">설문결과</h3>
 			<!-- 개수로 검색 -->
+			<div class="write_div" style="margin-left:-250px; width:250px;">
+				<select id="filelist"  name="filelist" required class="frm_input required"> 
+				</select>		
+					
+			</div>
+
 			<div class="sch_wrap" style="border:none;">
 				<form name="search"> <!-- method="get" action="/admin/survey/list.do" -->
 					<input type="text" id="startDate" required class="dateTimePicker frm_input required" name="startDate" placeholder="시작일" value="2022/03/26 00:00" autocomplete="off"> 
@@ -139,46 +151,18 @@
 				<option value="100">100개씩보기</option>
 			</select> 
 			-->
-			<a href="/admin/excelDownload.do?startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" style="text-decoration: none; float: right; background-color: red; color: white; padding: 2px 5px;">엑셀다운로드</a>
+			<a id="downlink" href="#" onclick="updateLink();" style="text-decoration: none; float: right; background-color: red; color: white; padding: 2px 5px;">엑셀다운로드</a>
 		</div>
 
 		<!-- 테이블 목록 -->
 		
 			<table class="table" id="survey-table"> 
 	<caption>survey ㅣ 번호, 등록시간, 연령, 성별, 거주지역, 월구매건무, 상등급으로 구성</caption>
-	<thead>
-		<tr>
-			<th scope="col">번호</th>
-			<th scope="col">등록시간</th>
-			<th scope="col">선택한 추첨상품</th>	
-			<th scope="col">연령</th>
-			<th scope="col">성별</th>
-			<th scope="col">거주지역</th>
-			<th scope="col">구매지역</th>
-			<th scope="col">구매점포</th>
-			<th scope="col">월구매건수</th>
-			<th scope="col">제일복권 정보를 얻는 곳</th>
-			<th scope="col">가장 갖고 싶은 상등급</th>
-			<th scope="col">이치방쿠지 처음 사용여부</th>
-			<th scope="col">더블찬스 처음 사용여부</th>
-		</tr>
+	<thead id="deliveryhead">
+	
 	</thead>
-	<tbody>
-	 	  <tr>
-	 	  <td>93119</td>
-	 	  <td>2023.03.26 03:41</td>
-	 	  <td>톰과 제리 -ALWAYS TOGETHER MORNING TILL NIGHT-</td>
-	 	  <td>30</td>
-	 	  <td>여</td>
-	 	  <td>서울특별시</td>
-	 	  <td>서울특별시</td>
-	 	  <td>국제전자센터</td>
-	 	  <td>1회~5회</td>
-	 	  <td>제일복권(이치방쿠지) 직영점 트위터 </td>
-	 	  <td>A상</td>
-		  <td>네</td>
-		  <td>네</td> 
-		 </tr>
+	<tbody id="deliverydata">
+	 	  
 	 	  
 	</tbody>
 </table>
@@ -190,48 +174,7 @@
 
 			<!-- 페이지 -->
 			<nav class="pagination">
-				<a href="/admin/survey/list.do?page=1&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page pg_start"> <i class="fa fa-angle-double-left" aria-hidden="true"> <span class="hidden">처음</span>
-				</i>
-				</a> <a href="#" class="pg_page pg_prev"> <i class="fa fa-angle-left" aria-hidden="true"> <span class="hidden">이전</span>
-				</i>
-				</a>
-				
-					<strong class="pg_page pg_current">1</strong>
-					
-				
-					
-					<a href="/admin/survey/list.do?page=2&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">2</a>
-				
-					
-					<a href="/admin/survey/list.do?page=3&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">3</a>
-				
-					
-					<a href="/admin/survey/list.do?page=4&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">4</a>
-				
-					
-					<a href="/admin/survey/list.do?page=5&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">5</a>
-				
-					
-					<a href="/admin/survey/list.do?page=6&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">6</a>
-				
-					
-					<a href="/admin/survey/list.do?page=7&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">7</a>
-				
-					
-					<a href="/admin/survey/list.do?page=8&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">8</a>
-				
-					
-					<a href="/admin/survey/list.do?page=9&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">9</a>
-				
-					
-					<a href="/admin/survey/list.do?page=10&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page">10</a>
-				
-
-				<a href="/admin/survey/list.do?page=2&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page pg_next"> <i class="fa fa-angle-right" aria-hidden="true"> <span class="hidden">다음</span>
-				</i>
-				</a> <a href="/admin/survey/list.do?page=11640&amp;size=&amp;startDate=2022/03/26%2000:00&amp;endDate=2024/03/26%2000:00" class="pg_page pg_end"> <i class="fa fa-angle-double-right" aria-hidden="true"> <span class="hidden">맨끝</span>
-				</i>
-				</a>
+			
 			</nav>
 		</div>
 		<input type="hidden" id="path" name="path" value="survey">

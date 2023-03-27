@@ -29,127 +29,72 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
 		<script src="https://unpkg.com/filepond-polyfill/dist/filepond-polyfill.js"></script>
 		<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
-
-		 <!-- JS -->
-		 <script src="../js/admin_script.js" defer></script>
 		 
 		<!-- 개별 content(eg. main.html) 화면에 적용된 css/js를 가져와 아래 영역에 적용시킨다.
 		다른 영역에 적용시키고 싶으면 아래 두 줄을 다른 곳에 넣으면 됨 -->
 		
-			
-<link rel="stylesheet" href="/css/admin.css"/>
-<style>
-label{display: inline-block;width: 130px;}
-#login_id_box{margin-left: 2%;}
-</style>
-
-		
-<script src="/js/lib/jquery.serialize-object.min.js"></script>
-<script>
-$(document).ready(function(){
-	$("#admin_info").submit(function(){
-		$.ajax({
-			type: "POST",
-			url: this.action,
-			dataType: 'json',
-			data: $(this).serializeObject(),
-			success: function(res){
-				if(res.result){
-					alert(res.msg);
-					location.reload();
-				} else {
-					alert(res.msg);
-				}
-			},
-			error : function(xhr){
-				if(xhr.status == 403){
-					alert("세션이 만료되었습니다. 다시 로그인해주시기 바랍니다.");
-					location.href = "/admin/login.do";
-				}else{
-					alert("오류가 발생하였습니다. 다시 시도해주시기 바랍니다.");
-				}
-			}
-		});
-		return false;
-	});
-})
-</script>
-
 	
-	</head>
-	<body>
-		<div id="adm_wrapper">
-			<!-- ST:sidebar -->
-			<div class="sidebar">
-				<div class="sidebar_top">
-					<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+		
+		<!--     <script th:src="@{/js/page/home.js}"></script> -->
+	
+		
+		</head>
+		<body>
+			<div id="adm_wrapper">
+				<!-- ST:sidebar -->
+				<div class="sidebar">
+					<div class="sidebar_top">
+						<h1 class="logo"><a href="/admin"><span>이찌방쿠지</span></a></h1>
+					</div>
+					<ul class="sidebar_menu">
+						<li><a href="notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
+						<li><a href="shop/index.html"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
+						<!-- <li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/banner.do')} ? active"><a href="/admin/banner.do"><i class="fa fa-picture-o" aria-hidden="true"></i> 배너관리</a></li>
+						<li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/popup.do')} ? active"><a href="/admin/popup.do"><i class="fa fa-object-group" aria-hidden="true"></i> 팝업관리</a></li> -->	
+						<li><a href="survey/index.html"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
+						
+						<!-- classappend path 에 있는 .do 다 삭제하기 (sidemenu의 링크 누르면 '/경로' 가 a href 링크로 넘어감 -->
+						<li><a href="prize/index.html"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
+						<li><a href="product/index.html"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
+						<li><a href="delivery/index.html?page=1"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
+					</ul>
 				</div>
-				<ul class="sidebar_menu">
-					<li><a href="notice/index.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 공지사항</a></li>
-					<li><a href="shop/index.html"><i class="fa fa-industry" aria-hidden="true"></i> 매장관리</a></li>
-					<!-- <li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/banner.do')} ? active"><a href="/admin/banner.do"><i class="fa fa-picture-o" aria-hidden="true"></i> 배너관리</a></li>
-					<li th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/popup.do')} ? active"><a href="/admin/popup.do"><i class="fa fa-object-group" aria-hidden="true"></i> 팝업관리</a></li> -->	
-					<li><a href="survey/index.html"><i class="fa fa-clipboard" aria-hidden="true"></i> 설문결과</a></li>			
+				<!-- EN:sidebar -->
+				
+				<!-- ST:content_area -->
+				<div class="content_area" data-aos-delay="300">
+					<!-- ST:navbar -->
+					<div class="navbar">
+						<a href="adminInfo.html" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
+						<a href="../index.html" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
+					</div>
+					<!-- EN:navbar -->
 					
-					<!-- classappend path 에 있는 .do 다 삭제하기 (sidemenu의 링크 누르면 '/경로' 가 a href 링크로 넘어감 -->
-					<li><a href="prize/index.html"><i class="fa fa-barcode" aria-hidden="true"></i> 일련번호관리</a></li>
-					<li><a href="product/index.html"><i class="fa fa-cubes" aria-hidden="true"></i> 상품관리</a></li>
-					<li><a href="delivery/index.html"><i class="fa fa-truck" aria-hidden="true"></i> 배송정보</a></li>
-				</ul>
-			</div>
-			<!-- EN:sidebar -->
-
-		<!-- ST:content_area -->
-		<div class="content_area" data-aos-delay="300">
-			<!-- ST:navbar -->
-			<div class="navbar">
-				<a href="adminInfo.html" class="user"><i class="fa fa-user" aria-hidden="true"></i> admin</a>
-				<a href="logout.html" class="ic" title="로그아웃"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
-			</div>
-			<!-- EN:navbar -->
-				
-				
+					
 		<div class="card">
 			<div class="card_top">
-				<h3 class="title">관리자 정보</h3>
+				<h3 class="title">Home</h3>
+			</div>
+			<div class="card_bottom">
+				<ul>
+					<li>설문이 총 <span style="color:#F44336; font-weight:bold">144428</span>건 등록되었습니다.</li>
+					<li>상품 배송신청이 총 <span style="color:#F44336; font-weight:bold">2650</span>건 등록되었습니다.</li>
+				</ul>
+			</div>
+	
+		</div>
+		<!-- EN:content_area -->
+	
+	
+	
+				</div>
+				<!-- EN:content_area -->
 			</div>
 			
-			<form id="admin_info" name="adminInfo" action="/admin/adminInfo.do">
-				<div class="write_div write">
-					<!-- ID -->
-					<label for="id">아이디</label>
-					<p id="login_id_box">admin</p>
-				</div>
-				<div class="write_div write">
-					<!-- 이름 -->
-					<label for="name">이름</label>
-					<input type="text" id="name" name="name" required class="frm_input required" placeholder="이름" value="관리자">
-				</div>
-			   <div class="write_div write">
-					<!-- 비밀번호 -->
-					<label for="loginPw">비밀번호</label>
-					<input type="password" id="loginPw" name="loginPw" class="frm_input required" placeholder="비밀번호 변경">
-				</div>
-				<div class="write_div write">
-					<!-- 비밀번호 확인-->
-					<label for="loginPwCheck">비밀번호</label>
-					<input type="password" id="loginPwCheck" name="loginPwCheck" class="frm_input required" placeholder="비밀번호 변경 확인">
-				</div>
-				<div class="btn_wrap">
-					<button type="submit" class="btn btnSubmit">수정</button> <!-- 제품 등록 버튼 -->
-					<a class="btn btnSubmit">취소</a> <!-- 제품 수정 버튼 -->
-				</div>
-			</form>
-		</div>
-
-			</div>
-			<!-- EN:content_area -->
-		</div>
-		
-		
-		  
-		<footer id="footer"> 
-	<p>COPYRIGHT © 2021 이찌방쿠지 더블찬스. ALL RIGHTS RESERVED</p>
-</footer>
-	</body>
-</html>
+			
+			  
+			<footer id="footer"> 
+		<p>COPYRIGHT © 2021 이찌방쿠지 더블찬스. ALL RIGHTS RESERVED</p>
+	</footer>
+		</body>
+	</html>

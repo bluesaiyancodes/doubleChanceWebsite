@@ -89,14 +89,63 @@ $(document).ready(function () {
 
   var imageList = Array();
 
-  const productList = document.getElementById("cars");
-  console.log({ productList });
-  const getPost = async () => {
-    const response = await fetch("http://202.31.200.222/api/goods/types");
+  //const productList = document.getElementById("cars");
+  //console.log({ productList });
+  var pData; 
+  const getData = async () => {
+    const response = await fetch('http://localhost:3000/api/goods/types');
     const data = await response.json();
+    pData = data;
     console.log(data);
-    return data;
   };
+
+
+
+  (async () => {
+    await getData();
+    var wrapper = $("#imagetitles");
+    
+    for(var i in pData){
+     console.log(i);
+     var data = pData[i];
+     var str_tiles = '<div class="img-card" id="img-'+(parseInt(i)+1)+'"><p>'+data["typename"]+'</p></div>';
+     console.log(str_tiles);
+     wrapper.append(str_tiles);
+
+      
+    }
+
+
+    $(".img-card").click(function(e){
+      selectedText = $(this).find('p').text();
+      console.log($(this)[0].id);
+      // alert(header_text);
+      e.stopPropagation();
+      e.preventDefault();
+      $('#home').animate({ right: '100%' });
+      $('#tandc-block').animate({ left: '0%' });
+      $('#tandc-block').show();
+      $('.header-text').text(selectedText);
+      createCookie("doubleChanceTck", $(this)[0].id, 15)
+      createCookie("doubleChanceTckName", $(this)[0].id, 15)
+    });
+
+    function createCookie(name,value,minutes) {
+      if (minutes) {
+       var date = new Date();
+       date.setTime(date.getTime()+(minutes*60*1000));
+       var expires = "; expires="+date.toGMTString();
+      } else {
+         var expires = "";
+      }
+     document.cookie = name+"="+value+expires+"; path=/";
+ }		
+
+    
+
+  })();
+
+
 
   const displayOption = async () => {
     const options = await getPost();
@@ -108,7 +157,7 @@ $(document).ready(function () {
       newOption.id = i;
       productList.appendChild(newOption);
       imageList[i] = new Image(70, 70);
-      imageList[i].src = "http://202.31.200.222/api/goods/image/" + option.typeid;
+      imageList[i].src = "http://localhost:3000/api/goods/image/" + option.typeid;
       console.log(i);
       console.log(imageList[i].src);
       i = i + 1;
@@ -127,7 +176,7 @@ $(document).ready(function () {
     });
   };
 
-  displayOption();
+  //displayOption();
 
   // Page  2 Validation
   $('#opn_submit_btn_final').on('click', function (e) {
@@ -199,7 +248,7 @@ $(document).ready(function () {
     if (x < max_fields) {
       x++;
       var str1 = '<div class="form-group">';
-      var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input' + (x + 2) + '" capture="environment" ><input class="input-field" type="text" placeholder="쿠폰을 입력하십시오" id="coupon' + (x + 2) + '" /> . <button class="input-button" onclick="$(' + '\'#file-input' + (x + 2) + '\').click()" >이미지 스캔 <i class="fa-solid fa-camera"></i></button></div>'
+      var str2 = '<div class="form-group"><input class="hide" type="file" accept="image/*" id="file-input' + (x + 2) + '" capture="environment" ><input class="input-field" type="text" placeholder="쿠폰을 입력하십시오" maxlength="19" id="coupon' + (x + 2) + '" /> . <button class="input-button" onclick="$(' + '\'#file-input' + (x + 2) + '\').click()" >이미지 스캔 <i class="fa-solid fa-camera"></i></button></div>'
       $(wrapper).append(str2); //add input box
     } else {
       alert('You Reached the limits')
@@ -239,17 +288,55 @@ $(document).ready(function () {
     })
   });
 
+ function doSomethingWithFiles(e){
+  var file_id = e.target.id;
 
+    //var file_name_arr = new Array();
+    //var process_path = site_url + 'public/uploads/';
+
+    for (i = 0; i < $("#" + file_id).prop("files").length; i++) {
+
+        var form_data = new FormData();
+        var file_data = $("#" + file_id).prop("files")[i];
+        form_data.append("image", file_data);
+
+        $.ajax({
+          //url         :   site_url + "inc/upload_image.php?width=96&height=60&show_small=1",
+          url: "http://localhost:3000/api/ocr",
+          cache: false,
+          contentType: false,
+          processData: false,
+          async: false,
+          data: form_data,
+          type: 'post',
+          success: function(data) {
+              // display image
+              console.log(data);
+              var ib = document.getElementById("coupon1");
+              ib.value = data["data"];
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+        }      
+      });
+
+    }
+ }
 
 
 
   //Image Handling
   const fileInput = document.getElementById('file-input1');
-  //fileInput.addEventListener('change', (e) =>{
+  fileInput.addEventListener('change', (e) =>{
+    console.log(e.target.id);
 
-  //doSomethingWithFiles(e.dataTransfer.files);
 
-  //});
+
+
+
+  doSomethingWithFiles(e);
+
+  });
 
   // Captcha and Coupon Validation
   var coupon1L = 19;
@@ -303,7 +390,7 @@ $(document).ready(function () {
             $.ajax({
               type: "POST",
               dataType: "json",
-              url: "http://202.31.200.222/api/win/valid",
+              url: "http://localhost:3000/api/win/valid",
               headers: {
                 'serial': coupon_i,
                 'type': coupon_i
@@ -395,7 +482,7 @@ $(function () {
 
 // api url
 const api_url =
-  "http://202.31.200.222/auth/check";
+  "http://localhost:3000/auth/check";
 
 // Defining async function
 async function getapi(url) {
@@ -422,7 +509,7 @@ async function getapi(url) {
 // Calling that async function
 getapi(api_url);
 
-fetch('http://202.31.200.222/auth/check')
+fetch('http://localhost:3000/auth/check')
   .then(response => response.text()) // the promise
   .then(data => console.log('Data', data)) // data
   .catch(error => console.log('Error', error))

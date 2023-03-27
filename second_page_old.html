@@ -19,92 +19,6 @@
     <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
     <script src="https://kit.fontawesome.com/a5b1885f61.js" crossorigin="anonymous"></script>
 </head>
-<style>
-    .form-card1{
-        margin: 200px auto 0 auto;
-    }
-
-    .img-card {
-        height: 200px;
-        font-size: 1.5rem;
-        color: white;
-        font-weight: bolder;
-        transition: transform .2s;
-        line-height: 40px;
-        padding: 10px;
-        text-shadow: 1px 1px 10px black;
-    }
-
-    .img-card:hover{
-        /* background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)); */
-        opacity: 0.7;
-        
-    }
-
-    .list-content{
-        height: 600px;
-    }
-
-    #img-1 {
-        background: url('./list_card_img/KakaoTalk_20230322_114557173.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    #img-2 {
-        background: url('./list_card_img/KakaoTalk_20230322_114557279.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    #img-3 {
-        background: url('./list_card_img/KakaoTalk_20230322_114557399.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    #img-4 {
-        background: url('./list_card_img/KakaoTalk_20230322_114557513.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    #img-5 {
-        background: url('./list_card_img/KakaoTalk_20230322_114557614.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    #img-6 {
-        background: url('./list_card_img/KakaoTalk_20230322_114558209.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    #img-7 {
-        background: url('./list_card_img/KakaoTalk_20230322_114557513.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    #img-8 {
-        background: url('./list_card_img/KakaoTalk_20230322_114557279.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    .btn-center{
-        text-align: center;
-    }
-</style>
 
 <body>
     <!-- Header section starts -->
@@ -115,39 +29,19 @@
         <nav class="navbar">
             <a href="admin_login.html">Admin</a>
             <a href="admin_login.html">Kakao Login</a>
-        </nav>
+    
+          </nav>
+
     </header>
     <!-- Header section ends -->
 
     <div class="home-slide">
         <section class="home" id="home">
-            <form class="form-card1" action="">
-                <div class="list-content">
-                    <div class="img-card" id="img-1">
-                        <p>Option 1</p>
-                    </div>
-                    <div class="img-card" id="img-2">
-                        <p>Option 2</p>
-                    </div>
-                    <div class="img-card" id="img-3">
-                        <p>Option 3</p>
-                    </div>
-                    <div class="img-card" id="img-4">
-                        <p>Option 4</p>
-                    </div>
-                    <div class="img-card" id="img-5">
-                        <p>Option 5</p>
-                    </div>
-                    <div class="img-card" id="img-6">
-                        <p>Option 6</p>
-                    </div>
-                    <div class="img-card" id="img-7">
-                        <p>Option 7</p>
-                    </div>
-                    <div class="img-card" id="img-8">
-                        <p>Option 8</p>
-                    </div>
-                </div>
+            <form class="form-card col-sm-5" action="">
+                <select class="list-content" multiple="multiple" size="7" style="height: 100%; text-align: center;" name="cars" id="cars">
+
+                </select>
+                <button class="btn2" id="opn_submit_btn">Submit</button>
             </form>
         </section>
 
@@ -188,13 +82,13 @@
                     <div class="form-group row">
                         <label for="inputGender" class="col-sm-3 col-form-label">성별</label>
                         <div class="col-sm-3">
-                            <input type="radio" name="op1" id="id3"> 남
+                            <input type="radio" name="op1" id="id3">  남
                         </div>
                         <div class="col-sm-3">
-                            <input type="radio" name="op1" id="id3"> 여
+                            <input type="radio" name="op1" id="id3">  여
                         </div>
                         <div class="col-sm-3">
-                            <input type="radio" name="op1" id="id3"> 기타
+                            <input type="radio" name="op1" id="id3">  기타
                         </div>
                     </div>
                     <div class="form-group row">
@@ -326,20 +220,19 @@
     </div>
 
 
-    <!-- footer -->
-    <div id="footer" class="footer">
-        <div class="footer-top">
-            <div class="footer-top-inner">
-                <ul>
-                    <li><a href="/rule.do?type=1">개인정보처리방침</a></li>
-                    <li><a href="/rule.do?type=2">청소년보호정책</a></li>
-                    <li><a href="/rule.do?type=3">이용약관</a></li>
-                </ul>
-                <div class="right">
-                    <a href="https://twitter.com/ICHIBAN_KUJI_" class="twitter" target="_blank"><span
-                            class="blind"></span></a>
-
-                    <!--<div class="family dropDown">
+  <!-- footer -->
+  <div id="footer" class="footer">
+    <div class="footer-top">
+      <div class="footer-top-inner">
+        <ul>
+          <li><a href="/rule.do?type=1">개인정보처리방침</a></li>
+          <li><a href="/rule.do?type=2">청소년보호정책</a></li>
+          <li><a href="/rule.do?type=3">이용약관</a></li>
+        </ul>
+        <div class="right">
+          <a href="https://twitter.com/ICHIBAN_KUJI_" class="twitter" target="_blank"><span class="blind"></span></a>
+          
+          <!--<div class="family dropDown">
             <button type="button" class="trigger">관련페이지 바로가기</button>
             <ul class="target">
               <li><a href="#">관련페이지1</a></li>
@@ -348,31 +241,31 @@
             </ul>
           </div>
         -->
-                </div>
-            </div>
         </div>
-        <div class="footer-bottom">
-            <div class="fotter-bottom-inner">
-                <a href="#" class="logo"><span class="blind"></span></a>
-                <div class="footer-bottom-right">
-                    <div class="location">회사명 : 대원미디어(주) | 사업자등록번호 : 106-81-03487 | 대표자 : 정동훈 | 주소 : 서울특별시
-                        용산구 한강대로23길 55 (용산역) 아이파크몰 리빙파크6층 1-1호 통신판매업 신고 : <br />제2007-서울용산-04838호 | 고객센터 : 1670-0396 |
-                        개인정보관리 책임자 : 김기남 | 메일 : jw@daewonmedia.com</div>
-                    <div class="copy">COPYRIGHT © 2023 이찌방쿠지 더블찬스. ALL RIGHTS RESERVED</div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <!-- footer -->
+    <div class="footer-bottom">
+      <div class="fotter-bottom-inner">
+        <a href="#" class="logo"><span class="blind"></span></a>
+        <div class="footer-bottom-right">
+          <div class="location">회사명 : 대원미디어(주) | 사업자등록번호 : 106-81-03487 | 대표자 : 정동훈 | 주소 : 서울특별시
+            용산구 한강대로23길 55 (용산역) 아이파크몰 리빙파크6층 1-1호 통신판매업 신고 : <br/>제2007-서울용산-04838호 | 고객센터 : 1670-0396 |
+            개인정보관리 책임자 : 김기남 | 메일 : jw@daewonmedia.com</div>
+          <div class="copy">COPYRIGHT © 2023 이찌방쿠지 더블찬스. ALL RIGHTS RESERVED</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- footer -->
 
 
     <!-- Back to Top Button -->
     <a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
 
-
+    
     <div class="loader-container">
         <!-- <img src="assets/images/loading_goku.gif" alt="" /> -->
-    </div>
+    </div> 
 
     <!-- JS -->
     <script src="js/script.js" defer></script>

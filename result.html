@@ -18,10 +18,168 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
     <script src="https://kit.fontawesome.com/a5b1885f61.js" crossorigin="anonymous"></script>
+
+<script>
+
+var imgID= getCookie('doubleChanceTck');
+var imgName= getCookie('doubleChanceTckName');
+console.log("Bear: ", imgID, imgName);
+var wrapper = $("#vict_titles");
+    
+    
+    // console.log(i);
+   // var data = pData[i];
+     var str_tiles = '<div class="img-card" id="img-'+(imgID)+'"><p>'+imgName+'</p></div>';
+     console.log(str_tiles);
+     wrapper.append(str_tiles);
+
+
+
+
+
+function uploadAddr(){
+        var id_ = "uid-XXX"; //user id
+        var serial = "XXXX";
+        var date = new Date();
+        date.setDate(date.getDate());
+        //console.log(date);
+        var name = document.getElementById('deli-name').value;
+        var phone = document.getElementById('deli-phone').value;
+        var address = document.getElementById('deli-addr').value;
+        var care = document.getElementById('deli-msg').value;
+        var shop = "X";
+				//console.log(id_.value,passwd.value);
+
+				var payload = {
+    				id: id_, 
+    				serial: serial,
+            date: date,
+            name: name,
+            phone: phone,
+            address: address,
+            care: care,
+            shop: shop
+   				}
+
+				var outFlag;
+				
+				const getLoginData = async () => {
+      				const response = await fetch('http://localhost:3000/api/delivery',{
+        				method: 'POST',
+						headers : {
+							"Content-type" : "application/json"
+						},
+        				body: JSON.stringify(payload)
+      				});
+					const data = await response.json();
+      				
+					outFlag = data["res"];
+          console.log()
+    			};
+
+				(async () => {
+      				await getLoginData();
+					//console.log(loginFlag);
+					if(outFlag){
+						//window.location = "admin/";
+            console.log(outFlag);
+            alert("성공이었습니다");
+            window.location = "index.html";
+					}else{
+						alert("아이디/비밀번호를 확인해주세요!");
+					}
+				})();
+}
+
+</script>
+
+
+
+
+
 </head>
 
 <style>
-    
+  .form-card1{
+      margin: 200px auto 0 auto;
+  }
+
+  .img-card {
+      height: 200px;
+      font-size: 1.5rem;
+      color: white;
+      font-weight: bolder;
+      transition: transform .2s;
+      line-height: 40px;
+      padding: 10px;
+      text-shadow: 1px 1px 10px black;
+  }
+
+  .img-card:hover{
+      /* background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)); */
+      opacity: 0.7;
+      
+  }
+
+  #img-1 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557173.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-2 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557279.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-3 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557399.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-4 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557513.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-5 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557614.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-6 {
+      background: url('./list_card_img/KakaoTalk_20230322_114558209.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-7 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557513.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  #img-8 {
+      background: url('./list_card_img/KakaoTalk_20230322_114557279.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  .btn-center{
+      text-align: center;
+  }
 </style>
 
 <body>
@@ -44,27 +202,31 @@
             </div>
         </div>
         <div id="panel">
-            <form name="address-form" action="javascript:void(0);" method="post" class="address_form">
+          <!-- <div class="list-content" id="vict_titles">
+                    
+          </div>
+        -->
+            <form name="address-form" action="javascript:uploadAddr()" method="post" class="address_form">
 				
               <div class="mb-2">
                 <label for="cityField" class="form-label"> 성명</label>
-                <input type="text" class="form-control" id="cityField" placeholder=" 성명">
+                <input type="text" class="form-control" id="deli-name" placeholder=" 성명">
             </div>
             <div class="mb-2">
               <label for="cityField" class="form-label">전화번호</label>
-              <input type="text" class="form-control" id="cityField" placeholder="010XXXXXXXXX">
+              <input type="text" class="form-control" id="deli-phone" placeholder="010XXXXXXXXX">
           </div>
                 <div class="mb-2">
                     <label for="cityField" class="form-label">도시</label>
-                    <input type="text" class="form-control" id="cityField" placeholder="광주">
+                    <input type="text" class="form-control" id="deli-city" placeholder="광주">
                 </div>
                 <div class="mb-2">
                   <label for="addressField" class="form-label">주소</label>
-                  <input type="text" class="form-control" id="addressField" placeholder="푸름관4동 302호, 대학로 61">
+                  <input type="text" class="form-control" id="deli-addr" placeholder="푸름관4동 302호, 대학로 61">
               </div>
               <div class="mb-2">
                 <label for="addressField" class="form-label">배달 메시지</label>
-                <input type="text" class="form-control" id="addressField" placeholder="문 앞에 두세요푸름관4동 302호, 대학로 61">
+                <input type="text" class="form-control" id="deli-msg" placeholder="문 앞에 두세요푸름관4동 302호, 대학로 61">
             </div>
                 <div class="mb-2 text-center">
                     <input type="submit" value="제출" class="btn btn-danger" id="addresssubmitbtn">
