@@ -274,8 +274,6 @@ $(document).ready(function () {
     $('#myModal').modal('show');
   });
 
-
-
   $('.crop_image').click(function (event) {
     $image_crop.croppie('result', {
       type: 'canvas',
@@ -338,26 +336,19 @@ $(document).ready(function () {
 
  }
 
-
-
   //Image Handling
   const fileInput = document.getElementById('file-input1');
   fileInput.addEventListener('change', (e) =>{
     console.log(e.target.id);
 
-
-
-  
   //document.getElementById('spinner').style.display= 'block' ;
   doSomethingWithFiles(e);
-
+    
   });
 
   // Captcha and Coupon Validation
   var coupon1L = 19;
   var coupon2L = 14;
-
-
 
   $('#submit_coupons').click(function (e) {
 
