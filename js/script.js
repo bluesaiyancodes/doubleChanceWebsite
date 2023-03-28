@@ -103,12 +103,14 @@ $(document).ready(function () {
 
   (async () => {
     await getData();
-    var wrapper = $("#imagetitles");
+    var wrapper = $("#cars");
     
     for(var i in pData){
      console.log(i);
      var data = pData[i];
-     var str_tiles = '<div class="img-card" id="img-'+(parseInt(i)+1)+'"><p>'+data["typename"]+'</p></div>';
+     //var str_tiles = '<div class="img-card" id="img-'+(parseInt(i)+1)+'"><p>'+data["typename"]+'</p></div>';
+     var str_tiles = '<option id="img-'+(parseInt(i)+1)+'" value="'+(parseInt(i)+1)+'"><p>'+data["typename"]+'</p></option>';
+     //<option value="">----</option>
      console.log(str_tiles);
      wrapper.append(str_tiles);
 
@@ -116,16 +118,19 @@ $(document).ready(function () {
     }
 
 
-    $(".img-card").click(function(e){
-      selectedText = $(this).find('p').text();
-      console.log($(this)[0].id);
+    $(".form-card").click(function(e){
+      var optionE = document.getElementById("cars");
+      var selectedText = optionE.options[optionE.selectedIndex].text;
+    //selectedText = $(this).text();
+      console.log(selectedText);
       // alert(header_text);
       e.stopPropagation();
       e.preventDefault();
       $('#home').animate({ right: '100%' });
       $('#tandc-block').animate({ left: '0%' });
       $('#tandc-block').show();
-      $('.header-text').text(selectedText);
+      //$('#productname').text(selectedText);
+      document.getElementById("productname").innerHTML = selectedText;
       createCookie("doubleChanceTck", $(this)[0].id, 15)
       createCookie("doubleChanceTckName", $(this)[0].id, 15)
     });
@@ -294,12 +299,16 @@ $(document).ready(function () {
     //var file_name_arr = new Array();
     //var process_path = site_url + 'public/uploads/';
 
-    for (i = 0; i < $("#" + file_id).prop("files").length; i++) {
+    
 
+//    for (i = 0; i < $("#" + file_id).prop("files").length; i++) {
+
+        
         var form_data = new FormData();
-        var file_data = $("#" + file_id).prop("files")[i];
+        var file_data = $("#" + file_id).prop("files")[0];
         form_data.append("image", file_data);
 
+        //console.log(i);
         $.ajax({
           //url         :   site_url + "inc/upload_image.php?width=96&height=60&show_small=1",
           url: "http://localhost:3000/api/ocr",
@@ -309,18 +318,24 @@ $(document).ready(function () {
           async: false,
           data: form_data,
           type: 'post',
+          beforeSend: function() {
+            $("#spinner").css('display', 'block');
+          }, 
+          complete: function() {
+            $("#spinner").css('display', 'none');
+          },
           success: function(data) {
               // display image
               console.log(data);
               var ib = document.getElementById("coupon1");
               ib.value = data["data"];
+              
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) { 
             alert("Status: " + textStatus); alert("Error: " + errorThrown); 
         }      
       });
 
-    }
  }
 
 
@@ -332,8 +347,8 @@ $(document).ready(function () {
 
 
 
-
-
+  
+  //document.getElementById('spinner').style.display= 'block' ;
   doSomethingWithFiles(e);
 
   });

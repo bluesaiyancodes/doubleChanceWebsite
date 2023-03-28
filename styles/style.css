@@ -418,6 +418,11 @@ input {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.311);
   overflow-y: scroll;
 }
+.tandc-section2 h1{
+  color: #e80000 !important;
+  background-color: #fff;
+
+}
 
 .tandc-block2{
   display: none;
@@ -734,6 +739,13 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+.home-slide h1{
+  color: white;
+  font-weight: bold;
+  font-size: 2.8vi;
+  margin-bottom: 20px;
 }
 
 .home-sec-page{
