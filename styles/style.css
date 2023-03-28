@@ -854,6 +854,10 @@ input {
   width: 500px;
 }
 
+.loading{
+  display: none;
+}
+
 .loading .loader {
   /* display: none; */
   position: absolute;

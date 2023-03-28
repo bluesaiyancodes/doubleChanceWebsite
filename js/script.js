@@ -301,6 +301,9 @@ $(document).ready(function () {
 
 //    for (i = 0; i < $("#" + file_id).prop("files").length; i++) {
 
+        $(".loading").show();
+
+
         
         var form_data = new FormData();
         var file_data = $("#" + file_id).prop("files")[0];
@@ -316,13 +319,8 @@ $(document).ready(function () {
           async: false,
           data: form_data,
           type: 'post',
-          beforeSend: function() {
-            $("#spinner").css('display', 'block');
-          }, 
-          complete: function() {
-            $("#spinner").css('display', 'none');
-          },
           success: function(data) {
+            //$(".loading").hide();
               // display image
               console.log(data);
               var ib = document.getElementById("coupon1");
@@ -330,6 +328,7 @@ $(document).ready(function () {
               
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            $(".loading").hide();
             alert("Status: " + textStatus); alert("Error: " + errorThrown); 
         }      
       });
